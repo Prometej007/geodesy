@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.controller;
 
+import com.geodesy.web.geodesy.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class RouterController {
+    @Autowired
+    private TestService testService;
+
     @RequestMapping({"/", "/main", "/home"})
     public String index(Model model) {
         model.addAttribute("name", "test");
+        testService.test();
         return "index";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
     }
 }
