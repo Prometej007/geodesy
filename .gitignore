@@ -1,22 +1,32 @@
-# Compiled class file
-*.class
+/target/
+# Eclipse
+.classpath
+.project
+.settings/
 
-# Log file
-*.log
+# Intellij
+.idea/
+*.iml
+*.iws
 
-# BlueJ files
-*.ctxt
+# Mac
+.DS_Store
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Maven
+log/
+target/
+/bin/
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Angular #
+*.ngfactory.ts
+*.css.shim.ts
+*.ngsummary.json
+*.shim.ngstyle.ts
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Node Files #
+/node_modules/
+/bower_components/
+npm-debug.log
+/npm-debug.log.*
+public/edem/node/
+public/edem/node_modules/
