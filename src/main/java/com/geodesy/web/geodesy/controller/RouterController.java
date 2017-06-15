@@ -16,8 +16,8 @@ public class RouterController {
 
     @RequestMapping({"/", "/main", "/home"})
     public String index(Model model) {
-        model.addAttribute("name", "test");
-        testService.test();
+        model.addAttribute("name", testService.test("test"));
+
         return "index";
     }
 

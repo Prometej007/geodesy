@@ -20,8 +20,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/loginprocess").permitAll()
-                .anyRequest().authenticated();
-        http.formLogin()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
                 .loginPage("/login").permitAll()
                 .loginProcessingUrl("/loginprocess").permitAll()
                 .usernameParameter("name")
@@ -30,7 +31,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login")
                 .and()
                 .logout().logoutUrl("/logout")
-                .logoutSuccessUrl("/loginpage").permitAll();;
+                .logoutSuccessUrl("/loginpage").permitAll()
+                .and()
+                .csrf().disable();
     }
 
     @Autowired
