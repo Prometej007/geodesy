@@ -1,4 +1,4 @@
-package com.geodesy.web.geodesy.persistence;
+package com.geodesy.web.geodesy.repository;
 
 /**
  * Created by danul on 15.06.2017.
