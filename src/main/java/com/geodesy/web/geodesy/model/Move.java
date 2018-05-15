@@ -3,7 +3,7 @@ package com.geodesy.web.geodesy.model;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Move {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,7 @@ package com.geodesy.web.geodesy.model;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Reper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
