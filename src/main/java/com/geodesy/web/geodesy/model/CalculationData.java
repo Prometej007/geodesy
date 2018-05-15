@@ -2,9 +2,12 @@ package com.geodesy.web.geodesy.model;
 
 import com.geodesy.web.geodesy.model.enums.CalculationType;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 //@Entity
 public class CalculationData {
@@ -35,6 +38,13 @@ public class CalculationData {
         return this;
     }
 
+    public CalculationData addReper(Reper reper) {
+        if (reperList == null)
+            reperList = new ArrayList<>();
+        this.reperList.add(reper);
+        return this;
+    }
+
     public List<Move> getMoveList() {
         return moveList;
     }
@@ -43,6 +53,14 @@ public class CalculationData {
         this.moveList = moveList;
         return this;
     }
+
+    public CalculationData addMove(Move move) {
+        if (moveList == null)
+            moveList = new ArrayList<>();
+        this.moveList.add(move);
+        return this;
+    }
+
 
     public CalculationType getCalculationType() {
         return calculationType;

@@ -23,11 +23,19 @@ public interface DefaultNetworkService {
     Double getApproxamation(Double height, Double difference);
     //move-----------------------------------------------------------------
 
+    CalculationData normilize(CalculationData calculationData);
+
     /**
      * @param calculationData calculationData with only repers' known height
      * @return persisted calculationData with approximate height of points
      */
     CalculationData getApproximatePointHeight(CalculationData calculationData);
+
+    /**
+     * @param calculationData calculationData which contains not all necessary moves
+     * @return calculationData which contains all necessary moves
+     */
+    CalculationData fulfillMoves(CalculationData calculationData);
 
     /**
      * P[i] = 1/stationCount
