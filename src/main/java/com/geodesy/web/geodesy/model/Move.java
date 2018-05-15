@@ -26,6 +26,10 @@ public class Move {
     private List<Double> approximations;
     // v
     private Double correction;
+    // P`v
+    private Double weightStrokeCorrection;
+    // P`vv
+    private Double weightStrokeCorrectionCorrection;
     @ManyToOne
     private CalculationData calculationData;
 
