@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Entity
+//@Entity
 public class CalculationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

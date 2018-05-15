@@ -4,7 +4,7 @@ import com.geodesy.web.geodesy.model.enums.ReperType;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Reper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
