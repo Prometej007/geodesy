@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.model;
 
+import com.geodesy.web.geodesy.model.enums.MoveType;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -114,6 +116,15 @@ public class Move {
 
     public Move setCalculationData(CalculationData calculationData) {
         this.calculationData = calculationData;
+        return this;
+    }
+
+    public MoveType getMoveType() {
+        return moveType;
+    }
+
+    public Move setMoveType(MoveType moveType) {
+        this.moveType = moveType;
         return this;
     }
 }
