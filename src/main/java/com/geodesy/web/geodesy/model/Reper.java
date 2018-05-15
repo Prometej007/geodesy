@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.model;
 
+import com.geodesy.web.geodesy.model.enums.ReperType;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Reper {
     private Double height;
     @ManyToOne
     private CalculationData calculationData;
+    private ReperType reperType;
 
     public Long getId() {
         return id;
@@ -45,6 +48,15 @@ public class Reper {
 
     public Reper setCalculationData(CalculationData calculationData) {
         this.calculationData = calculationData;
+        return this;
+    }
+
+    public ReperType getReperType() {
+        return reperType;
+    }
+
+    public Reper setReperType(ReperType reperType) {
+        this.reperType = reperType;
         return this;
     }
 }

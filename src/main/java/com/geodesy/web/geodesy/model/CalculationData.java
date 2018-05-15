@@ -4,6 +4,7 @@ import com.geodesy.web.geodesy.model.enums.CalculationType;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class CalculationData {
@@ -51,4 +52,5 @@ public class CalculationData {
         this.calculationType = calculationType;
         return this;
     }
+
 }
