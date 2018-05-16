@@ -3,6 +3,7 @@ package com.geodesy.web.geodesy.service.Impl;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.model.Reper;
+import com.geodesy.web.geodesy.model.constants.CalculationType;
 import com.geodesy.web.geodesy.model.enums.MoveType;
 import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
 import org.apache.log4j.Logger;
@@ -14,7 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
@@ -74,7 +74,7 @@ public class DefaultNetworkServiceImplTest {
     public void getWeight() {
         defaultNetworkService.normilize(CALCULATION_DATA);
         defaultNetworkService.getWeight(CALCULATION_DATA);
-        CALCULATION_DATA.getMoveList().forEach(move -> LOGGER.info("MV.NAME : [ " + move.getName() + " ] WEIGHT : [ " + format.format(move.getWeight())+" ]"));
+        CALCULATION_DATA.getMoveList().forEach(move -> LOGGER.info("MV.NAME : [ " + move.getName() + " ] WEIGHT : [ " + format.format(move.getWeight()) + " ]"));
         assertEquals(12, CALCULATION_DATA.getMoveList().size());
     }
 
@@ -118,9 +118,18 @@ public class DefaultNetworkServiceImplTest {
 
     @Test
     public void calculateApproximation() {
-        for (int i = 0; i < 5; i++) {
-        defaultNetworkService.calculateApproximation(CALCULATION_DATA);
-        }
+        defaultNetworkService.calculateApproximation(CALCULATION_DATA, .001);
+        CALCULATION_DATA.getMoveList().stream()
+//                .filter(move -> move.getMoveType().equals(MoveType.CHECK))
+                .forEach(move -> LOGGER.info("NAME : [ " + move.getName() +
+                        " ] WEIGHT : [ " + format.format(move.getWeight()) +
+                        " ] WEIGHT` : [ " + format.format(move.getWeightStroke()) +
+                        " ] APPROXIMATIONS : " + move.getApproximations().stream().map(approximation -> format.format(approximation.getValue())).collect(toList())));
+    }
+
+    //    @Test
+    public void calculateApproximation1() {
+        defaultNetworkService.calculateApproximation(CALCULATION_DATA, CalculationType.FIRST);
         CALCULATION_DATA.getMoveList().stream()
                 .filter(move -> move.getMoveType().equals(MoveType.CHECK))
                 .forEach(move -> LOGGER.info("NAME : [ " + move.getName() +

@@ -50,4 +50,6 @@ public interface DefaultNetworkService {
      * @return calculated proceeded point (one step)
      */
     CalculationData calculateApproximation(CalculationData calculationData);
+
+    CalculationData calculateApproximation(CalculationData calculationData,Double maxDifference);
 }
