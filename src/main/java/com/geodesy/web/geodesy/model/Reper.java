@@ -59,4 +59,5 @@ public class Reper {
         this.reperType = reperType;
         return this;
     }
+
 }

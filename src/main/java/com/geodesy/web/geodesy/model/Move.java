@@ -3,6 +3,7 @@ package com.geodesy.web.geodesy.model;
 import com.geodesy.web.geodesy.model.enums.MoveType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //@Entity
@@ -23,7 +24,8 @@ public class Move {
     // P`
     private Double weightStroke;
     // (H) I, II, III, IV, V ...
-    private List<Double> approximations;
+    @OneToMany(mappedBy = "move")
+    private List<Approximation> approximations;
     // v
     private Double correction;
     // P`v
@@ -96,12 +98,39 @@ public class Move {
         return this;
     }
 
-    public List<Double> getApproximations() {
+    public List<Approximation> getApproximations() {
+        if (approximations == null)
+            approximations = new ArrayList<>();
         return approximations;
     }
 
-    public Move setApproximations(List<Double> approximations) {
+    public Move setApproximations(List<Approximation> approximations) {
         this.approximations = approximations;
+        return this;
+    }
+
+    public Move addApproximation(Approximation approximation) {
+        if (this.approximations == null)
+            this.approximations = new ArrayList<>();
+        this.approximations.add(approximation);
+        return this;
+    }
+
+    public Double getWeightStrokeCorrection() {
+        return weightStrokeCorrection;
+    }
+
+    public Move setWeightStrokeCorrection(Double weightStrokeCorrection) {
+        this.weightStrokeCorrection = weightStrokeCorrection;
+        return this;
+    }
+
+    public Double getWeightStrokeCorrectionCorrection() {
+        return weightStrokeCorrectionCorrection;
+    }
+
+    public Move setWeightStrokeCorrectionCorrection(Double weightStrokeCorrectionCorrection) {
+        this.weightStrokeCorrectionCorrection = weightStrokeCorrectionCorrection;
         return this;
     }
 

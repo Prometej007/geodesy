@@ -6,23 +6,10 @@ import com.geodesy.web.geodesy.model.Move;
 import java.util.List;
 
 public interface DefaultNetworkService {
-    //move
-
     /**
-     * @param weight        P
-     * @param approximation H[i]
-     * @return H'
+     * @param calculationData calculationData that comes from file
+     * @return calculationData with fulfilled repers and moves
      */
-    Double averageReperWeight(Double weight, Double approximation);
-
-    /**
-     * @param height     H[i]
-     * @param difference h[i]
-     * @return H[i+1]
-     */
-    Double getApproxamation(Double height, Double difference);
-    //move-----------------------------------------------------------------
-
     CalculationData normilize(CalculationData calculationData);
 
     /**
@@ -32,16 +19,35 @@ public interface DefaultNetworkService {
     CalculationData getApproximatePointHeight(CalculationData calculationData);
 
     /**
+     * P[i] = 1/stationCount
+     * @param calculationData calculationData moves without weight
+     * @return calculationData with persisted moves with weight
+     */
+    CalculationData getWeight(CalculationData calculationData);
+
+    /**
      * @param calculationData calculationData which contains not all necessary moves
      * @return calculationData which contains all necessary moves
      */
     CalculationData fulfillMoves(CalculationData calculationData);
 
     /**
-     * P[i] = 1/stationCount
      * P`[i] = P[i] / sum(P)
-     * @param moveList moves without weight
-     * @return persisted moves with weight and weightStroke
+     * @param calculationData calculationData moves without weight`
+     * @return calculationData with persisted moves with weight`
      */
-    List<Move> getWeight(List<Move> moveList);
+    CalculationData getWeightStroke(CalculationData calculationData);
+
+    /**
+     * @param calculationData calculationData with fulfilled info necessary for calculation
+     * @return calculationData with moves of type CHECK
+     */
+    CalculationData createCheckMoves(CalculationData calculationData);
+
+    /**
+     * H[i]+h[i]
+     * @param calculationData to proceed
+     * @return calculated proceeded point (one step)
+     */
+    CalculationData calculateApproximation(CalculationData calculationData);
 }
