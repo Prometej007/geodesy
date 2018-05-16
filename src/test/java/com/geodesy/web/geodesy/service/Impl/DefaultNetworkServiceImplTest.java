@@ -3,6 +3,7 @@ package com.geodesy.web.geodesy.service.Impl;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.model.Reper;
+import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,8 +25,8 @@ public class DefaultNetworkServiceImplTest {
 
     private static final NumberFormat format = new DecimalFormat("#.####");
 
-    private static final List<Move> MOVE_LIST = new ArrayList<>();
-    private static final List<Move> EXPECTED_MOVE_LIST = new ArrayList<>();
+//    private static final List<Move> MOVE_LIST = new ArrayList<>();
+//    private static final List<Move> EXPECTED_MOVE_LIST = new ArrayList<>();
     private static final CalculationData CALCULATION_DATA = new CalculationData();
 
     @InjectMocks
@@ -46,10 +47,10 @@ public class DefaultNetworkServiceImplTest {
                 .addMove(new Move().setName("2-3").setDifference(2.785).setStationCount(50).setDistance(7.6))
         ;
 
-        MOVE_LIST.add(new Move().setStationCount(47));
-        MOVE_LIST.add(new Move().setStationCount(51));
-        MOVE_LIST.add(new Move().setStationCount(56));
-        MOVE_LIST.add(new Move().setStationCount(31));
+//        MOVE_LIST.add(new Move().setStationCount(47));
+//        MOVE_LIST.add(new Move().setStationCount(51));
+//        MOVE_LIST.add(new Move().setStationCount(56));
+//        MOVE_LIST.add(new Move().setStationCount(31));
 
 //        EXPECTED_MOVE_LIST.add(new Move().setStationCount(47).setWeight(.021).setWeightStroke(.234));
 //        EXPECTED_MOVE_LIST.add(new Move().setStationCount(51).setWeight(.02).setWeightStroke(.215));
@@ -69,7 +70,7 @@ public class DefaultNetworkServiceImplTest {
         data = defaultNetworkService.fulfillMoves(data);
         List<Move> moves = defaultNetworkService.getWeight(data.getMoveList());
         for (Move move : moves) {
-            LOGGER.info("MV.NAME : [ " + move.getName() + " ] P[act] : [ " + format.format(move.getWeight()) + " ], P`[act] : [ " + format.format(move.getWeightStroke()) + " ]\n");
+            LOGGER.info("MV.NAME : [ " + move.getName() + " ] P[act] : [ " + format.format(move.getWeight()) + " ], P`[act] : [ " + format.format(move.getWeightStroke()) + " ]");
         }
     }
 
@@ -77,7 +78,7 @@ public class DefaultNetworkServiceImplTest {
     public void getApproximatePointHeight() {
         CalculationData data = defaultNetworkService.normilize(CALCULATION_DATA);
         data = defaultNetworkService.getApproximatePointHeight(data);
-        data.getReperList().forEach(reper -> LOGGER.info("\nNAME : [ " + reper.getName() + " ] height : [ " + reper.getHeight() + " ] type : [ " + reper.getReperType() + " ]"));
+        data.getReperList().forEach(reper -> LOGGER.info("\nNAME : [ " + reper.getName() + " ] height : [ " + format.format(reper.getHeight()) + " ] type : [ " + reper.getReperType() + " ]"));
     }
 
     @Test
@@ -85,7 +86,8 @@ public class DefaultNetworkServiceImplTest {
         CalculationData data = defaultNetworkService.normilize(CALCULATION_DATA);
         data = defaultNetworkService.getApproximatePointHeight(data);
         data = defaultNetworkService.fulfillMoves(data);
-        data.getMoveList().forEach(move -> LOGGER.info("NAME : [ "+move.getName()+" ]"));
-        assertEquals(9,data.getMoveList().size());
+        data.getMoveList().sort(new MoveNameComparator());
+        data.getMoveList().forEach(move -> LOGGER.info("NAME : [ " + move.getName() + " ]"));
+        assertEquals(9, data.getMoveList().size());
     }
 }
