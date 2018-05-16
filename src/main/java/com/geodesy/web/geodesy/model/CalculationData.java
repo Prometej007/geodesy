@@ -19,6 +19,8 @@ public class CalculationData {
     @OneToMany(mappedBy = "calculationData")
     private List<Move> moveList;
     private CalculationType calculationType;
+    private Double niu;
+    private Double m;
 
     public Long getId() {
         return id;
@@ -71,4 +73,33 @@ public class CalculationData {
         return this;
     }
 
+    public Double getNiu() {
+        return niu;
+    }
+
+    public CalculationData setNiu(Double niu) {
+        this.niu = niu;
+        return this;
+    }
+
+    public Double getM() {
+        return m;
+    }
+
+    public CalculationData setM(Double m) {
+        this.m = m;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "CalculationData{\n" +
+                "id=" + id +
+                ", \nreperList=" + reperList +
+                ", \nmoveList=" + moveList +
+                ", \ncalculationType=" + calculationType +
+                ", \nniu=" + niu +
+                ", \nm=" + m +
+                '}';
+    }
 }

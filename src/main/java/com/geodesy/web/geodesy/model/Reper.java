@@ -2,7 +2,10 @@ package com.geodesy.web.geodesy.model;
 
 import com.geodesy.web.geodesy.model.enums.ReperType;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 //@Entity
 public class Reper {
@@ -60,4 +63,13 @@ public class Reper {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Reper{\n" +
+                "id=" + id +
+                ", \nname='" + name + '\'' +
+                ", \nheight=" + height +
+                ", \nreperType=" + reperType +
+                '}';
+    }
 }

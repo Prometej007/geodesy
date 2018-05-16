@@ -1,9 +1,6 @@
 package com.geodesy.web.geodesy.service;
 
 import com.geodesy.web.geodesy.model.CalculationData;
-import com.geodesy.web.geodesy.model.Move;
-
-import java.util.List;
 
 public interface DefaultNetworkService {
     /**
@@ -20,6 +17,7 @@ public interface DefaultNetworkService {
 
     /**
      * P[i] = 1/stationCount
+     *
      * @param calculationData calculationData moves without weight
      * @return calculationData with persisted moves with weight
      */
@@ -33,7 +31,8 @@ public interface DefaultNetworkService {
 
     /**
      * P`[i] = P[i] / sum(P)
-     * @param calculationData calculationData moves without weight`
+     *
+     * @param calculationData calculationData with moves without weight`
      * @return calculationData with persisted moves with weight`
      */
     CalculationData getWeightStroke(CalculationData calculationData);
@@ -46,10 +45,22 @@ public interface DefaultNetworkService {
 
     /**
      * H[i]+h[i]
-     * @param calculationData to proceed
+     *
+     * @param calculationData to proceed (with all data accept corrections and approximations)
      * @return calculated proceeded point (one step)
      */
     CalculationData calculateApproximation(CalculationData calculationData);
 
-    CalculationData calculateApproximation(CalculationData calculationData,Double maxDifference);
+    /**
+     * @param calculationData to proceed (with all data accept corrections and approximations)
+     * @param maxDifference   max difference between approximations
+     * @return calculated proceeded point (full)
+     */
+    CalculationData calculateApproximation(CalculationData calculationData, Double maxDifference);
+
+    /**
+     * @param calculationData calculated data without corrections
+     * @return ready calculationData for parsing into table
+     */
+    CalculationData fulfillCorrections(CalculationData calculationData);
 }

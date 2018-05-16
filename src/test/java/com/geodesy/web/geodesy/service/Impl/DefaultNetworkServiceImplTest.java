@@ -37,22 +37,22 @@ public class DefaultNetworkServiceImplTest {
     public void setUp() throws Exception {
         if (CALCULATION_DATA.getMoveList() == null)
             CALCULATION_DATA
-                    .addReper(new Reper().setName("Rp1").setHeight(261.837))
-                    .addReper(new Reper().setName("Rp2").setHeight(269.508))
-                    .addReper(new Reper().setName("Rp3").setHeight(260.705))
-                    .addReper(new Reper().setName("Rp4").setHeight(254.019))
-                    .addReper(new Reper().setName("Rp5").setHeight(257.203))
-                    .addReper(new Reper().setName("Rp6").setHeight(254.825))
+                    .addReper(new Reper().setId(1L).setName("Rp1").setHeight(261.837))
+                    .addReper(new Reper().setId(1L).setName("Rp2").setHeight(269.508))
+                    .addReper(new Reper().setId(1L).setName("Rp3").setHeight(260.705))
+                    .addReper(new Reper().setId(1L).setName("Rp4").setHeight(254.019))
+                    .addReper(new Reper().setId(1L).setName("Rp5").setHeight(257.203))
+                    .addReper(new Reper().setId(1L).setName("Rp6").setHeight(254.825))
 
-                    .addMove(new Move().setName("Rp1-1").setDifference(3.401).setStationCount(47).setDistance(4.0))
-                    .addMove(new Move().setName("Rp2-1").setDifference(-4.269).setStationCount(51).setDistance(3.4))
-                    .addMove(new Move().setName("Rp3-2").setDifference(-3.223).setStationCount(47).setDistance(3.7))
-                    .addMove(new Move().setName("Rp4-2").setDifference(3.448).setStationCount(86).setDistance(3.9))
-                    .addMove(new Move().setName("Rp5-3").setDifference(3.681).setStationCount(53).setDistance(2.9))
-                    .addMove(new Move().setName("Rp6-3").setDifference(6.050).setStationCount(29).setDistance(4.4))
-                    .addMove(new Move().setName("1-2").setDifference(-7.802).setStationCount(56).setDistance(4.0))
-                    .addMove(new Move().setName("2-3").setDifference(3.423).setStationCount(48).setDistance(2.9))
-                    .addMove(new Move().setName("3-1").setDifference(4.393).setStationCount(31).setDistance(3.2));
+                    .addMove(new Move().setId(1L).setName("Rp1-1").setDifference(3.401).setStationCount(47).setDistance(4.0))
+                    .addMove(new Move().setId(1L).setName("Rp2-1").setDifference(-4.269).setStationCount(51).setDistance(3.4))
+                    .addMove(new Move().setId(1L).setName("Rp3-2").setDifference(-3.223).setStationCount(47).setDistance(3.7))
+                    .addMove(new Move().setId(1L).setName("Rp4-2").setDifference(3.448).setStationCount(86).setDistance(3.9))
+                    .addMove(new Move().setId(1L).setName("Rp5-3").setDifference(3.681).setStationCount(53).setDistance(2.9))
+                    .addMove(new Move().setId(1L).setName("Rp6-3").setDifference(6.050).setStationCount(29).setDistance(4.4))
+                    .addMove(new Move().setId(1L).setName("1-2").setDifference(-7.802).setStationCount(56).setDistance(4.0))
+                    .addMove(new Move().setId(1L).setName("2-3").setDifference(3.423).setStationCount(48).setDistance(2.9))
+                    .addMove(new Move().setId(1L).setName("3-1").setDifference(4.393).setStationCount(31).setDistance(3.2));
 
 //        MOVE_LIST.add(new Move().setStationCount(47));
 //        MOVE_LIST.add(new Move().setStationCount(51));
@@ -125,6 +125,8 @@ public class DefaultNetworkServiceImplTest {
                         " ] WEIGHT : [ " + format.format(move.getWeight()) +
                         " ] WEIGHT` : [ " + format.format(move.getWeightStroke()) +
                         " ] APPROXIMATIONS : " + move.getApproximations().stream().map(approximation -> format.format(approximation.getValue())).collect(toList())));
+        defaultNetworkService.fulfillCorrections(CALCULATION_DATA);
+        LOGGER.info(CALCULATION_DATA);
     }
 
     //    @Test
@@ -136,5 +138,11 @@ public class DefaultNetworkServiceImplTest {
                         " ] WEIGHT : [ " + format.format(move.getWeight()) +
                         " ] WEIGHT` : [ " + format.format(move.getWeightStroke()) +
                         " ] APPROXIMATIONS : " + move.getApproximations().stream().map(approximation -> format.format(approximation.getValue())).collect(toList())));
+        defaultNetworkService.fulfillCorrections(CALCULATION_DATA);
+        LOGGER.info(CALCULATION_DATA);
     }
+
+//    @Test
+//    public void fulfillCorrections() {
+//    }
 }

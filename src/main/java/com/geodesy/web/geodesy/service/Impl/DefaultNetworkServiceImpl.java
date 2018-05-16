@@ -44,6 +44,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
             if (calculationData.getReperList().stream().noneMatch(reper1 -> reper1.getName().equals(name))) {
                 calculationData.addReper(
                         new Reper()
+                                .setId(1L)
                                 .setName(name)
                                 .setHeight(reper.getHeight() + move.getDifference())
                                 .setReperType(ReperType.POINT)
@@ -105,6 +106,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
         Move rMove = pointMoves.stream().filter(move -> move.getName().contains(rPoint.getName() + "-" + point.getName())).findFirst().orElseThrow(RuntimeException::new);
         calculationData.addMove(
                 new Move()
+                        .setId(1L)
                         .setDifference(.0 - rMove.getDifference())
                         .setStationCount(rMove.getStationCount())
                         .setDistance(rMove.getDistance())
@@ -141,6 +143,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
             }
             calculationData.addMove(
                     new Move()
+                            .setId(1L)
                             .setMoveType(MoveType.CHECK)
                             .setName(point.getName())
                             .setDifference(chDifference)
@@ -293,5 +296,32 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
             }
         }
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CalculationData fulfillCorrections(CalculationData calculationData) {
+        List<Reper> repers = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
+        Double sumPVV = .0;
+        Integer sumStations = 0;
+        Double sumDistance = .0;
+        for (Reper point :
+                repers) {
+            Move checkMove = calculationData.getMoveList().stream().filter(move -> move.getName().equals(point.getName())).findFirst().orElseThrow(RuntimeException::new);
+            List<Move> moves = calculationData.getMoveList().stream().filter(move -> move.getName().contains("-" + point.getName())).collect(toList());
+            for (Move move : moves) {
+                move.setCorrection(checkMove.getApproximations().get(checkMove.getApproximations().size() - 1).getValue() - move.getApproximations().get(move.getApproximations().size() - 1).getValue());
+                move.setWeightStrokeCorrection(move.getWeightStroke() * move.getCorrection());
+                move.setWeightStrokeCorrectionCorrection(move.getWeightStrokeCorrection() * move.getCorrection());
+                sumPVV += move.getWeightStrokeCorrectionCorrection();
+                sumDistance += move.getDistance();
+                sumStations += move.getStationCount();
+            }
+        }
+        calculationData.setNiu(Math.sqrt(sumPVV / (calculationData.getReperList().size() - calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count())));
+        calculationData.setM((calculationData.getNiu() / 10) * Math.sqrt(sumStations / sumDistance));
+        return calculationData;
     }
 }

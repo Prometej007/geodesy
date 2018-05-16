@@ -160,4 +160,22 @@ public class Move {
         this.moveType = moveType;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Move{\n" +
+                "id=" + id +
+                ", \nname='" + name + '\'' +
+                ", \nmoveType=" + moveType +
+                ", \ndifference=" + difference +
+                ", \nstationCount=" + stationCount +
+                ", \ndistance=" + distance +
+                ", \nweight=" + weight +
+                ", \nweightStroke=" + weightStroke +
+                ", \napproximations=" + approximations +
+                ", \ncorrection=" + correction +
+                ", \nweightStrokeCorrection=" + weightStrokeCorrection +
+                ", \nweightStrokeCorrectionCorrection=" + weightStrokeCorrectionCorrection +
+                '}';
+    }
 }
