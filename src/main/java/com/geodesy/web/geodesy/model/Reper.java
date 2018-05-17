@@ -1,6 +1,7 @@
 package com.geodesy.web.geodesy.model;
 
 import com.geodesy.web.geodesy.model.enums.ReperType;
+import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -68,7 +69,7 @@ public class Reper {
         return "Reper{\n" +
                 "id=" + id +
                 ", \nname='" + name + '\'' +
-                ", \nheight=" + height +
+                ", \nheight=" + DoubleFormatter.format(height) +
                 ", \nreperType=" + reperType +
                 '}';
     }

@@ -4,6 +4,7 @@ import com.geodesy.web.geodesy.model.Approximation;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.model.Reper;
+import com.geodesy.web.geodesy.model.constants.CalculationType;
 import com.geodesy.web.geodesy.model.enums.MoveType;
 import com.geodesy.web.geodesy.model.enums.ReperType;
 import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
@@ -59,60 +60,18 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
      */
     @Override
     public CalculationData fulfillMoves(CalculationData calculationData) {
-        List<Reper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
         List<Move> moves = calculationData.getMoveList().stream().filter(move -> !move.getName().contains("Rp")).collect(toList());
-        for (Reper point : points) {
-            calculationData = checkPointMoves(calculationData, points, moves, point);
-            moves = calculationData.getMoveList().stream().filter(move -> !move.getName().contains("Rp")).collect(toList());
+        for (Move move :
+                moves) {
+            Move newMove = new Move()
+                    .setId(1L)
+                    .setDifference(-move.getDifference())
+                    .setName(move.getName().split("-")[1] + "-" + move.getName().split("-")[1])
+                    .setStationCount(move.getStationCount())
+                    .setDistance(move.getDistance());
+            if (calculationData.getMoveList().stream().noneMatch(move1 -> move1.getName().equals(newMove.getName())))
+                calculationData.addMove(newMove);
         }
-        return calculationData;
-    }
-
-    private CalculationData checkPointMoves(CalculationData calculationData, List<Reper> points, List<Move> moves, Reper point) {
-        List<Reper> restPoints = points.stream().filter(reper -> reper.getReperType().equals(ReperType.POINT) && !reper.getName().equals(point.getName())).collect(toList());
-        if (moves.stream().filter(move -> move.getName().contains(point.getName())).count() < ((points.size() - 1) * 2)) {
-            calculationData = fulfillPointMoves(calculationData, moves, point, restPoints);
-        }
-        return calculationData;
-    }
-
-    /**
-     * @param calculationData calculationData
-     * @param moves           moves with only points
-     * @param point           point for which will be created moves
-     * @param restPoints      other points
-     * @return new moves closing all necessary connections for point
-     */
-    private CalculationData fulfillPointMoves(CalculationData calculationData, List<Move> moves, Reper point, List<Reper> restPoints) {
-        List<Move> pointMoves = moves.stream().filter(move -> move.getName().contains(point.getName())).collect(toList());
-        for (Reper rPoint : restPoints) {
-            if (pointMoves.stream().noneMatch(move -> move.getName().contains(point.getName() + "-" + rPoint.getName()))) {
-                calculationData = createMove(calculationData, point, pointMoves, rPoint);
-            } else if (pointMoves.stream().noneMatch(move -> move.getName().contains(rPoint.getName() + "-" + point.getName()))) {
-                calculationData = createMove(calculationData, rPoint, pointMoves, point);
-            }
-        }
-        return calculationData;
-    }
-
-    /**
-     * @param calculationData calculationData
-     * @param point           in point
-     * @param pointMoves      all moves with only points
-     * @param rPoint          out point
-     * @return move with name rPoint-point
-     */
-    private CalculationData createMove(CalculationData calculationData, Reper point, List<Move> pointMoves, Reper rPoint) {
-        Move rMove = pointMoves.stream().filter(move -> move.getName().contains(rPoint.getName() + "-" + point.getName())).findFirst().orElseThrow(RuntimeException::new);
-        calculationData.addMove(
-                new Move()
-                        .setId(1L)
-                        .setDifference(.0 - rMove.getDifference())
-                        .setStationCount(rMove.getStationCount())
-                        .setDistance(rMove.getDistance())
-                        .setName(point.getName() + "-" + rPoint.getName())
-                        .setMoveType(MoveType.DEFAULT)
-        );
         return calculationData;
     }
 
@@ -193,7 +152,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
             List<Reper> connectedRepers = getConnectedRepers(calculationData, moves);
             setApproximations(step, moves, connectedRepers);
             Double checkHeight = getCheckHeight(step, moves);
-            checkMove.addApproximation(new Approximation().setValue(checkHeight).setStep(step));
+            checkMove.addApproximation(new Approximation().setId(1L).setValue(checkHeight).setStep(step));
             points.get(i).setHeight(checkHeight);
         }
         return calculationData;
@@ -221,7 +180,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
      */
     private List<Move> setApproximations(Integer step, List<Move> moves, List<Reper> connectedRepers) {
         for (int i = 0; i < connectedRepers.size(); i++) {
-            moves.get(i).addApproximation(new Approximation().setStep(step).setValue(connectedRepers.get(i).getHeight() + moves.get(i).getDifference()));
+            moves.get(i).addApproximation(new Approximation().setId(1L).setStep(step).setValue(connectedRepers.get(i).getHeight() + moves.get(i).getDifference()));
         }
         return moves;
     }
@@ -255,8 +214,8 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
      * {@inheritDoc}
      */
     @Override
-    public CalculationData calculateApproximation(CalculationData calculationData, Double maxDifference) {
-        while (!checkApproximations(calculationData, maxDifference)) {
+    public CalculationData calculateApproximationFull(CalculationData calculationData) {
+        while (!checkApproximations(calculationData, CalculationType.TYPES.get(calculationData.getCalculationTypeNames()))) {
             calculationData = calculateApproximation(calculationData);
         }
         return calculationData;
@@ -309,6 +268,11 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
         Double sumDistance = .0;
         for (Reper point :
                 repers) {
+            Double sumPVVOne = .0;
+            Integer sumStationsOne = 0;
+            Double sumDistanceOne = .0;
+            Double sumCorrectionOne = .0;
+            Double sumPVOne = .0;
             Move checkMove = calculationData.getMoveList().stream().filter(move -> move.getName().equals(point.getName())).findFirst().orElseThrow(RuntimeException::new);
             List<Move> moves = calculationData.getMoveList().stream().filter(move -> move.getName().contains("-" + point.getName())).collect(toList());
             for (Move move : moves) {
@@ -318,7 +282,18 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
                 sumPVV += move.getWeightStrokeCorrectionCorrection();
                 sumDistance += move.getDistance();
                 sumStations += move.getStationCount();
+
+                sumPVVOne += move.getWeightStrokeCorrectionCorrection();
+                sumDistanceOne += move.getDistance();
+                sumStationsOne += move.getStationCount();
+                sumCorrectionOne += move.getCorrection();
+                sumPVOne += move.getWeightStrokeCorrection();
             }
+            checkMove.setWeightStrokeCorrectionCorrection(sumPVVOne);
+            checkMove.setDistance(sumDistanceOne);
+            checkMove.setStationCount(sumStationsOne);
+            checkMove.setCorrection(sumCorrectionOne);
+            checkMove.setWeightStrokeCorrection(sumPVOne);
         }
         calculationData.setNiu(Math.sqrt(sumPVV / (calculationData.getReperList().size() - calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count())));
         calculationData.setM((calculationData.getNiu() / 10) * Math.sqrt(sumStations / sumDistance));

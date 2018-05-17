@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.model;
 
+import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
+
 import javax.persistence.*;
 
 @Entity
@@ -46,5 +48,14 @@ public class Approximation {
     public Approximation setStep(Integer step) {
         this.step = step;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Approximation{" +
+                "id=" + id +
+                ", step=" + step +
+                ", value=" + DoubleFormatter.format(value) +
+                '}';
     }
 }

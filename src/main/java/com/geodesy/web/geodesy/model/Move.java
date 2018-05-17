@@ -1,6 +1,7 @@
 package com.geodesy.web.geodesy.model;
 
 import com.geodesy.web.geodesy.model.enums.MoveType;
+import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +35,10 @@ public class Move {
     private Double weightStrokeCorrectionCorrection;
     @ManyToOne
     private CalculationData calculationData;
+
+    public Move() {
+        distance = .0;
+    }
 
     public Long getId() {
         return id;
@@ -167,15 +172,15 @@ public class Move {
                 "id=" + id +
                 ", \nname='" + name + '\'' +
                 ", \nmoveType=" + moveType +
-                ", \ndifference=" + difference +
+                ", \ndifference=" + DoubleFormatter.format(difference) +
                 ", \nstationCount=" + stationCount +
-                ", \ndistance=" + distance +
-                ", \nweight=" + weight +
-                ", \nweightStroke=" + weightStroke +
+                ", \ndistance=" + DoubleFormatter.format(distance) +
+                ", \nweight=" + DoubleFormatter.format(weight) +
+                ", \nweightStroke=" + DoubleFormatter.format(weightStroke) +
                 ", \napproximations=" + approximations +
-                ", \ncorrection=" + correction +
-                ", \nweightStrokeCorrection=" + weightStrokeCorrection +
-                ", \nweightStrokeCorrectionCorrection=" + weightStrokeCorrectionCorrection +
+                ", \ncorrection=" + DoubleFormatter.format(correction) +
+                ", \nweightStrokeCorrection=" + DoubleFormatter.format(weightStrokeCorrection) +
+                ", \nweightStrokeCorrectionCorrection=" + DoubleFormatter.format(weightStrokeCorrectionCorrection) +
                 '}';
     }
 }

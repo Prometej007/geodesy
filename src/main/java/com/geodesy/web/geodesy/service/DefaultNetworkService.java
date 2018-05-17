@@ -24,7 +24,7 @@ public interface DefaultNetworkService {
     CalculationData getWeight(CalculationData calculationData);
 
     /**
-     * @param calculationData calculationData which contains not all necessary moves
+     * @param calculationData calculationData which contains not all necessary moves (e.g has "1-2" but no "2-1")
      * @return calculationData which contains all necessary moves
      */
     CalculationData fulfillMoves(CalculationData calculationData);
@@ -53,10 +53,9 @@ public interface DefaultNetworkService {
 
     /**
      * @param calculationData to proceed (with all data accept corrections and approximations)
-     * @param maxDifference   max difference between approximations
      * @return calculated proceeded point (full)
      */
-    CalculationData calculateApproximation(CalculationData calculationData, Double maxDifference);
+    CalculationData calculateApproximationFull(CalculationData calculationData);
 
     /**
      * @param calculationData calculated data without corrections
