@@ -61,12 +61,13 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
     @Override
     public CalculationData fulfillMoves(CalculationData calculationData) {
         List<Move> moves = calculationData.getMoveList().stream().filter(move -> !move.getName().contains("Rp")).collect(toList());
+        System.err.println(moves.stream().map(Move::getName).collect(toList()));
         for (Move move :
                 moves) {
             Move newMove = new Move()
                     .setId(1L)
-                    .setDifference(-move.getDifference())
-                    .setName(move.getName().split("-")[1] + "-" + move.getName().split("-")[1])
+                    .setDifference(.0-move.getDifference())
+                    .setName(move.getName().split("-")[1] + "-" + move.getName().split("-")[0])
                     .setStationCount(move.getStationCount())
                     .setDistance(move.getDistance());
             if (calculationData.getMoveList().stream().noneMatch(move1 -> move1.getName().equals(newMove.getName())))
@@ -94,17 +95,19 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
     public CalculationData createCheckMoves(CalculationData calculationData) {
         for (Reper point : calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList())) {
             List<Move> moves = calculationData.getMoveList().stream().filter(move -> move.getName().contains("-" + point.getName())).collect(toList());
-            Double chDifference = .0, chWeight = .0, chWeightStroke = .0;
+            Double chDifference = .0, chWeight = .0, chWeightStroke = .0, chDistance=.0;
             for (Move move : moves) {
                 chDifference += move.getDifference();
                 chWeight += move.getWeight();
                 chWeightStroke += move.getWeightStroke();
+                chDistance += move.getDistance();
             }
             calculationData.addMove(
                     new Move()
                             .setId(1L)
                             .setMoveType(MoveType.CHECK)
                             .setName(point.getName())
+                            .setDistance(chDistance)
                             .setDifference(chDifference)
                             .setWeight(chWeight)
                             .setWeightStroke(chWeightStroke)
@@ -149,8 +152,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
             Integer tI = i;
             Move checkMove = calculationData.getMoveList().stream().filter(move -> move.getName().equals(points.get(tI).getName()) && move.getMoveType().equals(MoveType.CHECK)).findFirst().orElseThrow(RuntimeException::new);
             List<Move> moves = calculationData.getMoveList().stream().filter(move -> move.getMoveType().equals(MoveType.DEFAULT) && move.getName().contains("-" + points.get(tI).getName())).collect(toList());
-            List<Reper> connectedRepers = getConnectedRepers(calculationData, moves);
-            setApproximations(step, moves, connectedRepers);
+            setApproximations(step, moves, getConnectedRepers(calculationData, moves));
             Double checkHeight = getCheckHeight(step, moves);
             checkMove.addApproximation(new Approximation().setId(1L).setValue(checkHeight).setStep(step));
             points.get(i).setHeight(checkHeight);

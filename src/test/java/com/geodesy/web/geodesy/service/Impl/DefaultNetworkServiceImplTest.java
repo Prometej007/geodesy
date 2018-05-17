@@ -39,7 +39,7 @@ public class DefaultNetworkServiceImplTest {
             CALCULATION_DATA
                     .setId(1L)
 
-                    .setCalculationTypeNames(CalculationTypeNames.FIRST)
+                    .setCalculationTypeNames(CalculationTypeNames.THIRD)
 
                     .addReper(new Reper().setId(1L).setName("Rp1").setHeight(261.837))
                     .addReper(new Reper().setId(1L).setName("Rp2").setHeight(269.508))
@@ -126,7 +126,7 @@ public class DefaultNetworkServiceImplTest {
         CALCULATION_DATA.getMoveList().stream()
 //                .filter(move -> move.getMoveType().equals(MoveType.CHECK))
                 .forEach(move -> LOGGER.info("NAME : [ " + move.getName() +
-                        " ] DISTANCE : [ " + move.getDistance() +
+                        " ] DIFFERENCE : [ " + move.getDifference() +
                         " ] WEIGHT : [ " + format.format(move.getWeight()) +
                         " ] WEIGHT` : [ " + format.format(move.getWeightStroke()) +
                         " ] APPROXIMATIONS : " + move.getApproximations().stream().map(approximation -> format.format(approximation.getValue())).collect(toList())));
