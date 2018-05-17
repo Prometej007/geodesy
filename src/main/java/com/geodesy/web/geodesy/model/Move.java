@@ -25,7 +25,7 @@ public class Move {
     // P`
     private Double weightStroke;
     // (H) I, II, III, IV, V ...
-    @OneToMany(mappedBy = "move")
+    @OneToMany(mappedBy = "move",cascade = CascadeType.ALL)
     private List<Approximation> approximations;
     // v
     private Double correction;

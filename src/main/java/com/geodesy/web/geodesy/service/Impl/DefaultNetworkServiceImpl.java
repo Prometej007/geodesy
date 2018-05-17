@@ -279,10 +279,6 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
                 move.setCorrection(checkMove.getApproximations().get(checkMove.getApproximations().size() - 1).getValue() - move.getApproximations().get(move.getApproximations().size() - 1).getValue());
                 move.setWeightStrokeCorrection(move.getWeightStroke() * move.getCorrection());
                 move.setWeightStrokeCorrectionCorrection(move.getWeightStrokeCorrection() * move.getCorrection());
-                sumPVV += move.getWeightStrokeCorrectionCorrection();
-                sumDistance += move.getDistance();
-                sumStations += move.getStationCount();
-
                 sumPVVOne += move.getWeightStrokeCorrectionCorrection();
                 sumDistanceOne += move.getDistance();
                 sumStationsOne += move.getStationCount();
@@ -294,6 +290,9 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
             checkMove.setStationCount(sumStationsOne);
             checkMove.setCorrection(sumCorrectionOne);
             checkMove.setWeightStrokeCorrection(sumPVOne);
+            sumPVV += checkMove.getWeightStrokeCorrectionCorrection();
+            sumDistance += checkMove.getDistance();
+            sumStations += checkMove.getStationCount();
         }
         calculationData.setNiu(Math.sqrt(sumPVV / (calculationData.getReperList().size() - calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count())));
         calculationData.setM((calculationData.getNiu() / 10) * Math.sqrt(sumStations / sumDistance));

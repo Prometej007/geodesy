@@ -2,10 +2,7 @@ package com.geodesy.web.geodesy.model;
 
 import com.geodesy.web.geodesy.model.enums.CalculationTypeNames;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +11,9 @@ public class CalculationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "calculationData")
+    @OneToMany(mappedBy = "calculationData",cascade = CascadeType.ALL)
     private List<Reper> reperList;
-    @OneToMany(mappedBy = "calculationData")
+    @OneToMany(mappedBy = "calculationData",cascade = CascadeType.ALL)
     private List<Move> moveList;
     private CalculationTypeNames calculationTypeNames;
     private Double niu;
