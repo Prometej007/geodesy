@@ -1,5 +1,5 @@
 package com.geodesy.web.geodesy.model.enums;
 
-public enum CalculationTypeNames {
+public enum CalculationTypeName {
     FIRST,SECOND,THIRD,FOURTH
 }

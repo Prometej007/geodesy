@@ -8,7 +8,8 @@ import com.geodesy.web.geodesy.model.constants.CalculationType;
 import com.geodesy.web.geodesy.model.enums.MoveType;
 import com.geodesy.web.geodesy.model.enums.ReperType;
 import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
-import com.geodesy.web.geodesy.service.DefaultNetworkService;
+import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
+import com.geodesy.web.geodesy.service.DefaultConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import static org.aspectj.runtime.internal.Conversions.doubleValue;
 import static org.aspectj.runtime.internal.Conversions.intValue;
 
 @Service
-public class DefaultNetworkServiceImpl implements DefaultNetworkService {
+public class ConsistentApproximationMethodImpl implements ConsistentApproximationMethod, DefaultConfiguration {
     /**
      * {@inheritDoc}
      */
@@ -66,7 +67,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
                 moves) {
             Move newMove = new Move()
                     .setId(1L)
-                    .setDifference(.0-move.getDifference())
+                    .setDifference(.0 - move.getDifference())
                     .setName(move.getName().split("-")[1] + "-" + move.getName().split("-")[0])
                     .setStationCount(move.getStationCount())
                     .setDistance(move.getDistance());
@@ -77,6 +78,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
     }
 
     /**
+     * P[i] = 1/stationCount
      * {@inheritDoc}
      */
     @Override
@@ -95,7 +97,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
     public CalculationData createCheckMoves(CalculationData calculationData) {
         for (Reper point : calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList())) {
             List<Move> moves = calculationData.getMoveList().stream().filter(move -> move.getName().contains("-" + point.getName())).collect(toList());
-            Double chDifference = .0, chWeight = .0, chWeightStroke = .0, chDistance=.0;
+            Double chDifference = .0, chWeight = .0, chWeightStroke = .0, chDistance = .0;
             for (Move move : moves) {
                 chDifference += move.getDifference();
                 chWeight += move.getWeight();
@@ -217,7 +219,7 @@ public class DefaultNetworkServiceImpl implements DefaultNetworkService {
      */
     @Override
     public CalculationData calculateApproximationFull(CalculationData calculationData) {
-        while (!checkApproximations(calculationData, CalculationType.TYPES.get(calculationData.getCalculationTypeNames()))) {
+        while (!checkApproximations(calculationData, CalculationType.TYPES.get(calculationData.getCalculationTypeName()))) {
             calculationData = calculateApproximation(calculationData);
         }
         return calculationData;

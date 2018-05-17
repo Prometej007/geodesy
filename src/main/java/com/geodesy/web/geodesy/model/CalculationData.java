@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.model;
 
-import com.geodesy.web.geodesy.model.enums.CalculationTypeNames;
+import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class CalculationData {
     private List<Reper> reperList;
     @OneToMany(mappedBy = "calculationData",cascade = CascadeType.ALL)
     private List<Move> moveList;
-    private CalculationTypeNames calculationTypeNames;
+    private CalculationTypeName calculationTypeName;
     private Double niu;
     private Double m;
 
@@ -61,12 +61,12 @@ public class CalculationData {
     }
 
 
-    public CalculationTypeNames getCalculationTypeNames() {
-        return calculationTypeNames;
+    public CalculationTypeName getCalculationTypeName() {
+        return calculationTypeName;
     }
 
-    public CalculationData setCalculationTypeNames(CalculationTypeNames calculationTypeNames) {
-        this.calculationTypeNames = calculationTypeNames;
+    public CalculationData setCalculationTypeName(CalculationTypeName calculationTypeName) {
+        this.calculationTypeName = calculationTypeName;
         return this;
     }
 
@@ -94,7 +94,7 @@ public class CalculationData {
                 "id=" + id +
                 ", \nreperList=" + reperList +
                 ", \nmoveList=" + moveList +
-                ", \ncalculationTypeNames=" + calculationTypeNames +
+                ", \ncalculationTypeName=" + calculationTypeName +
                 ", \nniu=" + niu +
                 ", \nm=" + m +
                 '}';

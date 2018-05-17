@@ -3,7 +3,7 @@ package com.geodesy.web.geodesy.service.Impl;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.model.Reper;
-import com.geodesy.web.geodesy.model.enums.CalculationTypeNames;
+import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.enums.MoveType;
 import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
 import org.apache.log4j.Logger;
@@ -20,9 +20,9 @@ import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DefaultNetworkServiceImplTest {
+public class ConsistentApproximationMethodImplTest {
 
-    private static final Logger LOGGER = Logger.getLogger(DefaultNetworkServiceImplTest.class);
+    private static final Logger LOGGER = Logger.getLogger(ConsistentApproximationMethodImplTest.class);
 
     private static final NumberFormat format = new DecimalFormat("#.####");
 
@@ -31,7 +31,7 @@ public class DefaultNetworkServiceImplTest {
     private static final CalculationData CALCULATION_DATA = new CalculationData();
 
     @InjectMocks
-    private DefaultNetworkServiceImpl defaultNetworkService;
+    private ConsistentApproximationMethodImpl defaultNetworkService;
 
     @Before
     public void setUp() throws Exception {
@@ -39,7 +39,7 @@ public class DefaultNetworkServiceImplTest {
             CALCULATION_DATA
                     .setId(1L)
 
-                    .setCalculationTypeNames(CalculationTypeNames.THIRD)
+                    .setCalculationTypeName(CalculationTypeName.THIRD)
 
                     .addReper(new Reper().setId(1L).setName("Rp1").setHeight(261.837))
                     .addReper(new Reper().setId(1L).setName("Rp2").setHeight(269.508))

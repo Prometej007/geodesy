@@ -38,6 +38,7 @@ public class Move {
 
     public Move() {
         distance = .0;
+        stationCount = 0;
     }
 
     public Long getId() {
