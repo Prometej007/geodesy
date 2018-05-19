@@ -21,6 +21,17 @@ import static org.aspectj.runtime.internal.Conversions.intValue;
 
 @Service
 public class ConsistentApproximationMethodImpl implements ConsistentApproximationMethod, DefaultConfiguration {
+    @Override
+    public CalculationData calculate(CalculationData calculationData) {
+        return calculateApproximationFull(
+                createCheckMoves(
+                        getWeightStroke(
+                                getWeight(
+                                        fulfillMoves(
+                                                getApproximatePointHeight(
+                                                        normilize(calculationData)))))));
+    }
+
     /**
      * {@inheritDoc}
      */
