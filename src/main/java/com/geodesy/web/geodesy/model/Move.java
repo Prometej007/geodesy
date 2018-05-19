@@ -1,5 +1,6 @@
 package com.geodesy.web.geodesy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geodesy.web.geodesy.model.enums.MoveType;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
@@ -33,6 +34,7 @@ public class Move {
     private Double weightStrokeCorrection;
     // P`vv
     private Double weightStrokeCorrectionCorrection;
+    @JsonIgnore
     @ManyToOne
     private CalculationData calculationData;
 

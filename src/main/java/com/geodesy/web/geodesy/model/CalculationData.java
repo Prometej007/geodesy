@@ -1,8 +1,13 @@
 package com.geodesy.web.geodesy.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
+import com.geodesy.web.geodesy.model.utils.DateDeserializer;
+import com.geodesy.web.geodesy.model.utils.DateSerializer;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +23,7 @@ public class CalculationData {
     private CalculationTypeName calculationTypeName;
     private Double niu;
     private Double m;
+    private Timestamp date;
 
     public Long getId() {
         return id;
@@ -85,6 +91,17 @@ public class CalculationData {
 
     public CalculationData setM(Double m) {
         this.m = m;
+        return this;
+    }
+
+    @JsonSerialize(using = DateSerializer.class)
+    public Timestamp getDate() {
+        return date;
+    }
+
+    @JsonDeserialize(using = DateDeserializer.class)
+    public CalculationData setDate(Timestamp date) {
+        this.date = date;
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.geodesy.web.geodesy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ public class Approximation {
     private Long id;
     private Integer step;
     private Double value;
+    @JsonIgnore
     @ManyToOne
     private Move move;
 
