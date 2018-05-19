@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class CalculationType {
     public static final HashMap<CalculationTypeName, Double> TYPES;
     public static final HashMap<CalculationTypeName, Integer> TYPES_SQ;
-    private static final Double FIRST = .00001;
+    private static final Double FIRST = .0003;
     private static final Double SECOND = .0005;
     private static final Double THIRD = .001;
     private static final Double FOURTH = .002;
