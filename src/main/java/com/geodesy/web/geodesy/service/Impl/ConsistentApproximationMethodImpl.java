@@ -43,7 +43,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
         LOGGER.info(calculationData.getReperList());
         return calculationData
                 .setMoveList(calculationData.getMoveList().stream().peek(LOGGER::info).map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).peek(move -> LOGGER.info("----------------------------\n")).peek(LOGGER::info).collect(toList()))
-                .setReperList(calculationData.getReperList().stream().peek(LOGGER::info).map(reper -> reper.setReperType(reper.getName().matches("\\w+") ? ReperType.REPER : ReperType.POINT)).peek(move -> LOGGER.info("============================\n")).peek(LOGGER::info).collect(toList()));
+                .setReperList(calculationData.getReperList().stream().peek(LOGGER::info).map(reper -> reper.setReperType(reper.getName().matches("\\w+\\d+") ? ReperType.REPER : ReperType.POINT)).peek(move -> LOGGER.info("============================\n")).peek(LOGGER::info).collect(toList()));
     }
 
     /**
@@ -163,7 +163,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData calculateApproximation(CalculationData calculationData) {
-        List<Reper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
+        List<Reper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).peek(LOGGER::info).collect(toList());
         Integer step = getStep(calculationData);
         for (int i = 0; i < points.size(); i++) {
             Integer tI = i;
