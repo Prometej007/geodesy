@@ -25,14 +25,13 @@
 
     <table>
         <tr>
-            <td rowspan="2">№ новмер вузлової точки репера</td>
             <td rowspan="2">ходи які сходяться у вузловій точці</td>
             <td rowspan="2">Назви Вузлових Реперів</td>
             <td rowspan="2">висоти вузлових реперів</td>
             <td rowspan="2">Суми перевищень ходу</td>
             <td rowspan="2">Кількість Штативів</td>
             <td colspan="2">Ваги</td>
-            <td colspan="5">Наближення</td>
+            <td colspan="${length}">Наближення</td>
             <%--зміна calspan--%>
             <td rowspan="2">V m,m</td>
             <td rowspan="2">P`v m,m</td>
@@ -41,83 +40,82 @@
         <tr>
             <td>PJI</td>
             <td>P`JI</td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
+            <c:forEach begin="1" var="i" end="${length}">
+                <td>${i}</td>
+            </c:forEach>
         </tr>
         <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>13</td>
-            <td>14</td>
-            <td>15</td>
-            <td>15</td>
+            <c:forEach begin="1" var="i" end="${length+10}">
+                <td>${i}</td>
+            </c:forEach>
         </tr>
         <c:forEach items="${calcs}" var="calc" varStatus="loop">
             <tr>
-                <c:if test="${loop.index==0}">
-                    <td rowspan="${calc.pointOne.size()}">
-                            ${calc.number}
-                    </td>
-                </c:if>
-                <td>
-                        ${calc.nameMuve}
-                </td>
-                <td>
-                        ${calc.nameReper}
-                </td>
-                <td>
-                        ${calc.height}
-                </td>
-                <td>
-                        ${calc.sum}
-                </td>
-                <td>
-                        ${calc.station}
-                </td>
-                <td>
-                        ${calc.weight}
-                </td>
-                <td>
-                        ${calc._weight}
-                </td>
-
-                <c:forEach items="${calc.pointOne}" var="row">
-                    <td>
-                            ${calc}
-                    </td>
-                </c:forEach>
-                <td>
-                        ${calc.correction}
-                </td>
-                <td>
-                        ${calc.weightCorrection}
-                </td>
-                <td>
-                        ${calc.weightCorrectionCorrection}
+                <td colspan="1000">
+                        ${calc.number}
                 </td>
             </tr>
-            <c:forEach items="${calc.pointOne}" var="row">
-
+            <c:forEach items="${calc.pointOne}" var="pointOne" varStatus="loop">
                 <tr>
+                    <td>
+                            ${pointOne.nameMuve}
+                    </td>
+                    <td>
+                            ${pointOne.nameReper}
+                    </td>
+                    <td>
+                            ${pointOne.height}
+                    </td>
+                    <td>
+                            ${pointOne.sum}
+                    </td>
+                    <td>
+                            ${pointOne.station}
+                    </td>
+                    <td>
+                            ${pointOne.weight}
+                    </td>
+                    <td>
+                            ${pointOne._weight}
+                    </td>
 
+                    <c:forEach items="${pointOne.approximationDto}" var="col">
+                        <td>
+                                ${col.value}
+                        </td>
+                    </c:forEach>
+                    <td>
+                            ${pointOne.correction}
+                    </td>
+                    <td>
+                            ${pointOne.weightCorrection}
+                    </td>
+                    <td>
+                            ${pointOne.weightCorrectionCorrection}
+                    </td>
                 </tr>
             </c:forEach>
+
+
+            <tr>
+                <td></td>
+                <td></td>
+
+                <td>Eh=</td>
+                <c:forEach items="${calc.checkParams}" var="row" varStatus="loops">
+                    <c:if test="${loops.index==1}">
+                        <td>
+
+                        </td>
+                    </c:if>
+                    <td>${row} </td>
+                </c:forEach>
+            </tr>
 
         </c:forEach>
 
     </table>
+</div>
+
 </body>
 </html>
