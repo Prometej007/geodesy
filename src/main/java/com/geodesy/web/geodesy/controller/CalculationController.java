@@ -5,6 +5,7 @@ import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.enums.ClassSystem;
 import com.geodesy.web.geodesy.service.CalculationDataService;
+import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
 import com.geodesy.web.geodesy.service.utils.ExcelReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class CalculationController {
     private ExcelReader excelReader;
     @Autowired
     private CalculationDataService calculationDataService;
+    @Autowired
+    private ConsistentApproximationMethod consistentApproximationMethod;
     private final PointDtoParser pointDtoParser = new PointDtoParser();
 
 
@@ -36,7 +39,7 @@ public class CalculationController {
         model.addAttribute("classSystem", classSystem.name());
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
-        model.addAttribute("calc", pointDtoParser.parse(calculationDataService.save(excelReader.getCalculationData(file))));
+        model.addAttribute("calc", pointDtoParser.parse(calculationDataService.save(consistentApproximationMethod.calculateApproximationFull(excelReader.getCalculationData(file)))));
         return "result";
     }
 
