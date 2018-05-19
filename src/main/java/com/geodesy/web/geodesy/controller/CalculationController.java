@@ -42,6 +42,7 @@ public class CalculationController {
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
         model.addAttribute("calcs", pointDtoParser.parse(res));
+        model.addAttribute("length", res.getMoveList().get(0).getApproximations().size());
         calculationDataService.save(res);
         return "result";
     }
