@@ -27,7 +27,7 @@ public class Move {
     // P`
     private Double weightStroke;
     // (H) I, II, III, IV, V ...
-    @OneToMany(mappedBy = "move",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "move", cascade = CascadeType.ALL)
     private List<Approximation> approximations;
     // v
     private Double correction;
@@ -174,17 +174,17 @@ public class Move {
     public String toString() {
         return "Move{\n" +
                 "id=" + id +
-                ", \nname='" + name + '\'' +
-                ", \nmoveType=" + moveType +
-                ", \ndifference=" + DoubleFormatter.format(difference) +
-                ", \nstationCount=" + stationCount +
-                ", \ndistance=" + DoubleFormatter.format(distance) +
-                ", \nweight=" + DoubleFormatter.format(weight) +
-                ", \nweightStroke=" + DoubleFormatter.format(weightStroke) +
-                ", \napproximations=" + approximations +
-                ", \ncorrection=" + DoubleFormatter.format(correction) +
-                ", \nweightStrokeCorrection=" + DoubleFormatter.format(weightStrokeCorrection) +
-                ", \nweightStrokeCorrectionCorrection=" + DoubleFormatter.format(weightStrokeCorrectionCorrection) +
+                ", \nname='" + (name == null ? "null" : name) + '\'' +
+                ", \nmoveType=" + (moveType == null ? "null" : moveType) +
+                ", \ndifference=" + (difference == null ? "null" : DoubleFormatter.format(difference)) +
+                ", \nstationCount=" + (stationCount == null ? "null" : stationCount) +
+                ", \ndistance=" + (distance == null ? "null" : DoubleFormatter.format(distance)) +
+                ", \nweight=" + (weight == null ? "null" : DoubleFormatter.format(weight)) +
+                ", \nweightStroke=" + (weightStroke == null ? "null" : DoubleFormatter.format(weightStroke)) +
+                ", \napproximations=" + (approximations == null ? "null" : approximations) +
+                ", \ncorrection=" + (correction == null ? "null" : DoubleFormatter.format(correction)) +
+                ", \nweightStrokeCorrection=" + (weightStrokeCorrection == null ? "null" : DoubleFormatter.format(weightStrokeCorrection)) +
+                ", \nweightStrokeCorrectionCorrection=" + (weightStrokeCorrectionCorrection == null ? "null" : DoubleFormatter.format(weightStrokeCorrectionCorrection)) +
                 '}';
     }
 }

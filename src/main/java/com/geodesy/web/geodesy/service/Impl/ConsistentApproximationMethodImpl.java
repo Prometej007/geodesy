@@ -10,6 +10,7 @@ import com.geodesy.web.geodesy.model.enums.ReperType;
 import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
 import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
 import com.geodesy.web.geodesy.service.DefaultConfiguration;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ import static org.aspectj.runtime.internal.Conversions.intValue;
 
 @Service
 public class ConsistentApproximationMethodImpl implements ConsistentApproximationMethod, DefaultConfiguration {
+    private static final Logger LOGGER = Logger.getLogger(ConsistentApproximationMethodImpl.class);
+
     @Override
     public CalculationData calculate(CalculationData calculationData) {
         return calculateApproximationFull(
@@ -37,9 +40,10 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData normilize(CalculationData calculationData) {
+        LOGGER.info(calculationData.getReperList());
         return calculationData
                 .setMoveList(calculationData.getMoveList().stream().map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).collect(toList()))
-                .setReperList(calculationData.getReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("\\w+") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
+                .setReperList(calculationData.getReperList().stream().peek(LOGGER::info).map(reper -> reper.setReperType(reper.getName().matches("\\w+") ? ReperType.REPER : ReperType.POINT)).peek(LOGGER::info).collect(toList()));
     }
 
     /**

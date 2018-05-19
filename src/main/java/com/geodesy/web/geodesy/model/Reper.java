@@ -68,9 +68,9 @@ public class Reper {
     public String toString() {
         return "Reper{\n" +
                 "id=" + id +
-                ", \nname='" + name + '\'' +
-                ", \nheight=" + DoubleFormatter.format(height) +
-                ", \nreperType=" + reperType +
+                ", \nname='" + (name == null ? "null" : name) + '\'' +
+                ", \nheight=" + (height == null ? "null" : DoubleFormatter.format(height)) +
+                ", \nreperType=" + (reperType == null ? "null" : reperType) +
                 '}';
     }
 }
