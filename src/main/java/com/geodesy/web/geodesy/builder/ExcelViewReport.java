@@ -7,12 +7,8 @@ import org.springframework.web.servlet.view.document.AbstractXlsView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class ExcelViewReport extends AbstractXlsView {
 
@@ -81,30 +77,30 @@ public class ExcelViewReport extends AbstractXlsView {
             counter += 1;
         }
 
-        header.createCell(counter + 1).setCellValue("V mm");
-        header.getCell(counter + 1).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 1)).setCellValue("V mm");
+        header.getCell((int) (approximationDtoLength + 1)).setCellStyle(style);
 
-        header.createCell(counter + 2).setCellValue("P`v MM");
-        header.getCell(counter + 2).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 2)).setCellValue("P`v MM");
+        header.getCell((int) (approximationDtoLength + 2)).setCellStyle(style);
 
-        header.createCell(counter + 3).setCellValue("P`v MM2");
-        header.getCell(counter + 3).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 3)).setCellValue("P`v MM2");
+        header.getCell((int) (approximationDtoLength + 3)).setCellStyle(style);
         int indexRow = 1;
 
         for (PointDto ticket :
                 pointDto) {
             Row userRow = sheet.createRow(indexRow++);
-            userRow.createCell(1).setCellValue(ticket.getNumber());
+            userRow.createCell(0).setCellValue(ticket.getNumber());
             for (int i = 0; i < ticket.getPointOne().size(); i++) {
-                userRow.createCell(2).setCellValue(ticket.getPointOne().get(i).getNameMuve());
-                userRow.createCell(3).setCellValue(ticket.getPointOne().get(i).getNameReper());
-                userRow.createCell(4).setCellValue(ticket.getPointOne().get(i).getHeight());
-                userRow.createCell(5).setCellValue(ticket.getPointOne().get(i).getSum());
-                userRow.createCell(6).setCellValue(ticket.getPointOne().get(i).getWeight());
-                userRow.createCell(7).setCellValue(ticket.getPointOne().get(i).get_weight());
+                userRow.createCell(1).setCellValue(ticket.getPointOne().get(i).getNameMuve());
+                userRow.createCell(2).setCellValue(ticket.getPointOne().get(i).getNameReper());
+                userRow.createCell(3).setCellValue(ticket.getPointOne().get(i).getHeight());
+                userRow.createCell(4).setCellValue(ticket.getPointOne().get(i).getSum());
+                userRow.createCell(5).setCellValue(ticket.getPointOne().get(i).getWeight());
+                userRow.createCell(6).setCellValue(ticket.getPointOne().get(i).get_weight());
 
                 for (int j = 0; j < ticket.getPointOne().get(i).getApproximationDto().size(); j++) {
-                    userRow.createCell(8 + j).setCellValue(ticket.getPointOne().get(i).getApproximationDto().get(j).getValue());
+                    userRow.createCell(7 + j).setCellValue(ticket.getPointOne().get(i).getApproximationDto().get(j).getValue());
                 }
                 userRow.createCell((int) (8 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getCorrection());
                 userRow.createCell((int) (9 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getWeightCorrection());
@@ -112,10 +108,10 @@ public class ExcelViewReport extends AbstractXlsView {
 
                 userRow = sheet.createRow(indexRow++);
             }
-            userRow.createCell(4).setCellValue("Eh=");
-            userRow.createCell(5).setCellValue(ticket.getCheckParams().get(0));
+            userRow.createCell(3).setCellValue("Eh=");
+            userRow.createCell(4).setCellValue(ticket.getCheckParams().get(0));
             for (int i = 1; i < ticket.getCheckParams().size(); i++) {
-                userRow.createCell((int) (7 + i)).setCellValue(ticket.getCheckParams().get(i));
+                userRow.createCell((int) (5 + i)).setCellValue(ticket.getCheckParams().get(i));
             }
         }
 
