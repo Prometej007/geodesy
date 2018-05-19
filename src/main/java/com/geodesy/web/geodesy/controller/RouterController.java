@@ -14,11 +14,11 @@ public class RouterController {
     @Autowired
     private TestService testService;
 
-    @RequestMapping({"/", "/main", "/home"})
+    @RequestMapping({"/", "/home", "/home/"})
     public String index(Model model) {
         model.addAttribute("name", testService.test("test"));
 
-        return "index";
+        return "home";
     }
 
     @RequestMapping("/login")
