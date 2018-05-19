@@ -77,13 +77,13 @@ public class ExcelViewReport extends AbstractXlsView {
             counter += 1;
         }
 
-        header.createCell((int) (approximationDtoLength + 1 + 6)).setCellValue("V mm");
+        header.createCell((int) (approximationDtoLength + 1 + 6)).setCellValue("V m");
         header.getCell((int) (approximationDtoLength + 1 + 6)).setCellStyle(style);
 
-        header.createCell((int) (approximationDtoLength + 2 + 6)).setCellValue("P`v MM");
+        header.createCell((int) (approximationDtoLength + 2 + 6)).setCellValue("P`v m");
         header.getCell((int) (approximationDtoLength + 2 + 6)).setCellStyle(style);
 
-        header.createCell((int) (approximationDtoLength + 3 + 6)).setCellValue("P`v MM2");
+        header.createCell((int) (approximationDtoLength + 3 + 6)).setCellValue("P`v m2");
         header.getCell((int) (approximationDtoLength + 3 + 6)).setCellStyle(style);
         int indexRow = 1;
 

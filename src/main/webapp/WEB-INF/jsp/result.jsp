@@ -33,9 +33,9 @@
             <td colspan="2">Ваги</td>
             <td colspan="${length}">Наближення</td>
             <%--зміна calspan--%>
-            <td rowspan="2">V m,m</td>
-            <td rowspan="2">P`v m,m</td>
-            <td rowspan="2">P`v m,m2</td>
+            <td rowspan="2">V m</td>
+            <td rowspan="2">P`v m</td>
+            <td rowspan="2">P`v m2</td>
         </tr>
         <tr>
             <td>PJI</td>
