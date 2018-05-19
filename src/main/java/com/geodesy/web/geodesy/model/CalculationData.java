@@ -16,9 +16,9 @@ public class CalculationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "calculationData",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "calculationData")
     private List<Reper> reperList;
-    @OneToMany(mappedBy = "calculationData",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "calculationData")
     private List<Move> moveList;
     @Enumerated
     private CalculationTypeName calculationTypeName;
