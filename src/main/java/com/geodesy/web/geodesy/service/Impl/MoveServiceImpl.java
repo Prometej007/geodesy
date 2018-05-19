@@ -22,7 +22,7 @@ public class MoveServiceImpl implements MoveService {
     @Override
     public Move save(Move move) {
         move.setId(moveRepository.save(move).getId());
-        return move.setApproximations(move.getApproximations().stream().map(approximation -> approximationService.save(approximation.setMove(move))).collect(toList()));
+        return moveRepository.save(move.setApproximations(move.getApproximations().stream().map(approximation -> approximationService.save(approximation.setMove(move))).collect(toList())));
     }
 
     @Override
