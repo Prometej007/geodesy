@@ -3,6 +3,9 @@ package com.geodesy.web.geodesy.controller;
 import com.geodesy.web.geodesy.builder.ExcelViewReport;
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.enums.ClassSystem;
+import com.geodesy.web.geodesy.service.CalculationDataService;
+import com.geodesy.web.geodesy.service.utils.ExcelReader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,11 @@ import java.util.Map;
 @RequestMapping("/calculation")
 public class CalculationController {
 
+    @Autowired
+    private ExcelReader excelReader;
+    @Autowired
+    private CalculationDataService calculationDataService;
+
 
     @PostMapping("/result-1")
     private String calculation1(Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
@@ -27,6 +35,7 @@ public class CalculationController {
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
         model.addAttribute("calc", file.getOriginalFilename());
+        calculationDataService.save(excelReader.getCalculationData(file));
         return "result";
     }
 
