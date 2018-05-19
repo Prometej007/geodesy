@@ -77,14 +77,14 @@ public class ExcelViewReport extends AbstractXlsView {
             counter += 1;
         }
 
-        header.createCell((int) (approximationDtoLength + 1)).setCellValue("V mm");
-        header.getCell((int) (approximationDtoLength + 1)).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 1 + 7)).setCellValue("V mm");
+        header.getCell((int) (approximationDtoLength + 1 + 7)).setCellStyle(style);
 
-        header.createCell((int) (approximationDtoLength + 2)).setCellValue("P`v MM");
-        header.getCell((int) (approximationDtoLength + 2)).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 2 + 7)).setCellValue("P`v MM");
+        header.getCell((int) (approximationDtoLength + 2 + 7)).setCellStyle(style);
 
-        header.createCell((int) (approximationDtoLength + 3)).setCellValue("P`v MM2");
-        header.getCell((int) (approximationDtoLength + 3)).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 3 + 7)).setCellValue("P`v MM2");
+        header.getCell((int) (approximationDtoLength + 3 + 7)).setCellStyle(style);
         int indexRow = 1;
 
         for (PointDto ticket :
@@ -111,7 +111,7 @@ public class ExcelViewReport extends AbstractXlsView {
             userRow.createCell(3).setCellValue("Eh=");
             userRow.createCell(4).setCellValue(ticket.getCheckParams().get(0));
             for (int i = 1; i < ticket.getCheckParams().size(); i++) {
-                userRow.createCell((int) (5 + i)).setCellValue(ticket.getCheckParams().get(i));
+                userRow.createCell((int) (4 + i)).setCellValue(ticket.getCheckParams().get(i));
             }
         }
 
