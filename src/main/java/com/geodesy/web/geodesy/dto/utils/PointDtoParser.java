@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PointDtoParser {
-    List<PointDto> parse(CalculationData calculationData) {
+    public List<PointDto> parse(CalculationData calculationData) {
         List<PointDto> result = new ArrayList<>();
         for (Reper point :
                 calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(Collectors.toList())) {

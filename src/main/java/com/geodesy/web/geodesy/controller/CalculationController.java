@@ -1,6 +1,7 @@
 package com.geodesy.web.geodesy.controller;
 
 import com.geodesy.web.geodesy.builder.ExcelViewReport;
+import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.enums.ClassSystem;
 import com.geodesy.web.geodesy.service.CalculationDataService;
@@ -27,6 +28,7 @@ public class CalculationController {
     private ExcelReader excelReader;
     @Autowired
     private CalculationDataService calculationDataService;
+    private final PointDtoParser pointDtoParser = new PointDtoParser();
 
 
     @PostMapping("/result-1")
@@ -34,8 +36,7 @@ public class CalculationController {
         model.addAttribute("classSystem", classSystem.name());
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
-        model.addAttribute("calc", file.getOriginalFilename());
-        calculationDataService.save(excelReader.getCalculationData(file));
+        model.addAttribute("calc", pointDtoParser.parse(calculationDataService.save(excelReader.getCalculationData(file))));
         return "result";
     }
 
