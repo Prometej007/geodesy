@@ -270,9 +270,9 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
                 moves) {
             Integer approximationsCount = move.getApproximations().size();
             LOGGER.info("-----------==============-------------");
-            LOGGER.info((Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) * 10000) + " > " + (.00001 * 10000));
+            LOGGER.info((Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) * 1000) + " > " + (maxDifference * 1000));
             LOGGER.info("-----------==============-------------");
-            if (Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) > .00001) {
+            if (Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) > maxDifference) {
                 return true;
             }
         }
