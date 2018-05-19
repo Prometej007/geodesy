@@ -5,6 +5,12 @@ import com.geodesy.web.geodesy.model.CalculationData;
 public interface ConsistentApproximationMethod {
 
     /**
+     * @param calculationData data with repers(name,height), moves(name, diff, stCount, dist), type
+     * @return calculated data
+     */
+    CalculationData calculate(CalculationData calculationData);
+
+    /**
      * P`[i] = P[i] / sum(P)
      *
      * @param calculationData calculationData with moves without weight`
