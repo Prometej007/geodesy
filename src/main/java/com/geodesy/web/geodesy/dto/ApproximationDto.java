@@ -12,4 +12,11 @@ public class ApproximationDto {
         this.value = value;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "ApproximationDto{" +
+                "value='" + value + '\'' +
+                '}';
+    }
 }

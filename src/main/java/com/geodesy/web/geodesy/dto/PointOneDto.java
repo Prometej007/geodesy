@@ -124,4 +124,21 @@ public class PointOneDto {
         this.weightCorrectionCorrection = weightCorrectionCorrection;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "PointOneDto{" +
+                "nameMuve='" + nameMuve + '\'' +
+                ", nameReper='" + nameReper + '\'' +
+                ", height='" + height + '\'' +
+                ", sum='" + sum + '\'' +
+                ", station='" + station + '\'' +
+                ", weight='" + weight + '\'' +
+                ", _weight='" + _weight + '\'' +
+                ", approximationDto=" + approximationDto +
+                ", correction='" + correction + '\'' +
+                ", weightCorrection='" + weightCorrection + '\'' +
+                ", weightCorrectionCorrection='" + weightCorrectionCorrection + '\'' +
+                '}';
+    }
 }

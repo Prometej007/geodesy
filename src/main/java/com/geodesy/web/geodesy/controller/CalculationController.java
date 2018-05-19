@@ -2,6 +2,7 @@ package com.geodesy.web.geodesy.controller;
 
 import com.geodesy.web.geodesy.builder.ExcelViewReport;
 import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
+import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.enums.ClassSystem;
 import com.geodesy.web.geodesy.service.CalculationDataService;
@@ -36,10 +37,12 @@ public class CalculationController {
 
     @PostMapping("/result-1")
     private String calculation1(Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
+        CalculationData res = consistentApproximationMethod.calculate(excelReader.getCalculationData(file).setCalculationTypeName(type));
         model.addAttribute("classSystem", classSystem.name());
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
-        model.addAttribute("calc", pointDtoParser.parse(calculationDataService.save(consistentApproximationMethod.calculate(excelReader.getCalculationData(file).setCalculationTypeName(type)))));
+        model.addAttribute("calc", pointDtoParser.parse(res));
+        calculationDataService.save(res);
         return "result";
     }
 

@@ -42,8 +42,8 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
     public CalculationData normilize(CalculationData calculationData) {
         LOGGER.info(calculationData.getReperList());
         return calculationData
-                .setMoveList(calculationData.getMoveList().stream().peek(LOGGER::info).map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).peek(move -> LOGGER.info("----------------------------\n")).peek(LOGGER::info).collect(toList()))
-                .setReperList(calculationData.getReperList().stream().peek(LOGGER::info).map(reper -> reper.setReperType(reper.getName().matches("\\w+\\d+") ? ReperType.REPER : ReperType.POINT)).peek(move -> LOGGER.info("============================\n")).peek(LOGGER::info).collect(toList()));
+                .setMoveList(calculationData.getMoveList().stream().map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).collect(toList()))
+                .setReperList(calculationData.getReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("\\w+\\d+") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
     }
 
     /**

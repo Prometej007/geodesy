@@ -1,5 +1,6 @@
 package com.geodesy.web.geodesy.service.Impl;
 
+import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.model.Reper;
@@ -151,7 +152,21 @@ public class ConsistentApproximationMethodImplTest {
     @Test
     public void calculate() {
         defaultNetworkService.calculate(CALCULATION_DATA);
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
         LOGGER.info(CALCULATION_DATA);
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++");
+        LOGGER.info(new PointDtoParser().parse(CALCULATION_DATA));
     }
 
 //    @Test

@@ -43,4 +43,13 @@ public class PointDto {
         this.checkParams = checkParams;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "PointDto{" +
+                "number=" + number +
+                ", pointOne=" + pointOne +
+                ", checkParams=" + checkParams +
+                '}';
+    }
 }
