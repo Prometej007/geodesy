@@ -1,6 +1,7 @@
 package com.geodesy.web.geodesy.controller;
 
 import com.geodesy.web.geodesy.builder.ExcelViewReport;
+import com.geodesy.web.geodesy.dto.PointDto;
 import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
@@ -11,31 +12,27 @@ import com.geodesy.web.geodesy.service.utils.ExcelReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/calculation")
 public class CalculationController {
 
+    private final PointDtoParser pointDtoParser = new PointDtoParser();
     @Autowired
     private ExcelReader excelReader;
     @Autowired
     private CalculationDataService calculationDataService;
     @Autowired
     private ConsistentApproximationMethod consistentApproximationMethod;
-    private final PointDtoParser pointDtoParser = new PointDtoParser();
-
 
     @PostMapping("/result-1")
     private String calculation1(Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
@@ -49,13 +46,15 @@ public class CalculationController {
         return "result";
     }
 
-    @GetMapping("/download/file")
-    private ModelAndView download1(){
-        Map<String,Object> map=new HashMap<>();
-        map.put("name","test");
-        map.put("pointDto","pointDto");
-        map.put("approximationDtoLength","approximationDtoLength");
-        return new ModelAndView(new ExcelViewReport(),map);
+    @GetMapping("/download/file/{id}")
+    private ModelAndView download1(@PathVariable Long id) {
+        CalculationData calculationData = calculationDataService.findOne(id);
+        List<PointDto> dtoList = pointDtoParser.parse(calculationData);
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "calculation_data_" + calculationData.getDate().toString());
+        map.put("pointDto", dtoList);
+        map.put("approximationDtoLength", calculationData.getMoveList().get(0).getApproximations().size());
+        return new ModelAndView(new ExcelViewReport(), map);
     }
 
     @PostMapping("/result-2")
@@ -65,6 +64,7 @@ public class CalculationController {
         model.addAttribute("file", file.getOriginalFilename());
         return "result";
     }
+
     @PostMapping("/result-3")
     private String calculation3(Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
         model.addAttribute("classSystem", classSystem.name());
@@ -72,6 +72,7 @@ public class CalculationController {
         model.addAttribute("file", file.getOriginalFilename());
         return "result";
     }
+
     @PostMapping("/result-4")
     private String calculation4(Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
         model.addAttribute("classSystem", classSystem.name());
