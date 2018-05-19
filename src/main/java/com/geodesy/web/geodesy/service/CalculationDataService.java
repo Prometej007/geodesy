@@ -1,0 +1,11 @@
+package com.geodesy.web.geodesy.service;
+
+import com.geodesy.web.geodesy.model.CalculationData;
+
+import java.util.List;
+
+public interface CalculationDataService {
+    CalculationData save(CalculationData calculationData);
+    CalculationData findOne(Long id);
+    List<CalculationData> findAll();
+}

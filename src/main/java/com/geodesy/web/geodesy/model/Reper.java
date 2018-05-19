@@ -1,5 +1,6 @@
 package com.geodesy.web.geodesy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geodesy.web.geodesy.model.enums.ReperType;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
@@ -12,6 +13,7 @@ public class Reper {
     private Long id;
     private String name;
     private Double height;
+    @JsonIgnore
     @ManyToOne
     private CalculationData calculationData;
     private ReperType reperType;
