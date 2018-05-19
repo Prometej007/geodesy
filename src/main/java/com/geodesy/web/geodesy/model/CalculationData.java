@@ -20,6 +20,7 @@ public class CalculationData {
     private List<Reper> reperList;
     @OneToMany(mappedBy = "calculationData",cascade = CascadeType.ALL)
     private List<Move> moveList;
+    @Enumerated
     private CalculationTypeName calculationTypeName;
     private Double niu;
     private Double m;

@@ -14,6 +14,7 @@ public class Move {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Enumerated
     private MoveType moveType;
     // h
     private Double difference;

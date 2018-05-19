@@ -16,6 +16,7 @@ public class Reper {
     @JsonIgnore
     @ManyToOne
     private CalculationData calculationData;
+    @Enumerated
     private ReperType reperType;
 
     public Long getId() {
