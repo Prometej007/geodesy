@@ -53,7 +53,7 @@ public class CalculationController {
         Map<String, Object> map = new HashMap<>();
         map.put("name", "calculation_data_" + calculationData.getDate().toString());
         map.put("pointDto", dtoList);
-        map.put("approximationDtoLength", calculationData.getMoveList().get(0).getApproximations().size());
+        map.put("approximationDtoLength", (long) calculationData.getMoveList().get(0).getApproximations().size());
         return new ModelAndView(new ExcelViewReport(), map);
     }
 
