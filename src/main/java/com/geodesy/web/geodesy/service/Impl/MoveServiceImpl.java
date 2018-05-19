@@ -4,6 +4,7 @@ import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.repository.MoveRepository;
 import com.geodesy.web.geodesy.service.ApproximationService;
 import com.geodesy.web.geodesy.service.MoveService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class MoveServiceImpl implements MoveService {
 
+    private static final Logger LOGGER = Logger.getLogger(MoveServiceImpl.class);
+
+
     @Autowired
     private MoveRepository moveRepository;
     @Autowired
@@ -21,6 +25,7 @@ public class MoveServiceImpl implements MoveService {
 
     @Override
     public Move save(Move move) {
+        LOGGER.info("Move name to save :" + move.getName());
         move.setId(moveRepository.save(move).getId());
         return moveRepository.save(move.setApproximations(move.getApproximations().stream().map(approximation -> approximationService.save(approximation.setMove(move))).collect(toList())));
     }
