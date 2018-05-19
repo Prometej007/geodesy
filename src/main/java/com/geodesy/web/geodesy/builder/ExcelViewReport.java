@@ -77,14 +77,14 @@ public class ExcelViewReport extends AbstractXlsView {
             counter += 1;
         }
 
-        header.createCell((int) (approximationDtoLength + 1 + 7)).setCellValue("V mm");
-        header.getCell((int) (approximationDtoLength + 1 + 7)).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 1 + 6)).setCellValue("V mm");
+        header.getCell((int) (approximationDtoLength + 1 + 6)).setCellStyle(style);
 
-        header.createCell((int) (approximationDtoLength + 2 + 7)).setCellValue("P`v MM");
-        header.getCell((int) (approximationDtoLength + 2 + 7)).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 2 + 6)).setCellValue("P`v MM");
+        header.getCell((int) (approximationDtoLength + 2 + 6)).setCellStyle(style);
 
-        header.createCell((int) (approximationDtoLength + 3 + 7)).setCellValue("P`v MM2");
-        header.getCell((int) (approximationDtoLength + 3 + 7)).setCellStyle(style);
+        header.createCell((int) (approximationDtoLength + 3 + 6)).setCellValue("P`v MM2");
+        header.getCell((int) (approximationDtoLength + 3 + 6)).setCellStyle(style);
         int indexRow = 1;
 
         for (PointDto ticket :
@@ -102,9 +102,9 @@ public class ExcelViewReport extends AbstractXlsView {
                 for (int j = 0; j < ticket.getPointOne().get(i).getApproximationDto().size(); j++) {
                     userRow.createCell(7 + j).setCellValue(ticket.getPointOne().get(i).getApproximationDto().get(j).getValue());
                 }
-                userRow.createCell((int) (8 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getCorrection());
-                userRow.createCell((int) (9 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getWeightCorrection());
-                userRow.createCell((int) (10 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getWeightCorrectionCorrection());
+                userRow.createCell((int) (8 - 1 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getCorrection());
+                userRow.createCell((int) (9 - 1 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getWeightCorrection());
+                userRow.createCell((int) (10 - 1 + approximationDtoLength)).setCellValue(ticket.getPointOne().get(i).getWeightCorrectionCorrection());
 
                 userRow = sheet.createRow(indexRow++);
             }
