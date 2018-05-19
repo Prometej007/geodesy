@@ -39,7 +39,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
     public CalculationData normilize(CalculationData calculationData) {
         return calculationData
                 .setMoveList(calculationData.getMoveList().stream().map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).collect(toList()))
-                .setReperList(calculationData.getReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("Rp\\d") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
+                .setReperList(calculationData.getReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("\\w+") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
     }
 
     /**
