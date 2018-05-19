@@ -16,13 +16,22 @@ public class RouterController {
 
     @RequestMapping({"/", "/home", "/home/"})
     public String index(Model model) {
-        model.addAttribute("name", testService.test("test"));
-
+//        model.addAttribute("name", testService.test("test"));
         return "home";
     }
 
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
+    @RequestMapping({"/level-the-system"})
+    public String levelTheSystem(Model model) {
+//        model.addAttribute("name", testService.test("test"));
+        return "level-the-system";
     }
+
+
+    @RequestMapping({"/result"})
+    public String result(Model model) {
+//        model.addAttribute("name", testService.test("test"));
+        return "result";
+    }
+
+
 }
