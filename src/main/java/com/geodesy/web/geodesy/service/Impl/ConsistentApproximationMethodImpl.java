@@ -28,11 +28,11 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
     public CalculationData calculate(CalculationData calculationData) {
         return calculateApproximationFull(
                 createCheckMoves(
-                        getWeightStroke(
-                                getWeight(
-                                        fulfillMoves(
+                        getWeightStroke(normilize(
+                                getWeight(normilize(
+                                        fulfillMoves(normilize(
                                                 getApproximatePointHeight(
-                                                        normilize(calculationData)))))));
+                                                        normilize(calculationData))))))))));
     }
 
     /**

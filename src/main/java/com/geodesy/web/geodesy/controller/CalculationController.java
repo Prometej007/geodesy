@@ -39,7 +39,7 @@ public class CalculationController {
         model.addAttribute("classSystem", classSystem.name());
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
-        model.addAttribute("calc", pointDtoParser.parse(calculationDataService.save(consistentApproximationMethod.calculate(excelReader.getCalculationData(file)))));
+        model.addAttribute("calc", pointDtoParser.parse(calculationDataService.save(consistentApproximationMethod.calculate(excelReader.getCalculationData(file).setCalculationTypeName(type)))));
         return "result";
     }
 

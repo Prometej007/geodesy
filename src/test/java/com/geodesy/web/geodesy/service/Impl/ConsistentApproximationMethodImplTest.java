@@ -39,7 +39,7 @@ public class ConsistentApproximationMethodImplTest {
             CALCULATION_DATA
                     .setId(1L)
 
-                    .setCalculationTypeName(CalculationTypeName.THIRD)
+                    .setCalculationTypeName(CalculationTypeName.FIRST)
 
                     .addReper(new Reper().setId(1L).setName("Rp1").setHeight(261.837))
                     .addReper(new Reper().setId(1L).setName("Rp2").setHeight(269.508))
@@ -145,6 +145,12 @@ public class ConsistentApproximationMethodImplTest {
                         " ] WEIGHT` : [ " + format.format(move.getWeightStroke()) +
                         " ] APPROXIMATIONS : " + move.getApproximations().stream().map(approximation -> format.format(approximation.getValue())).collect(toList())));
         defaultNetworkService.fulfillCorrections(CALCULATION_DATA);
+        LOGGER.info(CALCULATION_DATA);
+    }
+
+    @Test
+    public void calculate() {
+        defaultNetworkService.calculate(CALCULATION_DATA);
         LOGGER.info(CALCULATION_DATA);
     }
 
