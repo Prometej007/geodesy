@@ -16,7 +16,7 @@ public class ApproximationServiceImpl implements ApproximationService {
 
     @Override
     public Approximation save(Approximation approximation) {
-        return approximationRepository.save(approximation);
+        return approximationRepository.save(approximation.setId(null));
     }
 
     @Override
