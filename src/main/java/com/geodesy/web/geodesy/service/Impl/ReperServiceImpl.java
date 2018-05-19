@@ -19,6 +19,7 @@ public class ReperServiceImpl implements ReperService {
 
     @Override
     public Reper save(Reper reper) {
+        reper.setId(null);
         LOGGER.info("Reper name to save :"+reper.getName());
         return reperRepository.save(reper);
     }
