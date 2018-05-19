@@ -8,6 +8,7 @@ public class PointDto {
     private Long number;
     // порядково з таблиці
     private List<PointOneDto> pointOne;
+    private List<String> checkParams;
 
     public Long getNumber() {
         return number;
@@ -31,6 +32,15 @@ public class PointDto {
         if(this.pointOne==null)
             this.pointOne=new ArrayList<>();
         this.pointOne.add(pointOneDto);
+        return this;
+    }
+
+    public List<String> getCheckParams() {
+        return checkParams;
+    }
+
+    public PointDto setCheckParams(List<String> checkParams) {
+        this.checkParams = checkParams;
         return this;
     }
 }

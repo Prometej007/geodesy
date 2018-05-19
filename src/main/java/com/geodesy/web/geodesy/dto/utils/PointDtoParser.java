@@ -3,6 +3,7 @@ package com.geodesy.web.geodesy.dto.utils;
 import com.geodesy.web.geodesy.dto.ApproximationDto;
 import com.geodesy.web.geodesy.dto.PointDto;
 import com.geodesy.web.geodesy.dto.PointOneDto;
+import com.geodesy.web.geodesy.model.Approximation;
 import com.geodesy.web.geodesy.model.CalculationData;
 import com.geodesy.web.geodesy.model.Move;
 import com.geodesy.web.geodesy.model.Reper;
@@ -37,6 +38,19 @@ public class PointDtoParser {
                         .setApproximationDto(move.getApproximations().stream().sorted(new ApproximationStepComparator()).map(approximation -> new ApproximationDto().setValue(approximation.getValue().toString())).collect(Collectors.toList()));
                 pointDto.addPointOne(pointOneDto);
             }
+            Move move = calculationData.getMoveList().stream().filter(move1 -> move1.getName().equals(point.getName())).findFirst().orElseThrow(RuntimeException::new);
+            List<String> params = new ArrayList<>();
+            params.add(move.getDifference().toString());
+            params.add(move.getWeight().toString());
+            params.add(move.getWeightStroke().toString());
+            for (Double aDouble :
+                    move.getApproximations().stream().sorted(new ApproximationStepComparator()).map(Approximation::getValue).collect(Collectors.toList())) {
+                params.add(aDouble.toString());
+            }
+            params.add(move.getCorrection().toString());
+            params.add(move.getWeightStrokeCorrection().toString());
+            params.add(move.getWeightStrokeCorrectionCorrection().toString());
+            pointDto.setCheckParams(params);
             result.add(pointDto);
         }
         return result;
