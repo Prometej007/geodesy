@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.dto;
 
+import java.util.List;
+
 public class PointOneDto {
     // ходи які сходяться у вузловій точці
     private String nameMuve;
@@ -16,7 +18,7 @@ public class PointOneDto {
     //    p`ji
     private String _weight;
     // наближення
-    private ApproximationDto approximationDto;
+    private List<ApproximationDto> approximationDto;
     //    VMM
     private String correction;
     //    p`VMM
@@ -87,11 +89,11 @@ public class PointOneDto {
         return this;
     }
 
-    public ApproximationDto getApproximationDto() {
+    public List<ApproximationDto> getApproximationDto() {
         return approximationDto;
     }
 
-    public PointOneDto setApproximationDto(ApproximationDto approximationDto) {
+    public PointOneDto setApproximationDto(List<ApproximationDto> approximationDto) {
         this.approximationDto = approximationDto;
         return this;
     }

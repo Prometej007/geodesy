@@ -1,5 +1,6 @@
 package com.geodesy.web.geodesy.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PointDto {
@@ -23,6 +24,13 @@ public class PointDto {
 
     public PointDto setPointOne(List<PointOneDto> pointOne) {
         this.pointOne = pointOne;
+        return this;
+    }
+
+    public PointDto addPointOne(PointOneDto pointOneDto){
+        if(this.pointOne==null)
+            this.pointOne=new ArrayList<>();
+        this.pointOne.add(pointOneDto);
         return this;
     }
 }
