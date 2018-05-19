@@ -233,7 +233,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
         while (!checkApproximations(calculationData, CalculationType.TYPES.get(calculationData.getCalculationTypeName()))) {
             calculationData = calculateApproximation(calculationData);
         }
-        return calculationData;
+        return fulfillCorrections(calculationData);
     }
 
     /**
