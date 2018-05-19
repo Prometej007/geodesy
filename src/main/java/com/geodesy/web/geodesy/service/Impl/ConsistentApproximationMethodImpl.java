@@ -40,7 +40,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData normilize(CalculationData calculationData) {
-        LOGGER.info(calculationData.getReperList());
+//        LOGGER.info(calculationData.getReperList());
         return calculationData
                 .setMoveList(calculationData.getMoveList().stream().map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).collect(toList()))
                 .setReperList(calculationData.getReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("\\w+\\d+") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
@@ -163,7 +163,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData calculateApproximation(CalculationData calculationData) {
-        List<Reper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).peek(LOGGER::info).collect(toList());
+        List<Reper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
         Integer step = getStep(calculationData);
         for (int i = 0; i < points.size(); i++) {
             Integer tI = i;
@@ -269,7 +269,10 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
         for (Move move :
                 moves) {
             Integer approximationsCount = move.getApproximations().size();
-            if (Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) > maxDifference) {
+            LOGGER.info("-----------==============-------------");
+            LOGGER.info((Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) * 10000) + " > " + (.00001 * 10000));
+            LOGGER.info("-----------==============-------------");
+            if (Math.abs(move.getApproximations().get(approximationsCount - 1).getValue() - move.getApproximations().get(approximationsCount - 2).getValue()) > .00001) {
                 return true;
             }
         }
