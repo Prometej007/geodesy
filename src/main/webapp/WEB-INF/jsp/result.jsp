@@ -10,9 +10,10 @@
 </head>
 <body>
 <style>
-    table{
+    table {
         width: 100vw;
     }
+
     td {
         border: 1px solid black;
     }
@@ -64,9 +65,58 @@
             <td>15</td>
             <td>15</td>
         </tr>
-        <tr>
+        <c:forEach items="${calcs}" var="calc" varStatus="loop">
+            <tr>
+                <c:if test="${loop.index==0}">
+                    <td rowspan="${calc.pointOne.size()}">
+                            ${calc.number}
+                    </td>
+                </c:if>
+                <td>
+                        ${calc.nameMuve}
+                </td>
+                <td>
+                        ${calc.nameReper}
+                </td>
+                <td>
+                        ${calc.height}
+                </td>
+                <td>
+                        ${calc.sum}
+                </td>
+                <td>
+                        ${calc.station}
+                </td>
+                <td>
+                        ${calc.weight}
+                </td>
+                <td>
+                        ${calc._weight}
+                </td>
 
-        </tr>
+                <c:forEach items="${calc.pointOne}" var="row">
+                    <td>
+                            ${calc}
+                    </td>
+                </c:forEach>
+                <td>
+                        ${calc.correction}
+                </td>
+                <td>
+                        ${calc.weightCorrection}
+                </td>
+                <td>
+                        ${calc.weightCorrectionCorrection}
+                </td>
+            </tr>
+            <c:forEach items="${calc.pointOne}" var="row">
+
+                <tr>
+
+                </tr>
+            </c:forEach>
+
+        </c:forEach>
 
     </table>
 </body>
