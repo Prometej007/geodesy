@@ -1,5 +1,8 @@
 package com.geodesy.web.geodesy.model;
 
+import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Poligon {
@@ -36,6 +39,13 @@ public class Poligon {
         return this;
     }
 
+    public Poligon addPoligonMove(PoligonMove poligonMove){
+        if(poligonMoves == null)
+            poligonMoves = new ArrayList<>();
+        poligonMoves.add(poligonMove);
+        return this;
+    }
+
     public Double getPerimeter() {
         return perimeter;
     }
@@ -52,5 +62,16 @@ public class Poligon {
     public Poligon setMischief(Double mischief) {
         this.mischief = mischief;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Poligon{\n" +
+                "\tid=" + id +
+                ", \n\tname='" + name + '\'' +
+                ", \n\tperimeter=" + (perimeter == null ? "null" : DoubleFormatter.format(perimeter)) +
+                ", \n\tmischief=" + (mischief == null ? "null" : DoubleFormatter.format(mischief)) +
+                ", \n\tpoligonMoves=" + poligonMoves +
+                "\n}";
     }
 }

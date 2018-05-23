@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.model;
 
+import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
+
 public class PoligonReper {
     private Long id;
     private String name;
@@ -30,5 +32,14 @@ public class PoligonReper {
     public PoligonReper setHeight(Double height) {
         this.height = height;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "PoligonReper{\n" +
+                "\tid=" + id +
+                ", \n\tname='" + name + '\'' +
+                ", \n\theight=" + (height == null ? "null" : DoubleFormatter.format(height)) +
+                "\n}";
     }
 }

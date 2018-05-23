@@ -2,6 +2,7 @@ package com.geodesy.web.geodesy.model;
 
 import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PoligonData {
@@ -37,6 +38,13 @@ public class PoligonData {
         return this;
     }
 
+    public PoligonData addPoligon(Poligon poligon){
+        if(poligonList == null)
+            poligonList = new ArrayList<>();
+        poligonList.add(poligon);
+        return this;
+    }
+
     public CalculationTypeName getCalculationTypeName() {
         return calculationTypeName;
     }
@@ -44,5 +52,15 @@ public class PoligonData {
     public PoligonData setCalculationTypeName(CalculationTypeName calculationTypeName) {
         this.calculationTypeName = calculationTypeName;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "PoligonData{\n" +
+                "\tid=" + id +
+                ", \n\tpoligonReper=" + poligonReper +
+                ", \n\tpoligonList=" + poligonList +
+                ", \n\tcalculationTypeName=" + calculationTypeName +
+                "\n}";
     }
 }
