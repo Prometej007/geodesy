@@ -1,33 +1,24 @@
-package com.geodesy.web.geodesy.model;
+package com.geodesy.web.geodesy.model.poligon;
 
+import com.geodesy.web.geodesy.model.base.GObject;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Poligon {
-    private Long id;
-    private String name;
+public class Poligon extends GObject {
     private Double perimeter;
     private Double mischief;
     private List<PoligonMove> poligonMoves;
 
-    public Long getId() {
-        return id;
-    }
-
+    @Override
     public Poligon setId(Long id) {
-        this.id = id;
-        return this;
+        return (Poligon) super.setId(id);
     }
 
-    public String getName() {
-        return name;
-    }
-
+    @Override
     public Poligon setName(String name) {
-        this.name = name;
-        return this;
+        return (Poligon) super.setName(name);
     }
 
     public List<PoligonMove> getPoligonMoves() {
@@ -39,8 +30,8 @@ public class Poligon {
         return this;
     }
 
-    public Poligon addPoligonMove(PoligonMove poligonMove){
-        if(poligonMoves == null)
+    public Poligon addPoligonMove(PoligonMove poligonMove) {
+        if (poligonMoves == null)
             poligonMoves = new ArrayList<>();
         poligonMoves.add(poligonMove);
         return this;

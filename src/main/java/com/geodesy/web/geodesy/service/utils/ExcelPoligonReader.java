@@ -1,8 +1,8 @@
 package com.geodesy.web.geodesy.service.utils;
 
-import com.geodesy.web.geodesy.model.CalculationData;
-import com.geodesy.web.geodesy.model.Move;
-import com.geodesy.web.geodesy.model.Reper;
+import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
+import com.geodesy.web.geodesy.model.approximation.CalculationData;
+import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-
-import static org.aspectj.runtime.internal.Conversions.intValue;
 
 @Service
 public class ExcelPoligonReader {
@@ -36,7 +34,7 @@ public class ExcelPoligonReader {
 
     public void read(MultipartFile multipartFile, CalculationData calculationData) {
         try {
-            calculationData.setMoveList(new ArrayList<>());
+            calculationData.setApproximationMoveList(new ArrayList<>());
             calculationData.setReperList(new ArrayList<>());
 //            todo list
             POIFSFileSystem fs = new POIFSFileSystem(multipartFile.getInputStream());
@@ -63,8 +61,8 @@ public class ExcelPoligonReader {
             for (int r = 1; r < rows; r++) {
                 row = sheet.getRow(r);
 //            todo list create element
-                Reper tempReper = new Reper();
-                Move tempMove = new Move();
+                ApproximationReper tempApproximationReper = new ApproximationReper();
+                ApproximationMove tempApproximationMove = new ApproximationMove();
                 if (row != null) {
                     for (int c = 0; c < cols; c++) {
                         cell = row.getCell((short) c);
@@ -73,9 +71,9 @@ public class ExcelPoligonReader {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
 
 //todo
-                                    LOGGER.info("Reper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
+                                    LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
                                 }
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase())) {
+                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase())) {
 //todo
                                 LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
@@ -105,9 +103,9 @@ public class ExcelPoligonReader {
 
                         }
                     }
-                    if (tempReper.getHeight() != null && tempReper.getName() != null)
-                        calculationData.getReperList().add(tempReper);
-                    calculationData.getMoveList().add(tempMove);
+                    if (tempApproximationReper.getHeight() != null && tempApproximationReper.getName() != null)
+                        calculationData.getApproximationReperList().add(tempApproximationReper);
+                    calculationData.getApproximationMoveList().add(tempApproximationMove);
                 }
             }
         } catch (Exception ioe) {

@@ -1,4 +1,4 @@
-package com.geodesy.web.geodesy.model;
+package com.geodesy.web.geodesy.model.approximation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
@@ -14,7 +14,7 @@ public class Approximation {
     private Double value;
     @JsonIgnore
     @ManyToOne
-    private Move move;
+    private ApproximationMove approximationMove;
 
     public Long getId() {
         return id;
@@ -34,12 +34,12 @@ public class Approximation {
         return this;
     }
 
-    public Move getMove() {
-        return move;
+    public ApproximationMove getApproximationMove() {
+        return approximationMove;
     }
 
-    public Approximation setMove(Move move) {
-        this.move = move;
+    public Approximation setApproximationMove(ApproximationMove approximationMove) {
+        this.approximationMove = approximationMove;
         return this;
     }
 

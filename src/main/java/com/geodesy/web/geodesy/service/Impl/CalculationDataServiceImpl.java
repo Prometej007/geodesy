@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service.Impl;
 
-import com.geodesy.web.geodesy.model.CalculationData;
+import com.geodesy.web.geodesy.model.approximation.CalculationData;
 import com.geodesy.web.geodesy.repository.CalculationDataRepository;
 import com.geodesy.web.geodesy.service.CalculationDataService;
 import com.geodesy.web.geodesy.service.MoveService;
@@ -25,8 +25,8 @@ public class CalculationDataServiceImpl implements CalculationDataService {
     public CalculationData save(CalculationData calculationData) {
         calculationData.setId(calculationDataRepository.save(calculationData).getId());
         return calculationDataRepository.save(calculationData
-                .setMoveList(calculationData.getMoveList().stream().map(move -> moveService.save(move.setCalculationData(calculationData))).collect(Collectors.toList()))
-                .setReperList(calculationData.getReperList().stream().map(reper -> reperService.save(reper.setCalculationData(calculationData))).collect(Collectors.toList()))
+                .setApproximationMoveList(calculationData.getApproximationMoveList().stream().map(move -> moveService.save(move.setCalculationData(calculationData))).collect(Collectors.toList()))
+                .setReperList(calculationData.getApproximationReperList().stream().map(reper -> reperService.save(reper.setCalculationData(calculationData))).collect(Collectors.toList()))
         );
     }
 

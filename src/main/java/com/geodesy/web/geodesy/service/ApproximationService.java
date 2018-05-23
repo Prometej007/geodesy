@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service;
 
-import com.geodesy.web.geodesy.model.Approximation;
+import com.geodesy.web.geodesy.model.approximation.Approximation;
 
 import java.util.List;
 

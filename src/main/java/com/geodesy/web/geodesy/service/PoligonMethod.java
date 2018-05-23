@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service;
 
-import com.geodesy.web.geodesy.model.PoligonData;
+import com.geodesy.web.geodesy.model.poligon.PoligonData;
 
 public interface PoligonMethod {
 

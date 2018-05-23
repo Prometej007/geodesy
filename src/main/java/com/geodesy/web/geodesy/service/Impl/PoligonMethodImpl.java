@@ -1,9 +1,9 @@
 package com.geodesy.web.geodesy.service.Impl;
 
-import com.geodesy.web.geodesy.model.Poligon;
-import com.geodesy.web.geodesy.model.PoligonData;
-import com.geodesy.web.geodesy.model.PoligonMove;
-import com.geodesy.web.geodesy.model.constants.CalculationType;
+import com.geodesy.web.geodesy.model.poligon.Poligon;
+import com.geodesy.web.geodesy.model.poligon.PoligonData;
+import com.geodesy.web.geodesy.model.poligon.PoligonMove;
+import com.geodesy.web.geodesy.model.utils.constants.CalculationType;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 import com.geodesy.web.geodesy.model.utils.PoligonMischiefComparator;
 import com.geodesy.web.geodesy.model.utils.PoligonNameComparator;
@@ -46,8 +46,8 @@ public class PoligonMethodImpl implements PoligonMethod {
                 setCorrectionOne(poligonData.getPoligonList().get(i));
                 for (PoligonMove poligonMove :
                         poligonData.getPoligonList().get(i).getPoligonMoves()) {
-//                    System.err.println(String.format("E(%s) - C(%s) = %s", DoubleFormatter.format(poligonMove.getExceeding()), DoubleFormatter.format(poligonMove.getCorrection()), DoubleFormatter.format(poligonMove.getExceeding() - poligonMove.getCorrection())));
-                    poligonMove.setExceeding(poligonMove.getExceeding() - poligonMove.getCorrection());
+//                    System.err.println(String.format("E(%s) - C(%s) = %s", DoubleFormatter.format(poligonMove.setDifference()), DoubleFormatter.format(poligonMove.getCorrection()), DoubleFormatter.format(poligonMove.setDifference() - poligonMove.getCorrection())));
+                    poligonMove.setDifference(poligonMove.getDifference() - poligonMove.getCorrection());
                 }
                 setNewMischief(poligonData.getPoligonList().get(i), poligonData);
 //                System.err.println(String.format("%d (%d)", i, startIndex));
@@ -151,8 +151,8 @@ public class PoligonMethodImpl implements PoligonMethod {
 //        System.err.println("---------------------------------------");
         for (PoligonMove poligonMove :
                 poligon.getPoligonMoves()) {
-//            System.err.println(String.format("mis += %s (mis = %s)", DoubleFormatter.format(poligonMove.getExceeding()), DoubleFormatter.format(mis)));
-            mis += poligonMove.getExceeding();
+//            System.err.println(String.format("mis += %s (mis = %s)", DoubleFormatter.format(poligonMove.setDifference()), DoubleFormatter.format(mis)));
+            mis += poligonMove.getDifference();
         }
         poligon.setMischief(mis);
 //        System.err.println(String.format("id : [%d] mis : [%s]", poligon.getId(), DoubleFormatter.format(mis)));

@@ -1,6 +1,6 @@
-package com.geodesy.web.geodesy.model.constants;
+package com.geodesy.web.geodesy.model.utils.constants;
 
-import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
+import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 
 import java.util.HashMap;
 

@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.model.utils;
 
-import com.geodesy.web.geodesy.model.Approximation;
+import com.geodesy.web.geodesy.model.approximation.Approximation;
 
 import java.util.Comparator;
 

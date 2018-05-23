@@ -1,12 +1,12 @@
 package com.geodesy.web.geodesy.model.utils;
 
-import com.geodesy.web.geodesy.model.Move;
+import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 
 import java.util.Comparator;
 
-public class MoveNameComparator implements Comparator<Move> {
+public class MoveNameComparator implements Comparator<ApproximationMove> {
     @Override
-    public int compare(Move o1, Move o2) {
+    public int compare(ApproximationMove o1, ApproximationMove o2) {
         if (o1 == null || o2 == null)
             return 0;
         if ((o1.getName() == null || o1.getName().equals("")) ||

@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service.Impl;
 
-import com.geodesy.web.geodesy.model.Move;
+import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 import com.geodesy.web.geodesy.repository.MoveRepository;
 import com.geodesy.web.geodesy.service.ApproximationService;
 import com.geodesy.web.geodesy.service.MoveService;
@@ -24,20 +24,20 @@ public class MoveServiceImpl implements MoveService {
     private ApproximationService approximationService;
 
     @Override
-    public Move save(Move move) {
-        move.setId(null);
-        LOGGER.info("Move name to save :" + move.getName());
-        move.setId(moveRepository.save(move).getId());
-        return moveRepository.save(move.setApproximations(move.getApproximations().stream().map(approximation -> approximationService.save(approximation.setMove(move))).collect(toList())));
+    public ApproximationMove save(ApproximationMove approximationMove) {
+        approximationMove.setId(null);
+        LOGGER.info("ApproximationMove name to save :" + approximationMove.getName());
+        approximationMove.setId(moveRepository.save(approximationMove).getId());
+        return moveRepository.save(approximationMove.setApproximations(approximationMove.getApproximations().stream().map(approximation -> approximationService.save(approximation.setApproximationMove(approximationMove))).collect(toList())));
     }
 
     @Override
-    public Move findOne(Long id) {
+    public ApproximationMove findOne(Long id) {
         return moveRepository.findOne(id);
     }
 
     @Override
-    public List<Move> findAll() {
+    public List<ApproximationMove> findAll() {
         return moveRepository.findAll();
     }
 }

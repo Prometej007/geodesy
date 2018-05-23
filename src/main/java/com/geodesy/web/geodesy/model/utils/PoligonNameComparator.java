@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.model.utils;
 
-import com.geodesy.web.geodesy.model.Poligon;
+import com.geodesy.web.geodesy.model.poligon.Poligon;
 
 import java.util.Comparator;
 

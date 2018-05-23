@@ -1,15 +1,14 @@
 package com.geodesy.web.geodesy.service.utils;
 
-import com.geodesy.web.geodesy.model.CalculationData;
-import com.geodesy.web.geodesy.model.Move;
-import com.geodesy.web.geodesy.model.Reper;
+import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
+import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
+import com.geodesy.web.geodesy.model.approximation.CalculationData;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +36,7 @@ public class ExcelReader {
 
     public void read(MultipartFile multipartFile, CalculationData calculationData) {
         try {
-            calculationData.setMoveList(new ArrayList<>());
+            calculationData.setApproximationMoveList(new ArrayList<>());
             calculationData.setReperList(new ArrayList<>());
 //            todo list
             POIFSFileSystem fs = new POIFSFileSystem(multipartFile.getInputStream());
@@ -64,35 +63,35 @@ public class ExcelReader {
             for (int r = 1; r < rows; r++) {
                 row = sheet.getRow(r);
 //            todo list create element
-                Reper tempReper = new Reper();
-                Move tempMove = new Move();
+                ApproximationReper tempApproximationReper = new ApproximationReper();
+                ApproximationMove tempApproximationMove = new ApproximationMove();
                 if (row != null) {
                     for (int c = 0; c < cols; c++) {
                         cell = row.getCell((short) c);
                         if (cell != null) {
-                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
+                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
-                                    tempReper.setName((cell.getStringCellValue()));
-                                    LOGGER.info("Reper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
+                                    tempApproximationReper.setName((cell.getStringCellValue()));
+                                    LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
                                 }
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
-                                    tempReper.setHeight((cell.getNumericCellValue()));
+                                    tempApproximationReper.setHeight((cell.getNumericCellValue()));
                                     LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Steps".toLowerCase())) {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
-                                    tempMove.setName(cell.getStringCellValue());
+                                    tempApproximationMove.setName(cell.getStringCellValue());
                                     LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
                                 }
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Exceeding,m".toLowerCase())) {
-                                tempMove.setDifference(Double.valueOf(cell.getNumericCellValue()));
+                                tempApproximationMove.setDifference(Double.valueOf(cell.getNumericCellValue()));
                                 LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
-                                tempMove.setStationCount(intValue(cell.getNumericCellValue()));
+                                tempApproximationMove.setStationCount(intValue(cell.getNumericCellValue()));
                                 LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Length,km".toLowerCase())) {
-                                tempMove.setDistance(Double.valueOf(cell.getNumericCellValue()));
+                                tempApproximationMove.setDistance(Double.valueOf(cell.getNumericCellValue()));
                                 LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             }
 
@@ -104,9 +103,9 @@ public class ExcelReader {
 
                         }
                     }
-                    if(tempReper.getHeight()!=null&&tempReper.getName()!=null)
-                    calculationData.getReperList().add(tempReper);
-                    calculationData.getMoveList().add(tempMove);
+                    if(tempApproximationReper.getHeight()!=null&& tempApproximationReper.getName()!=null)
+                    calculationData.getApproximationReperList().add(tempApproximationReper);
+                    calculationData.getApproximationMoveList().add(tempApproximationMove);
                 }
             }
         } catch (Exception ioe) {

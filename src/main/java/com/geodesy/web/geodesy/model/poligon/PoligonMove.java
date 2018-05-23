@@ -1,79 +1,44 @@
-package com.geodesy.web.geodesy.model;
+package com.geodesy.web.geodesy.model.poligon;
 
+import com.geodesy.web.geodesy.model.base.Move;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
 import java.util.Objects;
 
-public class PoligonMove {
-    private Long id;
-    private String name;
-    private Integer stationCount;
-    private Double distance;
-    private Double exceeding;
-    private Double weight;
-    private Double correction;
-
-    public Long getId() {
-        return id;
-    }
-
-    public PoligonMove setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public PoligonMove setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Integer getStationCount() {
-        return stationCount;
-    }
-
+public class PoligonMove extends Move {
+    @Override
     public PoligonMove setStationCount(Integer stationCount) {
-        this.stationCount = stationCount;
-        return this;
+        return (PoligonMove) super.setStationCount(stationCount);
     }
 
-    public Double getDistance() {
-        return distance;
-    }
-
+    @Override
     public PoligonMove setDistance(Double distance) {
-        this.distance = distance;
-        return this;
+        return (PoligonMove) super.setDistance(distance);
     }
 
-    public Double getWeight() {
-        return weight;
+    @Override
+    public PoligonMove setDifference(Double difference) {
+        return (PoligonMove) super.setDifference(difference);
     }
 
+    @Override
     public PoligonMove setWeight(Double weight) {
-        this.weight = weight;
-        return this;
+        return (PoligonMove) super.setWeight(weight);
     }
 
-    public Double getExceeding() {
-        return exceeding;
-    }
-
-    public PoligonMove setExceeding(Double exceeding) {
-        this.exceeding = exceeding;
-        return this;
-    }
-
-    public Double getCorrection() {
-        return correction;
-    }
-
+    @Override
     public PoligonMove setCorrection(Double correction) {
-        this.correction = correction;
-        return this;
+        return (PoligonMove) super.setCorrection(correction);
+    }
+
+    @Override
+    public PoligonMove setId(Long id) {
+        return (PoligonMove) super.setId(id);
+    }
+
+    @Override
+    public PoligonMove setName(String name) {
+        return (PoligonMove) super.setName(name);
     }
 
     @Override
@@ -100,7 +65,6 @@ public class PoligonMove {
                 ", \n\tname='" + name + '\'' +
                 ", \n\tstationCount=" + stationCount +
                 ", \n\tdistance=" + (distance == null ? "null" : DoubleFormatter.format(distance)) +
-                ", \n\texceeding=" + (exceeding == null ? "null" : DoubleFormatter.format(exceeding)) +
                 ", \n\tweight=" + (weight == null ? "null" : DoubleFormatter.format(weight)) +
                 ", \n\tcorrection=" + (correction == null ? "null" : DoubleFormatter.format(correction)) +
                 "\n}";
