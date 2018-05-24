@@ -1,8 +1,8 @@
-package com.geodesy.web.geodesy.service.Impl;
+package com.geodesy.web.geodesy.service.Impl.persistence;
 
 import com.geodesy.web.geodesy.model.approximation.Approximation;
 import com.geodesy.web.geodesy.repository.ApproximationRepository;
-import com.geodesy.web.geodesy.service.ApproximationService;
+import com.geodesy.web.geodesy.service.persistence.ApproximationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -18,7 +18,7 @@ public class PointDtoParser {
     public List<PointDto> parse(CalculationData calculationData) {
         List<PointDto> result = new ArrayList<>();
         for (ApproximationReper point :
-                calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(Collectors.toList())) {
+                calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(Collectors.toList())) {
             PointDto pointDto = new PointDto();
             pointDto.setNumber(Long.valueOf(point.getName()));
             for (ApproximationMove approximationMove :
@@ -27,7 +27,7 @@ public class PointDtoParser {
                 pointOneDto
                         .setNameMuve(approximationMove.getName())
                         .setNameReper(approximationMove.getName().split("-")[0])
-                        .setHeight(calculationData.getApproximationReperList().stream().filter(reper -> reper.getName().equals(approximationMove.getName().split("-")[0])).findFirst().orElseThrow(RuntimeException::new).getHeight().toString())
+                        .setHeight(calculationData.getReperList().stream().filter(reper -> reper.getName().equals(approximationMove.getName().split("-")[0])).findFirst().orElseThrow(RuntimeException::new).getHeight().toString())
                         .setSum(approximationMove.getDifference().toString())
                         .setStation(approximationMove.getStationCount().toString())
                         .setWeight(approximationMove.getWeight().toString())

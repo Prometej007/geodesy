@@ -4,12 +4,16 @@ import com.geodesy.web.geodesy.model.base.Data;
 import com.geodesy.web.geodesy.model.base.Reper;
 import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PoligonData extends Data {
     private List<Poligon> poligonList;
+    @OneToMany(mappedBy = "data")
+    protected List<PoligonReper> reperList;
 
     public List<Poligon> getPoligonList() {
         return poligonList;
@@ -27,9 +31,13 @@ public class PoligonData extends Data {
         return this;
     }
 
-    @Override
-    public PoligonData setReperList(List<Reper> reperList) {
-        return (PoligonData) super.setReperList(reperList);
+    public List<PoligonReper> getReperList() {
+        return reperList;
+    }
+
+    public PoligonData setReperList(List<PoligonReper> reperList) {
+        this.reperList = reperList;
+        return this;
     }
 
     @Override
@@ -54,10 +62,13 @@ public class PoligonData extends Data {
 
     @Override
     public String toString() {
-        return "PoligonData{\n" +
-                "\tid=" + id +
-                ", \n\tpoligonList=" + poligonList +
-                ", \n\tcalculationTypeName=" + calculationTypeName +
+        return "PoligonData{" +
+                "\n\tpoligonList=" + poligonList +
+                ",\n\t reperList=" + reperList +
+                ",\n\t date=" + date +
+                ",\n\t calculationTypeName=" + calculationTypeName +
+                ",\n\t id=" + id +
+                ",\n\t name='" + name + '\'' +
                 "\n}";
     }
 }

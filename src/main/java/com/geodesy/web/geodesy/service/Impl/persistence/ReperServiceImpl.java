@@ -1,8 +1,8 @@
-package com.geodesy.web.geodesy.service.Impl;
+package com.geodesy.web.geodesy.service.Impl.persistence;
 
 import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import com.geodesy.web.geodesy.repository.ReperRepository;
-import com.geodesy.web.geodesy.service.ReperService;
+import com.geodesy.web.geodesy.service.persistence.ReperService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

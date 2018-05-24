@@ -14,20 +14,9 @@ import java.util.List;
 
 @MappedSuperclass
 public abstract class Data extends GObject {
-    @OneToMany(mappedBy = "data")
-    protected List<Reper> reperList;
     protected Timestamp date;
     @Enumerated
     protected CalculationTypeName calculationTypeName;
-
-    public List<? extends Reper> getApproximationReperList() {
-        return reperList;
-    }
-
-    public Data setReperList(List<Reper> reperList) {
-        this.reperList = reperList;
-        return this;
-    }
 
     @JsonSerialize(using = DateSerializer.class)
     public Timestamp getDate() {

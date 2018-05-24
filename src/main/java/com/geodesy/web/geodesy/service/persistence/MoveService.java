@@ -1,4 +1,4 @@
-package com.geodesy.web.geodesy.service;
+package com.geodesy.web.geodesy.service.persistence;
 
 import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 

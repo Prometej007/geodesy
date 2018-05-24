@@ -40,10 +40,10 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData normilize(CalculationData calculationData) {
-//        LOGGER.info(calculationData.getApproximationReperList());
+//        LOGGER.info(calculationData.getReperList());
         return calculationData
                 .setApproximationMoveList(calculationData.getApproximationMoveList().stream().map(move -> move.getMoveType() == null ? move.setMoveType(MoveType.DEFAULT) : move).collect(toList()))
-                .setReperList(calculationData.getApproximationReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("\\w+\\d+") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
+                .setReperList(calculationData.getReperList().stream().map(reper -> reper.setReperType(reper.getName().matches("\\w+\\d+") ? ReperType.REPER : ReperType.POINT)).collect(toList()));
     }
 
     /**
@@ -51,21 +51,23 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData getApproximatePointHeight(CalculationData calculationData) {
-        List<ApproximationReper> approximationRepers = new ArrayList<>(calculationData.getApproximationReperList());
+        List<ApproximationReper> approximationRepers = new ArrayList<>(calculationData.getReperList());
         List<ApproximationMove> approximationMoves = new ArrayList<>(calculationData.getApproximationMoveList());
         for (ApproximationReper approximationReper : approximationRepers) {
             ApproximationMove approximationMove = approximationMoves.stream().filter(move1 -> move1.getName().contains(approximationReper.getName())).findFirst().orElse(new ApproximationMove());
             if (approximationMove.getName() == null)
                 continue;
             String name = approximationMove.getName().replace(approximationReper.getName(), "").replace("-", "");
-            if (calculationData.getApproximationReperList().stream().noneMatch(reper1 -> reper1.getName().equals(name))) {
-                calculationData.addReper(
+            if (calculationData.getReperList().stream().noneMatch(reper1 -> reper1.getName().equals(name))) {
+                List<ApproximationReper> temp = new ArrayList<>(calculationData.getReperList());
+                temp.add(
                         new ApproximationReper()
                                 .setId(1L)
                                 .setName(name)
                                 .setHeight(approximationReper.getHeight() + approximationMove.getDifference())
                                 .setReperType(ReperType.POINT)
                 );
+                calculationData.setReperList(temp);
             }
         }
         return calculationData;
@@ -110,7 +112,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData createCheckMoves(CalculationData calculationData) {
-        for (ApproximationReper point : calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList())) {
+        for (ApproximationReper point : calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList())) {
             List<ApproximationMove> approximationMoves = calculationData.getApproximationMoveList().stream().filter(move -> move.getName().contains("-" + point.getName())).collect(toList());
             Double chDifference = .0, chWeight = .0, chWeightStroke = .0, chDistance = .0;
             for (ApproximationMove approximationMove : approximationMoves) {
@@ -139,7 +141,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
     @Override
     public CalculationData getWeightStroke(CalculationData calculationData) {
         calculationData.getApproximationMoveList().sort(new MoveNameComparator());
-        Long pointsCount = calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count();
+        Long pointsCount = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count();
         Long movesPerPoint = calculationData.getApproximationMoveList().size() / pointsCount;
         Long tempMPP = movesPerPoint;
         Double sumWeight = .0;
@@ -163,7 +165,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData calculateApproximation(CalculationData calculationData) {
-        List<ApproximationReper> points = calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
+        List<ApproximationReper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
         Integer step = getStep(calculationData);
         for (int i = 0; i < points.size(); i++) {
             Integer tI = i;
@@ -213,7 +215,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
         List<ApproximationReper> connectedApproximationRepers = new ArrayList<>();
         for (ApproximationMove approximationMove :
                 approximationMoves) {
-            connectedApproximationRepers.add(calculationData.getApproximationReperList().stream().filter(reper -> reper.getName().equals(approximationMove.getName().split("-")[0])).findFirst().orElseThrow(RuntimeException::new));
+            connectedApproximationRepers.add(calculationData.getReperList().stream().filter(reper -> reper.getName().equals(approximationMove.getName().split("-")[0])).findFirst().orElseThrow(RuntimeException::new));
         }
         return connectedApproximationRepers;
     }
@@ -251,7 +253,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
         Integer step = getStep(calculationData);
         if (step == 1)
             return false;
-        List<ApproximationReper> points = calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
+        List<ApproximationReper> points = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
         for (ApproximationReper point :
                 points) {
             List<ApproximationMove> approximationMoves = calculationData.getApproximationMoveList().stream().filter(move -> move.getName().contains("-" + point.getName())).collect(toList());
@@ -284,7 +286,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData fulfillCorrections(CalculationData calculationData) {
-        List<ApproximationReper> approximationRepers = calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
+        List<ApproximationReper> approximationRepers = calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).collect(toList());
         Double sumPVV = .0;
         Integer sumStations = 0;
         Double sumDistance = .0;
@@ -316,7 +318,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
             sumDistance += checkApproximationMove.getDistance();
             sumStations += checkApproximationMove.getStationCount();
         }
-        calculationData.setNiu(Math.sqrt(sumPVV / (calculationData.getApproximationReperList().size() - calculationData.getApproximationReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count())));
+        calculationData.setNiu(Math.sqrt(sumPVV / (calculationData.getReperList().size() - calculationData.getReperList().stream().filter(reper -> reper.getReperType().equals(ReperType.POINT)).count())));
         calculationData.setM((calculationData.getNiu() / 10) * Math.sqrt(sumStations / sumDistance));
         return calculationData;
     }

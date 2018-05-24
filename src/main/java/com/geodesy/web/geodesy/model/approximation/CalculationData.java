@@ -19,17 +19,10 @@ import static java.util.stream.Collectors.toList;
 public class CalculationData extends Data {
     @OneToMany(mappedBy = "calculationData")
     private List<ApproximationMove> approximationMoveList;
-    @Enumerated
     private Double niu;
     private Double m;
-
-
-    public CalculationData addReper(ApproximationReper approximationReper) {
-        if (reperList == null)
-            reperList = new ArrayList<>();
-        this.reperList.add(approximationReper);
-        return this;
-    }
+    @OneToMany(mappedBy = "data")
+    private List<ApproximationReper> reperList;
 
     public List<ApproximationMove> getApproximationMoveList() {
         return approximationMoveList;
@@ -65,14 +58,13 @@ public class CalculationData extends Data {
         return this;
     }
 
-    @Override
-    public List<ApproximationReper> getApproximationReperList() {
-        return super.getApproximationReperList().stream().map(o -> (ApproximationReper) o).collect(toList());
+    public List<ApproximationReper> getReperList() {
+        return reperList;
     }
 
-    @Override
-    public CalculationData setReperList(List<Reper> reperList) {
-        return (CalculationData) super.setReperList(reperList);
+    public CalculationData setReperList(List<ApproximationReper> reperList) {
+        this.reperList = reperList;
+        return this;
     }
 
     @Override

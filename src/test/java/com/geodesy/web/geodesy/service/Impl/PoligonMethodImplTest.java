@@ -30,7 +30,7 @@ public class PoligonMethodImplTest {
         POLIGON_DATA
                 .setId(1L)
                 .setCalculationTypeName(CalculationTypeName.FIRST)
-                .setReperList(Collections.singletonList(new PoligonReper().setName("E").setHeight(.0)))
+                .setReperList(Collections.singletonList(new PoligonReper().setId(1L).setName("E").setHeight(.0)))
                 .addPoligon(
                         new Poligon().setId(1L).setName("1")
                                 .addPoligonMove(new PoligonMove().setId(1L).setName("E-A").setDifference(-.0).setStationCount(11).setDistance(4.5))
@@ -68,5 +68,15 @@ public class PoligonMethodImplTest {
     public void mainCalculation() {
         poligonMethod.mainCalculation(poligonMethod.getWeight(POLIGON_DATA));
         LOGGER.info(POLIGON_DATA);
+    }
+
+    @Test
+    public void calculate() {
+        poligonMethod.calculate(POLIGON_DATA);
+        LOGGER.info(POLIGON_DATA.getReperList());
+    }
+
+    @Test
+    public void getHeights() {
     }
 }
