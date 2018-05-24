@@ -4,10 +4,7 @@ import com.geodesy.web.geodesy.model.base.Move;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 import com.geodesy.web.geodesy.model.utils.enums.MoveType;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class ApproximationMove extends Move {
     // P`
     private Double weightStroke;
     // (H) I, II, III, IV, V ...
-    @OneToMany(mappedBy = "move")
+    @OneToMany(mappedBy = "move", cascade = CascadeType.REFRESH)
     private List<Approximation> approximations;
     // P`v
     private Double weightStrokeCorrection;
@@ -98,37 +95,37 @@ public class ApproximationMove extends Move {
 
     @Override
     public ApproximationMove setStationCount(Integer stationCount) {
-        return (ApproximationMove)super.setStationCount(stationCount);
+        return (ApproximationMove) super.setStationCount(stationCount);
     }
 
     @Override
     public ApproximationMove setDistance(Double distance) {
-        return (ApproximationMove)super.setDistance(distance);
+        return (ApproximationMove) super.setDistance(distance);
     }
 
     @Override
     public ApproximationMove setDifference(Double difference) {
-        return (ApproximationMove)super.setDifference(difference);
+        return (ApproximationMove) super.setDifference(difference);
     }
 
     @Override
     public ApproximationMove setWeight(Double weight) {
-        return (ApproximationMove)super.setWeight(weight);
+        return (ApproximationMove) super.setWeight(weight);
     }
 
     @Override
     public ApproximationMove setCorrection(Double correction) {
-        return (ApproximationMove)super.setCorrection(correction);
+        return (ApproximationMove) super.setCorrection(correction);
     }
 
     @Override
     public ApproximationMove setId(Long id) {
-        return (ApproximationMove)super.setId(id);
+        return (ApproximationMove) super.setId(id);
     }
 
     @Override
     public ApproximationMove setName(String name) {
-        return (ApproximationMove)super.setName(name);
+        return (ApproximationMove) super.setName(name);
     }
 
     @Override
