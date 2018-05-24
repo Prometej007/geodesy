@@ -3,9 +3,9 @@ package com.geodesy.web.geodesy.controller;
 import com.geodesy.web.geodesy.builder.ExcelViewReport;
 import com.geodesy.web.geodesy.dto.PointDto;
 import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
-import com.geodesy.web.geodesy.model.CalculationData;
-import com.geodesy.web.geodesy.model.enums.CalculationTypeName;
-import com.geodesy.web.geodesy.model.enums.ClassSystem;
+import com.geodesy.web.geodesy.model.approximation.CalculationData;
+import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
+import com.geodesy.web.geodesy.model.utils.enums.ClassSystem;
 import com.geodesy.web.geodesy.service.CalculationDataService;
 import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
 import com.geodesy.web.geodesy.service.utils.ExcelReader;
@@ -41,7 +41,7 @@ public class CalculationController {
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
         model.addAttribute("calcs", pointDtoParser.parse(res));
-        model.addAttribute("length", res.getMoveList().get(0).getApproximations().size());
+        model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
         calculationDataService.save(res);
         return "result";
     }
@@ -53,7 +53,7 @@ public class CalculationController {
         Map<String, Object> map = new HashMap<>();
         map.put("name", "calculation_data_" + calculationData.getDate().toString());
         map.put("pointDto", dtoList);
-        map.put("approximationDtoLength", (long) calculationData.getMoveList().get(0).getApproximations().size());
+        map.put("approximationDtoLength", (long) calculationData.getApproximationMoveList().get(0).getApproximations().size());
         return new ModelAndView(new ExcelViewReport(), map);
     }
 

@@ -1,108 +1,43 @@
-package com.geodesy.web.geodesy.model;
+package com.geodesy.web.geodesy.model.approximation;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.geodesy.web.geodesy.model.enums.MoveType;
+import com.geodesy.web.geodesy.model.base.Move;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
+import com.geodesy.web.geodesy.model.utils.enums.MoveType;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Move {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+public class ApproximationMove extends Move {
     @Enumerated
     private MoveType moveType;
-    // h
-    private Double difference;
-    // n
-    private Integer stationCount;
-    // L
-    private Double distance;
-    // P
-    private Double weight;
     // P`
     private Double weightStroke;
     // (H) I, II, III, IV, V ...
     @OneToMany(mappedBy = "move")
     private List<Approximation> approximations;
-    // v
-    private Double correction;
     // P`v
     private Double weightStrokeCorrection;
     // P`vv
     private Double weightStrokeCorrectionCorrection;
-    @JsonIgnore
+
     @ManyToOne
     private CalculationData calculationData;
 
-    public Move() {
+    public ApproximationMove() {
         distance = .0;
         stationCount = 0;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Move setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Move setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Double getDifference() {
-        return difference;
-    }
-
-    public Move setDifference(Double difference) {
-        this.difference = difference;
-        return this;
-    }
-
-    public Integer getStationCount() {
-        return stationCount;
-    }
-
-    public Move setStationCount(Integer stationCount) {
-        this.stationCount = stationCount;
-        return this;
-    }
-
-    public Double getDistance() {
-        return distance;
-    }
-
-    public Move setDistance(Double distance) {
-        this.distance = distance;
-        return this;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public Move setWeight(Double weight) {
-        this.weight = weight;
-        return this;
     }
 
     public Double getWeightStroke() {
         return weightStroke;
     }
 
-    public Move setWeightStroke(Double weightStroke) {
+    public ApproximationMove setWeightStroke(Double weightStroke) {
         this.weightStroke = weightStroke;
         return this;
     }
@@ -113,12 +48,12 @@ public class Move {
         return approximations;
     }
 
-    public Move setApproximations(List<Approximation> approximations) {
+    public ApproximationMove setApproximations(List<Approximation> approximations) {
         this.approximations = approximations;
         return this;
     }
 
-    public Move addApproximation(Approximation approximation) {
+    public ApproximationMove addApproximation(Approximation approximation) {
         if (this.approximations == null)
             this.approximations = new ArrayList<>();
         this.approximations.add(approximation);
@@ -129,7 +64,7 @@ public class Move {
         return weightStrokeCorrection;
     }
 
-    public Move setWeightStrokeCorrection(Double weightStrokeCorrection) {
+    public ApproximationMove setWeightStrokeCorrection(Double weightStrokeCorrection) {
         this.weightStrokeCorrection = weightStrokeCorrection;
         return this;
     }
@@ -138,17 +73,8 @@ public class Move {
         return weightStrokeCorrectionCorrection;
     }
 
-    public Move setWeightStrokeCorrectionCorrection(Double weightStrokeCorrectionCorrection) {
+    public ApproximationMove setWeightStrokeCorrectionCorrection(Double weightStrokeCorrectionCorrection) {
         this.weightStrokeCorrectionCorrection = weightStrokeCorrectionCorrection;
-        return this;
-    }
-
-    public Double getCorrection() {
-        return correction;
-    }
-
-    public Move setCorrection(Double correction) {
-        this.correction = correction;
         return this;
     }
 
@@ -156,7 +82,7 @@ public class Move {
         return calculationData;
     }
 
-    public Move setCalculationData(CalculationData calculationData) {
+    public ApproximationMove setCalculationData(CalculationData calculationData) {
         this.calculationData = calculationData;
         return this;
     }
@@ -165,14 +91,49 @@ public class Move {
         return moveType;
     }
 
-    public Move setMoveType(MoveType moveType) {
+    public ApproximationMove setMoveType(MoveType moveType) {
         this.moveType = moveType;
         return this;
     }
 
     @Override
+    public ApproximationMove setStationCount(Integer stationCount) {
+        return (ApproximationMove)super.setStationCount(stationCount);
+    }
+
+    @Override
+    public ApproximationMove setDistance(Double distance) {
+        return (ApproximationMove)super.setDistance(distance);
+    }
+
+    @Override
+    public ApproximationMove setDifference(Double difference) {
+        return (ApproximationMove)super.setDifference(difference);
+    }
+
+    @Override
+    public ApproximationMove setWeight(Double weight) {
+        return (ApproximationMove)super.setWeight(weight);
+    }
+
+    @Override
+    public ApproximationMove setCorrection(Double correction) {
+        return (ApproximationMove)super.setCorrection(correction);
+    }
+
+    @Override
+    public ApproximationMove setId(Long id) {
+        return (ApproximationMove)super.setId(id);
+    }
+
+    @Override
+    public ApproximationMove setName(String name) {
+        return (ApproximationMove)super.setName(name);
+    }
+
+    @Override
     public String toString() {
-        return "Move{\n" +
+        return "ApproximationMove{\n" +
                 "id=" + id +
                 ", \nname='" + (name == null ? "null" : name) + '\'' +
                 ", \nmoveType=" + (moveType == null ? "null" : moveType) +

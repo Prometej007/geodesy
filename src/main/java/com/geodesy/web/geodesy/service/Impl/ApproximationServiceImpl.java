@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service.Impl;
 
-import com.geodesy.web.geodesy.model.Approximation;
+import com.geodesy.web.geodesy.model.approximation.Approximation;
 import com.geodesy.web.geodesy.repository.ApproximationRepository;
 import com.geodesy.web.geodesy.service.ApproximationService;
 import org.springframework.beans.factory.annotation.Autowired;

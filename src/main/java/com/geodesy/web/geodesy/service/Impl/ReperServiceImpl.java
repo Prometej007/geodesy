@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service.Impl;
 
-import com.geodesy.web.geodesy.model.Reper;
+import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import com.geodesy.web.geodesy.repository.ReperRepository;
 import com.geodesy.web.geodesy.service.ReperService;
 import org.apache.log4j.Logger;
@@ -18,19 +18,19 @@ public class ReperServiceImpl implements ReperService {
     private ReperRepository reperRepository;
 
     @Override
-    public Reper save(Reper reper) {
-        reper.setId(null);
-        LOGGER.info("Reper name to save :"+reper.getName());
-        return reperRepository.save(reper);
+    public ApproximationReper save(ApproximationReper approximationReper) {
+        approximationReper.setId(null);
+        LOGGER.info("ApproximationReper name to save :"+ approximationReper.getName());
+        return reperRepository.save(approximationReper);
     }
 
     @Override
-    public Reper findOne(Long id) {
+    public ApproximationReper findOne(Long id) {
         return reperRepository.findOne(id);
     }
 
     @Override
-    public List<Reper> findAll() {
+    public List<ApproximationReper> findAll() {
         return reperRepository.findAll();
     }
 }

@@ -1,11 +1,11 @@
 package com.geodesy.web.geodesy.service;
 
-import com.geodesy.web.geodesy.model.Move;
+import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 
 import java.util.List;
 
 public interface MoveService {
-    Move save(Move move);
-    Move findOne(Long id);
-    List<Move> findAll();
+    ApproximationMove save(ApproximationMove approximationMove);
+    ApproximationMove findOne(Long id);
+    List<ApproximationMove> findAll();
 }

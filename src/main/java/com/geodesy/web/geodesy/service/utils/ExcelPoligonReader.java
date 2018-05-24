@@ -1,8 +1,8 @@
 package com.geodesy.web.geodesy.service.utils;
 
 import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
-import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
+import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -14,12 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
-import static org.aspectj.runtime.internal.Conversions.intValue;
-
 @Service
-public class ExcelReader {
+public class ExcelPoligonReader {
 
-    private static final Logger LOGGER = Logger.getLogger(ExcelReader.class);
+    private static final Logger LOGGER = Logger.getLogger(ExcelPoligonReader.class);
 
 
     public static void main(String[] args) {
@@ -69,29 +67,31 @@ public class ExcelReader {
                     for (int c = 0; c < cols; c++) {
                         cell = row.getCell((short) c);
                         if (cell != null) {
-                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
+                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("poligon name".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
-                                    tempApproximationReper.setName((cell.getStringCellValue()));
+
+//todo
                                     LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
                                 }
+                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase())) {
+//todo
+                                LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
-                                    tempApproximationReper.setHeight((cell.getNumericCellValue()));
-                                    LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+//todo
+                                LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Steps".toLowerCase())) {
-                                if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
-                                    tempApproximationMove.setName(cell.getStringCellValue());
-                                    LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
-                                }
+//todo
+                                LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Exceeding,m".toLowerCase())) {
-                                tempApproximationMove.setDifference(Double.valueOf(cell.getNumericCellValue()));
-                                LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
-                                tempApproximationMove.setStationCount(intValue(cell.getNumericCellValue()));
+//todo
                                 LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
+//todo
+                                LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Length,km".toLowerCase())) {
-                                tempApproximationMove.setDistance(Double.valueOf(cell.getNumericCellValue()));
+//todo
                                 LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             }
 
@@ -103,8 +103,8 @@ public class ExcelReader {
 
                         }
                     }
-                    if(tempApproximationReper.getHeight()!=null&& tempApproximationReper.getName()!=null)
-                    calculationData.getApproximationReperList().add(tempApproximationReper);
+                    if (tempApproximationReper.getHeight() != null && tempApproximationReper.getName() != null)
+                        calculationData.getApproximationReperList().add(tempApproximationReper);
                     calculationData.getApproximationMoveList().add(tempApproximationMove);
                 }
             }

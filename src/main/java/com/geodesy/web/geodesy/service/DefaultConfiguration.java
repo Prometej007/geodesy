@@ -1,6 +1,6 @@
 package com.geodesy.web.geodesy.service;
 
-import com.geodesy.web.geodesy.model.CalculationData;
+import com.geodesy.web.geodesy.model.approximation.CalculationData;
 
 public interface DefaultConfiguration {
     /**
