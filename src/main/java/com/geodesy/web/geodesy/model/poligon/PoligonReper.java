@@ -3,7 +3,21 @@ package com.geodesy.web.geodesy.model.poligon;
 import com.geodesy.web.geodesy.model.base.Reper;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
+import javax.persistence.ManyToOne;
+
 public class PoligonReper extends Reper {
+    @ManyToOne
+    protected PoligonData data;
+
+    public PoligonData getData() {
+        return data;
+    }
+
+    public PoligonReper setData(PoligonData data) {
+        this.data = data;
+        return this;
+    }
+
     @Override
     public PoligonReper setHeight(Double height) {
         return (PoligonReper) super.setHeight(height);

@@ -5,8 +5,6 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class Reper extends GObject {
-    @ManyToOne
-    protected Data data;
     protected Double height;
 
     public Double getHeight() {
@@ -31,7 +29,6 @@ public abstract class Reper extends GObject {
     @Override
     public String toString() {
         return "Reper{" +
-                "data=" + (data == null ? "null" : data.id) +
                 ", height=" + height +
                 ", id=" + id +
                 ", name='" + name + '\'' +

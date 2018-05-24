@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ReperRepository extends JpaRepository<ApproximationReper,Long> {
-    List<ApproximationReper> findAllByCalculationData_Id(Long id);
+    List<ApproximationReper> findAllByData_Id(Long id);
 }

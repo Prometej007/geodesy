@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class ApproximationReper extends Reper {
     @JsonIgnore
     @ManyToOne
-    private CalculationData calculationData;
+    private CalculationData data;
     @Enumerated
     private ReperType reperType;
 
@@ -27,12 +27,12 @@ public class ApproximationReper extends Reper {
         return (ApproximationReper) super.setHeight(height);
     }
 
-    public CalculationData getCalculationData() {
-        return calculationData;
+    public CalculationData getData() {
+        return data;
     }
 
-    public ApproximationReper setCalculationData(CalculationData calculationData) {
-        this.calculationData = calculationData;
+    public ApproximationReper setData(CalculationData calculationData) {
+        this.data = calculationData;
         return this;
     }
 

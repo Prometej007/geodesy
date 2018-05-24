@@ -26,7 +26,7 @@ public class CalculationDataServiceImpl implements CalculationDataService {
         calculationData.setId(calculationDataRepository.save(calculationData).getId());
         return calculationDataRepository.save(calculationData
                 .setApproximationMoveList(calculationData.getApproximationMoveList().stream().map(move -> moveService.save(move.setCalculationData(calculationData))).collect(Collectors.toList()))
-                .setReperList(calculationData.getReperList().stream().map(reper -> reperService.save(reper.setCalculationData(calculationData))).collect(Collectors.toList()))
+                .setReperList(calculationData.getReperList().stream().map(reper -> reperService.save(reper.setData(calculationData))).collect(Collectors.toList()))
         );
     }
 

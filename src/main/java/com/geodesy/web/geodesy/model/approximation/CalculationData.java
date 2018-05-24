@@ -21,6 +21,8 @@ public class CalculationData extends Data {
     private List<ApproximationMove> approximationMoveList;
     private Double niu;
     private Double m;
+    @OneToMany(mappedBy = "data")
+    private List<ApproximationReper> reperList;
 
     public List<ApproximationMove> getApproximationMoveList() {
         return approximationMoveList;
@@ -56,14 +58,13 @@ public class CalculationData extends Data {
         return this;
     }
 
-    @Override
     public List<ApproximationReper> getReperList() {
-        return super.getReperList().stream().map(o -> (ApproximationReper) o).collect(toList());
+        return reperList;
     }
 
-    @Override
-    public CalculationData setReperList(List<? extends Reper> reperList) {
-        return (CalculationData) super.setReperList(reperList);
+    public CalculationData setReperList(List<ApproximationReper> reperList) {
+        this.reperList = reperList;
+        return this;
     }
 
     @Override

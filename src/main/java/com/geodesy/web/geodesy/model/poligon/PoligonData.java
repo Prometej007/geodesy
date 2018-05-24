@@ -4,6 +4,7 @@ import com.geodesy.web.geodesy.model.base.Data;
 import com.geodesy.web.geodesy.model.base.Reper;
 import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.stream.Collectors;
 
 public class PoligonData extends Data {
     private List<Poligon> poligonList;
+    @OneToMany(mappedBy = "data")
+    protected List<PoligonReper> reperList;
 
     public List<Poligon> getPoligonList() {
         return poligonList;
@@ -28,14 +31,13 @@ public class PoligonData extends Data {
         return this;
     }
 
-    @Override
     public List<PoligonReper> getReperList() {
-        return super.getReperList().stream().map(reper -> (PoligonReper) reper).collect(Collectors.toList());
+        return reperList;
     }
 
-    @Override
-    public PoligonData setReperList(List<? extends Reper> reperList) {
-        return (PoligonData) super.setReperList(reperList);
+    public PoligonData setReperList(List<PoligonReper> reperList) {
+        this.reperList = reperList;
+        return this;
     }
 
     @Override

@@ -14,7 +14,7 @@ public class Approximation {
     private Double value;
     @JsonIgnore
     @ManyToOne
-    private ApproximationMove approximationMove;
+    private ApproximationMove move;
 
     public Long getId() {
         return id;
@@ -34,12 +34,12 @@ public class Approximation {
         return this;
     }
 
-    public ApproximationMove getApproximationMove() {
-        return approximationMove;
+    public ApproximationMove getMove() {
+        return move;
     }
 
-    public Approximation setApproximationMove(ApproximationMove approximationMove) {
-        this.approximationMove = approximationMove;
+    public Approximation setMove(ApproximationMove approximationMove) {
+        this.move = approximationMove;
         return this;
     }
 
