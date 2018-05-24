@@ -6,7 +6,7 @@ import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
 import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.utils.enums.ClassSystem;
-import com.geodesy.web.geodesy.service.CalculationDataService;
+import com.geodesy.web.geodesy.service.persistence.CalculationDataService;
 import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
 import com.geodesy.web.geodesy.service.utils.ExcelReader;
 import org.springframework.beans.factory.annotation.Autowired;

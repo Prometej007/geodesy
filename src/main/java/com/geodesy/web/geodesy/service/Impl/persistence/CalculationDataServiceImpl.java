@@ -1,10 +1,10 @@
-package com.geodesy.web.geodesy.service.Impl;
+package com.geodesy.web.geodesy.service.Impl.persistence;
 
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
 import com.geodesy.web.geodesy.repository.CalculationDataRepository;
-import com.geodesy.web.geodesy.service.CalculationDataService;
-import com.geodesy.web.geodesy.service.MoveService;
-import com.geodesy.web.geodesy.service.ReperService;
+import com.geodesy.web.geodesy.service.persistence.CalculationDataService;
+import com.geodesy.web.geodesy.service.persistence.MoveService;
+import com.geodesy.web.geodesy.service.persistence.ReperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class CalculationDataServiceImpl implements CalculationDataService {
         calculationData.setId(calculationDataRepository.save(calculationData).getId());
         return calculationDataRepository.save(calculationData
                 .setApproximationMoveList(calculationData.getApproximationMoveList().stream().map(move -> moveService.save(move.setCalculationData(calculationData))).collect(Collectors.toList()))
-                .setReperList(calculationData.getApproximationReperList().stream().map(reper -> reperService.save(reper.setCalculationData(calculationData))).collect(Collectors.toList()))
+                .setReperList(calculationData.getReperList().stream().map(reper -> reperService.save(reper.setCalculationData(calculationData))).collect(Collectors.toList()))
         );
     }
 

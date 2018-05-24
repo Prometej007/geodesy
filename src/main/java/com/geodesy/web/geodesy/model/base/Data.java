@@ -15,16 +15,16 @@ import java.util.List;
 @MappedSuperclass
 public abstract class Data extends GObject {
     @OneToMany(mappedBy = "data")
-    protected List<Reper> reperList;
+    protected List<? extends Reper> reperList;
     protected Timestamp date;
     @Enumerated
     protected CalculationTypeName calculationTypeName;
 
-    public List<? extends Reper> getApproximationReperList() {
+    public List<? extends Reper> getReperList() {
         return reperList;
     }
 
-    public Data setReperList(List<Reper> reperList) {
+    public Data setReperList(List<? extends Reper> reperList) {
         this.reperList = reperList;
         return this;
     }

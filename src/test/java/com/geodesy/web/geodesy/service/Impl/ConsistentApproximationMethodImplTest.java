@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Arrays;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
@@ -42,12 +43,12 @@ public class ConsistentApproximationMethodImplTest {
 
                     .setCalculationTypeName(CalculationTypeName.FIRST)
 
-                    .addReper(new ApproximationReper().setId(1L).setName("Rp1").setHeight(261.837))
-                    .addReper(new ApproximationReper().setId(1L).setName("Rp2").setHeight(269.508))
-                    .addReper(new ApproximationReper().setId(1L).setName("Rp3").setHeight(260.705))
-                    .addReper(new ApproximationReper().setId(1L).setName("Rp4").setHeight(254.019))
-                    .addReper(new ApproximationReper().setId(1L).setName("Rp5").setHeight(257.203))
-                    .addReper(new ApproximationReper().setId(1L).setName("Rp6").setHeight(254.825))
+                    .setReperList(Arrays.asList(new ApproximationReper().setId(1L).setName("Rp1").setHeight(261.837),
+                            new ApproximationReper().setId(1L).setName("Rp2").setHeight(269.508),
+                            new ApproximationReper().setId(1L).setName("Rp3").setHeight(260.705),
+                            new ApproximationReper().setId(1L).setName("Rp4").setHeight(254.019),
+                            new ApproximationReper().setId(1L).setName("Rp5").setHeight(257.203),
+                            new ApproximationReper().setId(1L).setName("Rp6").setHeight(254.825)))
 
                     .addMove(new ApproximationMove().setId(1L).setName("Rp1-1").setDifference(3.401).setStationCount(47).setDistance(4.0))
                     .addMove(new ApproximationMove().setId(1L).setName("Rp2-1").setDifference(-4.269).setStationCount(51).setDistance(3.4))
@@ -87,10 +88,10 @@ public class ConsistentApproximationMethodImplTest {
     public void getApproximatePointHeight() {
         defaultNetworkService.normilize(CALCULATION_DATA);
         defaultNetworkService.getApproximatePointHeight(CALCULATION_DATA);
-        CALCULATION_DATA.getApproximationReperList().forEach(reper -> LOGGER.info("\nR.NAME : [ " + reper.getName() + " ] height : [ " + format.format(reper.getHeight()) + " ] type : [ " + reper.getReperType() + " ]"));
+        CALCULATION_DATA.getReperList().forEach(reper -> LOGGER.info("\nR.NAME : [ " + reper.getName() + " ] height : [ " + format.format(reper.getHeight()) + " ] type : [ " + reper.getReperType() + " ]"));
         CALCULATION_DATA.getApproximationMoveList().forEach(reper -> LOGGER.info("M.NAME : [ " + reper.getName() + " ]"));
         assertEquals(9, CALCULATION_DATA.getApproximationMoveList().size());
-        assertEquals(9, CALCULATION_DATA.getApproximationReperList().size());
+        assertEquals(9, CALCULATION_DATA.getReperList().size());
     }
 
     @Test

@@ -27,4 +27,14 @@ public abstract class Reper extends GObject {
     public Reper setName(String name) {
         return (Reper) super.setName(name);
     }
+
+    @Override
+    public String toString() {
+        return "Reper{" +
+                "data=" + (data == null ? "null" : data.id) +
+                ", height=" + height +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

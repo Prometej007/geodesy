@@ -1,9 +1,9 @@
-package com.geodesy.web.geodesy.service.Impl;
+package com.geodesy.web.geodesy.service.Impl.persistence;
 
 import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 import com.geodesy.web.geodesy.repository.MoveRepository;
-import com.geodesy.web.geodesy.service.ApproximationService;
-import com.geodesy.web.geodesy.service.MoveService;
+import com.geodesy.web.geodesy.service.persistence.ApproximationService;
+import com.geodesy.web.geodesy.service.persistence.MoveService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -104,7 +104,7 @@ public class ExcelReader {
                         }
                     }
                     if(tempApproximationReper.getHeight()!=null&& tempApproximationReper.getName()!=null)
-                    calculationData.getApproximationReperList().add(tempApproximationReper);
+                    calculationData.getReperList().add(tempApproximationReper);
                     calculationData.getApproximationMoveList().add(tempApproximationMove);
                 }
             }

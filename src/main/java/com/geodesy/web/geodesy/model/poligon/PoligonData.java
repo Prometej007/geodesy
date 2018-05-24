@@ -7,6 +7,7 @@ import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PoligonData extends Data {
     private List<Poligon> poligonList;
@@ -28,7 +29,12 @@ public class PoligonData extends Data {
     }
 
     @Override
-    public PoligonData setReperList(List<Reper> reperList) {
+    public List<PoligonReper> getReperList() {
+        return super.getReperList().stream().map(reper -> (PoligonReper) reper).collect(Collectors.toList());
+    }
+
+    @Override
+    public PoligonData setReperList(List<? extends Reper> reperList) {
         return (PoligonData) super.setReperList(reperList);
     }
 
@@ -54,10 +60,13 @@ public class PoligonData extends Data {
 
     @Override
     public String toString() {
-        return "PoligonData{\n" +
-                "\tid=" + id +
-                ", \n\tpoligonList=" + poligonList +
-                ", \n\tcalculationTypeName=" + calculationTypeName +
+        return "PoligonData{" +
+                "\n\tpoligonList=" + poligonList +
+                ",\n\t reperList=" + reperList +
+                ",\n\t date=" + date +
+                ",\n\t calculationTypeName=" + calculationTypeName +
+                ",\n\t id=" + id +
+                ",\n\t name='" + name + '\'' +
                 "\n}";
     }
 }

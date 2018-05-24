@@ -1,20 +1,27 @@
 package com.geodesy.web.geodesy.service.Impl;
 
+import com.geodesy.web.geodesy.model.base.Reper;
 import com.geodesy.web.geodesy.model.poligon.Poligon;
 import com.geodesy.web.geodesy.model.poligon.PoligonData;
 import com.geodesy.web.geodesy.model.poligon.PoligonMove;
-import com.geodesy.web.geodesy.model.utils.constants.CalculationType;
+import com.geodesy.web.geodesy.model.poligon.PoligonReper;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 import com.geodesy.web.geodesy.model.utils.PoligonMischiefComparator;
 import com.geodesy.web.geodesy.model.utils.PoligonNameComparator;
+import com.geodesy.web.geodesy.model.utils.constants.CalculationType;
 import com.geodesy.web.geodesy.service.PoligonMethod;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PoligonMethodImpl implements PoligonMethod {
     @Override
     public PoligonData calculate(PoligonData poligonData) {
-        return null;
+        getWeight(poligonData);
+        mainCalculation(poligonData);
+        getHeights(poligonData);
+        return poligonData;
     }
 
     @Override
@@ -39,7 +46,7 @@ public class PoligonMethodImpl implements PoligonMethod {
         Poligon poligon1 = poligonData.getPoligonList().get(0);
         poligonData.getPoligonList().sort(new PoligonNameComparator());
         Integer startIndex = poligonData.getPoligonList().indexOf(poligon1);
-        System.err.println("---------------=============+++++++++++++++++++++++++++++=================------------------------");
+//        System.err.println("---------------=============+++++++++++++++++++++++++++++=================------------------------");
         while (!checkMischief(poligonData) && count < 10) {
             for (int j = 0, i = startIndex; i < poligonData.getPoligonList().size(); i++, j++) {
 //                System.err.println("---------------==============================------------------------");
@@ -60,11 +67,42 @@ public class PoligonMethodImpl implements PoligonMethod {
                     i = -1;
                 }
             }
-            System.err.println("---------------===============7777777777777777777777777777777===============------------------------");
-            System.err.println(count++);
-            System.err.println("---------------===============7777777777777777777777777777777===============------------------------");
+//            System.err.println("---------------===============7777777777777777777777777777777===============------------------------");
+//            System.err.println(count++);
+//            System.err.println("---------------===============7777777777777777777777777777777===============------------------------");
         }
         return poligonData;
+    }
+
+    @Override
+    public PoligonData getHeights(PoligonData poligonData) {
+        for (Poligon poligon : poligonData.getPoligonList()) {
+            System.err.println("------------------POLIGON---------------------");
+            System.err.println(poligon.getName());
+            for (PoligonMove move : poligon.getPoligonMoves()) {
+                System.err.println("---------------MOVE----------------");
+                System.err.println(move.getName());
+                Reper reper = poligonData.getReperList().stream().filter(poligonReper -> move.getName().contains(poligonReper.getName() + "-")).findFirst().orElse(new PoligonReper());
+                if (reper.getId() == null)
+                    continue;
+                System.err.println("-----------------REPER--------------------");
+                System.err.println(reper.getName());
+                createNewReper(poligonData, move, reper);
+            }
+        }
+        return poligonData;
+    }
+
+    private void createNewReper(PoligonData poligonData, PoligonMove move, Reper reper) {
+        if (poligonData.getReperList().stream().noneMatch(poligonReper -> poligonReper.getName().equals(move.getName().split("-")[1]))) {
+            System.err.println("---------------NONE-MATCH--------------");
+            PoligonReper poligonReper = new PoligonReper().setHeight(reper.getHeight() + move.getDifference()).setName(move.getName().split("-")[1]);
+            List<PoligonReper> temp = new ArrayList<>(poligonData.getReperList());
+            temp.add(poligonReper);
+            poligonData.setReperList(temp);
+        } else {
+            System.err.println("---------------FOUND-MATCH------------------");
+        }
     }
 
     private void setNewMischief(Poligon current, PoligonData poligonData) {
@@ -74,7 +112,7 @@ public class PoligonMethodImpl implements PoligonMethod {
                 for (PoligonMove poligonMove : poligon.getPoligonMoves()) {
                     similar = getSimilar(current, poligonMove);
                     if (similar != null) {
-                        System.err.println("found similar [" + poligon.getId() + "] C[" + DoubleFormatter.format(similar.getCorrection()) + "] new M(" + DoubleFormatter.format(poligon.getMischief() + similar.getCorrection()) + ")");
+//                        System.err.println("found similar [" + poligon.getId() + "] C[" + DoubleFormatter.format(similar.getCorrection()) + "] new M(" + DoubleFormatter.format(poligon.getMischief() + similar.getCorrection()) + ")");
                         poligon.setMischief(poligon.getMischief() + similar.getCorrection());
                         break;
                     }
@@ -96,14 +134,14 @@ public class PoligonMethodImpl implements PoligonMethod {
     }
 
     private void setCorrectionOne(Poligon poligon) {
-        System.err.println(poligon.getName());
-        System.err.println("---------------------------------------");
+//        System.err.println(poligon.getName());
+//        System.err.println("---------------------------------------");
         for (PoligonMove poligonMove :
                 poligon.getPoligonMoves()) {
-            System.err.println(String.format("for %s W(%s) * M(%s) = %s", poligonMove.getName(), DoubleFormatter.format(poligonMove.getWeight()), DoubleFormatter.format(poligon.getMischief()), DoubleFormatter.format(poligonMove.getWeight() * poligon.getMischief())));
+//            System.err.println(String.format("for %s W(%s) * M(%s) = %s", poligonMove.getName(), DoubleFormatter.format(poligonMove.getWeight()), DoubleFormatter.format(poligon.getMischief()), DoubleFormatter.format(poligonMove.getWeight() * poligon.getMischief())));
             poligonMove.setCorrection(poligonMove.getWeight() * poligon.getMischief());
         }
-        System.err.println("---------------------------------------");
+//        System.err.println("---------------------------------------");
     }
 
     private PoligonMove getSimilar(Poligon first, PoligonMove poligonMove) {
@@ -119,7 +157,7 @@ public class PoligonMethodImpl implements PoligonMethod {
     private Boolean checkMischief(PoligonData poligonData) {
         for (Poligon poligon : poligonData.getPoligonList()) {
             if (Math.abs(poligon.getMischief()) > CalculationType.TYPES_P.get(poligonData.getCalculationTypeName())) {
-                System.err.println(String.format("%s > %s", DoubleFormatter.format(Math.abs(poligon.getMischief())), DoubleFormatter.format(CalculationType.TYPES_P.get(poligonData.getCalculationTypeName()))));
+//                System.err.println(String.format("%s > %s", DoubleFormatter.format(Math.abs(poligon.getMischief())), DoubleFormatter.format(CalculationType.TYPES_P.get(poligonData.getCalculationTypeName()))));
                 return false;
             }
         }
