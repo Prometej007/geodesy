@@ -3,9 +3,24 @@ package com.geodesy.web.geodesy.model.poligon;
 import com.geodesy.web.geodesy.model.base.Move;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
+@Entity
 public class PoligonMove extends Move {
+    @ManyToOne
+    private Poligon poligon;
+
+    public Poligon getPoligon() {
+        return poligon;
+    }
+
+    public PoligonMove setPoligon(Poligon poligon) {
+        this.poligon = poligon;
+        return this;
+    }
+
     @Override
     public PoligonMove setStationCount(Integer stationCount) {
         return (PoligonMove) super.setStationCount(stationCount);

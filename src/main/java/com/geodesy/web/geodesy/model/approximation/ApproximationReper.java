@@ -2,10 +2,12 @@ package com.geodesy.web.geodesy.model.approximation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geodesy.web.geodesy.model.base.Reper;
-import com.geodesy.web.geodesy.model.utils.enums.ReperType;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
+import com.geodesy.web.geodesy.model.utils.enums.ReperType;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ApproximationReper extends Reper {

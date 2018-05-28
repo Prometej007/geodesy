@@ -3,13 +3,30 @@ package com.geodesy.web.geodesy.model.poligon;
 import com.geodesy.web.geodesy.model.base.GObject;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Poligon extends GObject {
     private Double perimeter;
     private Double mischief;
+    @OneToMany(mappedBy = "poligon", cascade = CascadeType.REFRESH)
     private List<PoligonMove> poligonMoves;
+    @ManyToOne
+    private PoligonData data;
+
+    public PoligonData getData() {
+        return data;
+    }
+
+    public Poligon setData(PoligonData data) {
+        this.data = data;
+        return this;
+    }
 
     @Override
     public Poligon setId(Long id) {

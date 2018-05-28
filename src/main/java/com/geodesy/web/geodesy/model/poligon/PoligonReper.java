@@ -3,8 +3,10 @@ package com.geodesy.web.geodesy.model.poligon;
 import com.geodesy.web.geodesy.model.base.Reper;
 import com.geodesy.web.geodesy.model.utils.DoubleFormatter;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class PoligonReper extends Reper {
     @ManyToOne
     protected PoligonData data;

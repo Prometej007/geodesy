@@ -2,26 +2,23 @@ package com.geodesy.web.geodesy.model.approximation;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.geodesy.web.geodesy.model.base.Data;
-import com.geodesy.web.geodesy.model.base.Reper;
-import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.utils.DateDeserializer;
+import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @Entity
 public class CalculationData extends Data {
-    @OneToMany(mappedBy = "calculationData")
+    @OneToMany(mappedBy = "calculationData", cascade = CascadeType.REFRESH)
     private List<ApproximationMove> approximationMoveList;
     private Double niu;
     private Double m;
-    @OneToMany(mappedBy = "data")
+    @OneToMany(mappedBy = "data", cascade = CascadeType.REFRESH)
     private List<ApproximationReper> reperList;
 
     public List<ApproximationMove> getApproximationMoveList() {

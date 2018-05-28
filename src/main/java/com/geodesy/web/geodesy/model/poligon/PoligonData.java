@@ -1,19 +1,21 @@
 package com.geodesy.web.geodesy.model.poligon;
 
 import com.geodesy.web.geodesy.model.base.Data;
-import com.geodesy.web.geodesy.model.base.Reper;
 import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Entity
 public class PoligonData extends Data {
+    @OneToMany(mappedBy = "data", cascade = CascadeType.REFRESH)
     private List<Poligon> poligonList;
-    @OneToMany(mappedBy = "data")
-    protected List<PoligonReper> reperList;
+    @OneToMany(mappedBy = "data", cascade = CascadeType.REFRESH)
+    private List<PoligonReper> reperList;
 
     public List<Poligon> getPoligonList() {
         return poligonList;
