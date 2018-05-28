@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="<c:url value="/css/header.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/home.css"/>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -19,7 +20,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="main_header">
         <div class="up_container">
             <div class="nav_up">
@@ -29,7 +30,7 @@
             </div>
         </div>
         <div class="down_container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light nav_down">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
@@ -55,19 +56,19 @@
     <div class="background_main"></div>
     <div class="index_container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
+            <li class="nav-item tabs_home_item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                    aria-selected="true">
 
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item tabs_home_item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                    aria-controls="profile" aria-selected="false">
 
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item tabs_home_item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                    aria-controls="contact" aria-selected="false">
 
