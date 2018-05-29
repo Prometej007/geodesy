@@ -42,6 +42,10 @@
     margin: auto;
 }
 
+/** {*/
+    /*background: red!important;*/
+/*}*/
+
 .file_container label {
     display: block;
     margin-bottom: 0!important;
@@ -73,4 +77,17 @@
     font-size: 16px;
     background: #3e697a;
     color: #fff;
+}
+
+.file_dop_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file_dop_container_item {
+    width: 10%;
+    background: red;
+    margin: 0 1vw;
 }
