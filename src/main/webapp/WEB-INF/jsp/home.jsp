@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <html lang="en">
@@ -20,34 +21,33 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid p-0 m-0">
     <div class="main_header">
-        <img src="/image/logotype.png" class="logo" alt="">
+        <img src="/image/logo.png" class="logo" alt="">
         <div class="up_container">
             <div class="nav_up">
-                <a href="#">About us</a>
-                <a href="#">Contacts</a>
-                <a href="#">Sign in <img src="#" class="sign_in_img"></a>
+                <a href="/">Головна</a>
+                <a href="#">Мої результати</a>
+                <a href="#">Про нас</a>
+                <a href="#">Контакти</a>
+                <a href="#">Вхід<img src="#" class="sign_in_img"></a>
             </div>
         </div>
         <div class="down_container">
             <nav class="navbar navbar-expand-lg navbar-light nav_down">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">My results</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Level the system</a>
-                        </li>
-                        <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="#">Analysis of resistance stability</a>--%>
+                        <%--<li class="nav-item active">--%>
+                        <%--<a class="nav-link" href="#"></a>--%>
                         <%--</li>--%>
                         <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="#">Make graphics</a>--%>
+                        <%--<a class="nav-link" href="#"></a>--%>
+                        <%--</li>--%>
+                        <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link" href="#">Analysis of resistance stability</a>--%>
+                        <%--</li>--%>
+                        <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link" href="#">Make graphics</a>--%>
                         <%--</li>--%>
                     </ul>
                 </div>
@@ -60,66 +60,71 @@
             <li class="nav-item tabs_home_item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                    aria-selected="true">
-                    Test 1
+                    Метод послідовних наближень
                 </a>
             </li>
             <li class="nav-item tabs_home_item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                    aria-controls="profile" aria-selected="false">
-                    Test 2
+                    Метод полігонів
                 </a>
             </li>
             <%--<li class="nav-item tabs_home_item">--%>
-                <%--<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"--%>
-                   <%--aria-controls="contact" aria-selected="false">--%>
-                    <%--Test 3--%>
-                <%--</a>--%>
+            <%--<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"--%>
+            <%--aria-controls="contact" aria-selected="false">--%>
+            <%--Test 3--%>
+            <%--</a>--%>
             <%--</li>--%>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <form class="file_container">
+                <form:form method="post" action="/calculation/result-1" class="file_container"
+                           enctype="multipart/form-data">
+                    <img class="icon_xls" src="/image/excel-xls-icon.png" alt="">
+                    <input type="text" name="classSystem" hidden value="FIRST">
                     <label style="display:none;">
-                        <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
+                        <input style="display: none" id="file" name="file" type="file" accept="application/vnd.ms-excel" placeholder="Виберіть файл">
                     </label>
-                    <label for="file" class="file_form">Chose file</label>
+                    <label for="file" class="file_form">
+                        Виберіть файл *.xls</label>
                     <%--<label>--%>
-                        <%--<select>--%>
-                            <%--<option>test</option>--%>
-                            <%--<option>test</option>--%>
-                            <%--<option>test</option>--%>
-                            <%--<option>test</option>--%>
-                        <%--</select>--%>
+                    <%--<select>--%>
+                    <%--<option>test</option>--%>
+                    <%--<option>test</option>--%>
+                    <%--<option>test</option>--%>
+                    <%--<option>test</option>--%>
+                    <%--</select>--%>
                     <%--</label>--%>
                     <label>
-                        <select>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
+                        <select name="type">
+                            <option value="FIRST">FIRST</option>
+                            <option value="SECOND">SECOND</option>
+                            <option value="THIRD">THIRD</option>
+                            <option value="FOURTH">FOURTH</option>
                         </select>
                     </label>
                     <label>
-                        <button>Обрахувати</button>
+                        <button type="submit">Обрахувати</button>
                     </label>
-                </form>
+                </form:form>
                 <div class="file_dop_container">
                     <div class="file_dop_container_item">
                         <img src="/image/file.png" alt="">
-                        <p>Preview</p>
+                        <p>Переглянути</p>
                     </div>
                     <div class="file_dop_container_item">
                         <img src="/image/download.png" alt="">
-                        <p>Preview</p>
+                        <p>Завантажити</p>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <form class="file_container">
+                    <img class="icon_xls" src="/image/excel-xls-icon.png" alt="">
                     <label style="display:none;">
                         <input style="display: none" id="file1" type="file" placeholder="Виберіть файл">
                     </label>
-                    <label for="file1" class="file_form">Chose file</label>
+                    <label for="file1" class="file_form">Виберіть файл *.xls</label>
                     <%--<label>--%>
                     <%--<select>--%>
                     <%--<option>test</option>--%>
@@ -143,56 +148,92 @@
                 <div class="file_dop_container">
                     <div class="file_dop_container_item">
                         <img src="/image/file.png" alt="">
-                        <p>Preview</p>
+                        <p>Переглянути</p>
                     </div>
                     <div class="file_dop_container_item">
                         <img src="/image/download.png" alt="">
-                        <p>Preview</p>
+                        <p>Завантажити</p>
                     </div>
                 </div>
             </div>
             <%--<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">--%>
-                <%--<form class="file_container">--%>
-                    <%--<label style="display:none;">--%>
-                        <%--<input style="display: none" id="file1" type="file" placeholder="Виберіть файл">--%>
-                    <%--</label>--%>
-                    <%--<label for="file1" class="file_form"></label>--%>
-                    <%--<label>--%>
-                        <%--<button>Обрахувати</button>--%>
-                    <%--</label>--%>
-                <%--</form>--%>
-                <%--<div class="file_dop_container">--%>
-                    <%--<div class="file_dop_container_item">--%>
-                        <%--<img src="/image/file.png" alt="">--%>
-                        <%--<p>Preview</p>--%>
-                    <%--</div>--%>
-                    <%--<div class="file_dop_container_item">--%>
-                        <%--<img src="/image/download.png" alt="">--%>
-                        <%--<p>Preview</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+            <%--<form class="file_container">--%>
+            <%--<label style="display:none;">--%>
+            <%--<input style="display: none" id="file1" type="file" placeholder="Виберіть файл">--%>
+            <%--</label>--%>
+            <%--<label for="file1" class="file_form"></label>--%>
+            <%--<label>--%>
+            <%--<button>Обрахувати</button>--%>
+            <%--</label>--%>
+            <%--</form>--%>
+            <%--<div class="file_dop_container">--%>
+            <%--<div class="file_dop_container_item">--%>
+            <%--<img src="/image/file.png" alt="">--%>
+            <%--<p>Preview</p>--%>
+            <%--</div>--%>
+            <%--<div class="file_dop_container_item">--%>
+            <%--<img src="/image/download.png" alt="">--%>
+            <%--<p>Preview</p>--%>
+            <%--</div>--%>
+            <%--</div>--%>
             <%--</div>--%>
         </div>
         <div class="file_step_container">
             <div class="file_step_container_item">
                 <h2>Step 1</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consequatur
-                    dolores esse eum fugit in iste quaerat ratione voluptatem? Ab, qui, voluptate. Accusamus
-                    consequatur explicabo quaerat sit soluta voluptas.</p>
+                <p>
+                    Виберіть файл з розширенням .xls
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">Приклад завантажуваного файлу для
+                        "Методу послідовних наближень"</a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal1">Приклад завантажуваного файлу для
+                        "Методу полігонів"</a>
+                </p>
             </div>
             <hr class="step_hr">
             <div class="file_step_container_item">
                 <h2>Step 2</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam assumenda beatae cumque
-                    debitis dicta distinctio eum illo, maxime nesciunt obcaecati rem sunt suscipit? Commodi enim
-                    est placeat quam voluptatum?</p>
+                <p>
+                    Виберіть клас з яким проводилось вимірювання.
+                    та натисніть кнопку обрахувати
+                </p>
             </div>
             <hr class="step_hr">
             <div class="file_step_container_item">
                 <h2>Step 3</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur in minus mollitia neque
-                    officia provident tenetur! Animi, aperiam asperiores dolore ducimus eos nostrum odio odit
-                    quibusdam quos reprehenderit sint veniam?</p>
+                <p>
+                    Натисніть кнопку обрахувати
+
+                </p>
+            </div>
+        </div>
+        <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Приклад завантажуваного файлу для "Методу послідовних наближень"</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img width="100%" src="/image/example1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="exampleModal1" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Приклад завантажуваного файлу для "Методу полігонів"</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img width="100%" src="/image/example1.png" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
