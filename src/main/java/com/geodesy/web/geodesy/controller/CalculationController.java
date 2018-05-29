@@ -6,8 +6,8 @@ import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
 import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 import com.geodesy.web.geodesy.model.utils.enums.ClassSystem;
-import com.geodesy.web.geodesy.service.persistence.CalculationDataService;
 import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
+import com.geodesy.web.geodesy.service.persistence.CalculationDataService;
 import com.geodesy.web.geodesy.service.utils.ExcelReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +42,7 @@ public class CalculationController {
         model.addAttribute("file", file.getOriginalFilename());
         model.addAttribute("calcs", pointDtoParser.parse(res));
         model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
-        calculationDataService.save(res);
+        calculationDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")));
         return "result";
     }
 
