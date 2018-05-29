@@ -67,15 +67,15 @@ public class ExcelPoligonReader {
                     for (int c = 0; c < cols; c++) {
                         cell = row.getCell((short) c);
                         if (cell != null) {
-                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("poligon name".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
-                                if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
+                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase())) {
+                                if (r > 1)
+                                    continue;
+//todo
+                                LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
+                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("#".toLowerCase())) {
+//todo
+                                LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
 
-//todo
-                                    LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
-                                }
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase())) {
-//todo
-                                LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
 //todo
                                 LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
@@ -88,7 +88,7 @@ public class ExcelPoligonReader {
 //todo
                                 LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
-//todo
+//// TODO: 29.05.2018
                                 LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Length,km".toLowerCase())) {
 //todo

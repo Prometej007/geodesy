@@ -59,28 +59,29 @@
             <li class="nav-item tabs_home_item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                    aria-selected="true">
-
+                    Test 1
                 </a>
             </li>
             <li class="nav-item tabs_home_item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                    aria-controls="profile" aria-selected="false">
-
+                    Test 2
                 </a>
             </li>
             <li class="nav-item tabs_home_item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                    aria-controls="contact" aria-selected="false">
-
+                    Test 3
                 </a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <form class="file_container">
-                    <label>
-                        <input type="file" placeholder="Виберіть файл">
+                    <label style="display:none;">
+                        <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
                     </label>
+                    <label for="file" class="file_form"></label>
                     <label>
                         <select>
                             <option>test</option>
@@ -114,9 +115,10 @@
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <form class="file_container">
-                    <label>
-                        <input type="file" placeholder="Виберіть файл">
+                    <label style="display:none;">
+                        <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
                     </label>
+                    <label for="file" class="file_form"></label>
                     <label>
                         <button>Обрахувати</button>
                     </label>
@@ -134,9 +136,10 @@
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <form class="file_container">
-                    <label>
-                        <input type="file" placeholder="Виберіть файл">
+                    <label style="display:none;">
+                        <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
                     </label>
+                    <label for="file" class="file_form"></label>
                     <label>
                         <button>Обрахувати</button>
                     </label>
