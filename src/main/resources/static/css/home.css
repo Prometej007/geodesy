@@ -1,0 +1,93 @@
+.background_main {
+    width: 100%;
+    height: 325px;
+    background: url("../image/homeBG.png") no-repeat;
+    background-size: cover;
+}
+
+.tabs_home_item {
+    display: flex!important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1vw;
+    width: 15vw;
+    height: 15vw;
+    background: #fff!important;
+    border: 1px solid #ccc!important;
+}
+
+.tabs_home_item .nav-link {
+    font-size: 20px!important;
+    color: #999!important;
+    border: 0!important;
+}
+
+.nav-tabs {
+    margin-top: -7.5vw;
+    justify-content: center;
+    margin-bottom: 3vh!important;
+    border-bottom: 0!important;
+}
+
+.file_container {
+    width: 50%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #3d969e;
+    padding: 20px 2vw;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+/** {*/
+    /*background: red!important;*/
+/*}*/
+
+.file_container label {
+    display: block;
+    margin-bottom: 0!important;
+}
+
+.file_container input, .file_container select {
+    display: block;
+    font-size: 16px;
+    padding: 5px;
+    color: #999;
+    border: 1px solid #999;
+    cursor: pointer;
+    margin-bottom: 0!important;
+}
+
+.file_form {
+    width: 20%;
+    height: 26px;
+    display: block;
+    background: white;
+    cursor: pointer;
+    border: 1px solid #999;
+    margin-bottom: 0!important;
+}
+
+.file_container button {
+    cursor: pointer;
+    border: 0;
+    font-size: 16px;
+    background: #3e697a;
+    color: #fff;
+}
+
+.file_dop_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file_dop_container_item {
+    width: 10%;
+    background: red;
+    margin: 0 1vw;
+}
