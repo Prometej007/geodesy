@@ -10,9 +10,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 1vw;
-    width: 15vw;
-    height: 15vw;
+    margin: 0 2vw;
+    width: 10vw;
+    height: 10vw;
     background: #fff!important;
     border: 1px solid #ccc!important;
 }
@@ -23,8 +23,12 @@
     border: 0!important;
 }
 
+.tabs_home_item .nav-link.active {
+    color: blue!important;
+}
+
 .nav-tabs {
-    margin-top: -7.5vw;
+    margin-top: -5vw;
     justify-content: center;
     margin-bottom: 3vh!important;
     border-bottom: 0!important;
@@ -35,11 +39,12 @@
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background: #3d969e;
     padding: 20px 2vw;
     box-sizing: border-box;
     margin: auto;
+    margin-bottom: 3vh!important;
 }
 
 /** {*/
@@ -48,7 +53,7 @@
 
 .file_container label {
     display: block;
-    margin-bottom: 0!important;
+    margin: 0 1vw!important;
 }
 
 .file_container input, .file_container select {
@@ -58,17 +63,17 @@
     color: #999;
     border: 1px solid #999;
     cursor: pointer;
-    margin-bottom: 0!important;
+    margin: 0 10px!important;
 }
 
 .file_form {
     width: 20%;
-    height: 26px;
     display: block;
     background: white;
     cursor: pointer;
     border: 1px solid #999;
-    margin-bottom: 0!important;
+    padding: 5px;
+    font-size: 14px;
 }
 
 .file_container button {
@@ -84,10 +89,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 3vh;
 }
 
 .file_dop_container_item {
     width: 10%;
-    background: red;
     margin: 0 1vw;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+
+.file_dop_container_item img {
+    width: auto;
+    height: 60px;
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.file_dop_container_item p {
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.file_step_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3vh;
+}
+
+.file_step_container_item {
+    width: 20vw;
+    height: 250px;
+}
+
+.step_hr {
+    width: 10vw;
+    border: 0;
+    height: 3px;
+    background: #999;
+    margin: 0 10px;
+}
+
+.file_step_container_item h2 {
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.file_step_container_item p {
+    padding: 20px;
+    border: 1px solid #999;
 }

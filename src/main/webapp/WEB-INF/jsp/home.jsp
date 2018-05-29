@@ -22,6 +22,7 @@
 <body>
 <div class="container-fluid">
     <div class="main_header">
+        <img src="/image/logotype.png" class="logo" alt="">
         <div class="up_container">
             <div class="nav_up">
                 <a href="#">About us</a>
@@ -42,12 +43,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Level the system</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Analysis of resistance stability</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Make graphics</a>
-                        </li>
+                        <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="#">Analysis of resistance stability</a>--%>
+                        <%--</li>--%>
+                        <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="#">Make graphics</a>--%>
+                        <%--</li>--%>
                     </ul>
                 </div>
             </nav>
@@ -68,12 +69,12 @@
                     Test 2
                 </a>
             </li>
-            <li class="nav-item tabs_home_item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                   aria-controls="contact" aria-selected="false">
-                    Test 3
-                </a>
-            </li>
+            <%--<li class="nav-item tabs_home_item">--%>
+                <%--<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"--%>
+                   <%--aria-controls="contact" aria-selected="false">--%>
+                    <%--Test 3--%>
+                <%--</a>--%>
+            <%--</li>--%>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -81,15 +82,15 @@
                     <label style="display:none;">
                         <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
                     </label>
-                    <label for="file" class="file_form"></label>
-                    <label>
-                        <select>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
-                        </select>
-                    </label>
+                    <label for="file" class="file_form">Chose file</label>
+                    <%--<label>--%>
+                        <%--<select>--%>
+                            <%--<option>test</option>--%>
+                            <%--<option>test</option>--%>
+                            <%--<option>test</option>--%>
+                            <%--<option>test</option>--%>
+                        <%--</select>--%>
+                    <%--</label>--%>
                     <label>
                         <select>
                             <option>test</option>
@@ -104,11 +105,11 @@
                 </form>
                 <div class="file_dop_container">
                     <div class="file_dop_container_item">
-                        <img src="#" alt="">
+                        <img src="/image/file.png" alt="">
                         <p>Preview</p>
                     </div>
                     <div class="file_dop_container_item">
-                        <img src="#" alt="">
+                        <img src="/image/download.png" alt="">
                         <p>Preview</p>
                     </div>
                 </div>
@@ -116,63 +117,79 @@
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <form class="file_container">
                     <label style="display:none;">
-                        <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
+                        <input style="display: none" id="file1" type="file" placeholder="Виберіть файл">
                     </label>
-                    <label for="file" class="file_form"></label>
+                    <label for="file1" class="file_form">Chose file</label>
+                    <%--<label>--%>
+                    <%--<select>--%>
+                    <%--<option>test</option>--%>
+                    <%--<option>test</option>--%>
+                    <%--<option>test</option>--%>
+                    <%--<option>test</option>--%>
+                    <%--</select>--%>
+                    <%--</label>--%>
+                    <label>
+                        <select>
+                            <option>test</option>
+                            <option>test</option>
+                            <option>test</option>
+                            <option>test</option>
+                        </select>
+                    </label>
                     <label>
                         <button>Обрахувати</button>
                     </label>
                 </form>
                 <div class="file_dop_container">
                     <div class="file_dop_container_item">
-                        <img src="#" alt="">
+                        <img src="/image/file.png" alt="">
                         <p>Preview</p>
                     </div>
                     <div class="file_dop_container_item">
-                        <img src="#" alt="">
+                        <img src="/image/download.png" alt="">
                         <p>Preview</p>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <form class="file_container">
-                    <label style="display:none;">
-                        <input style="display: none" id="file" type="file" placeholder="Виберіть файл">
-                    </label>
-                    <label for="file" class="file_form"></label>
-                    <label>
-                        <button>Обрахувати</button>
-                    </label>
-                </form>
-                <div class="file_dop_container">
-                    <div class="file_dop_container_item">
-                        <img src="#" alt="">
-                        <p>Preview</p>
-                    </div>
-                    <div class="file_dop_container_item">
-                        <img src="#" alt="">
-                        <p>Preview</p>
-                    </div>
-                </div>
-            </div>
+            <%--<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">--%>
+                <%--<form class="file_container">--%>
+                    <%--<label style="display:none;">--%>
+                        <%--<input style="display: none" id="file1" type="file" placeholder="Виберіть файл">--%>
+                    <%--</label>--%>
+                    <%--<label for="file1" class="file_form"></label>--%>
+                    <%--<label>--%>
+                        <%--<button>Обрахувати</button>--%>
+                    <%--</label>--%>
+                <%--</form>--%>
+                <%--<div class="file_dop_container">--%>
+                    <%--<div class="file_dop_container_item">--%>
+                        <%--<img src="/image/file.png" alt="">--%>
+                        <%--<p>Preview</p>--%>
+                    <%--</div>--%>
+                    <%--<div class="file_dop_container_item">--%>
+                        <%--<img src="/image/download.png" alt="">--%>
+                        <%--<p>Preview</p>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
         <div class="file_step_container">
             <div class="file_step_container_item">
-                <h2>Step</h2>
+                <h2>Step 1</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consequatur
                     dolores esse eum fugit in iste quaerat ratione voluptatem? Ab, qui, voluptate. Accusamus
                     consequatur explicabo quaerat sit soluta voluptas.</p>
             </div>
             <hr class="step_hr">
             <div class="file_step_container_item">
-                <h2>Step</h2>
+                <h2>Step 2</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam assumenda beatae cumque
                     debitis dicta distinctio eum illo, maxime nesciunt obcaecati rem sunt suscipit? Commodi enim
                     est placeat quam voluptatum?</p>
             </div>
             <hr class="step_hr">
             <div class="file_step_container_item">
-                <h2>Step</h2>
+                <h2>Step 3</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur in minus mollitia neque
                     officia provident tenetur! Animi, aperiam asperiores dolore ducimus eos nostrum odio odit
                     quibusdam quos reprehenderit sint veniam?</p>
