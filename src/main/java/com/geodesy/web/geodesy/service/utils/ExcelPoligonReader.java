@@ -86,13 +86,11 @@ public class ExcelPoligonReader {
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("#".toLowerCase())) {
                                 if (index == -1 || index != cell.getNumericCellValue()) {
-                                    if (index != cell.getNumericCellValue())
+                                    if (index != cell.getNumericCellValue()&&index != -1)
                                         poligonData.getPoligonList().add(poligon);
 
                                     index = cell.getNumericCellValue();
                                     poligon = new Poligon().setPoligonMoves(new ArrayList<>());
-
-
                                 }
                                 poligon.getPoligonMoves().add(new PoligonMove());
                                 //todo
