@@ -48,5 +48,15 @@ public class RouterController {
         return "contacts";
     }
 
+    @RequestMapping({"/sign-in"})
+    public String signIn() {
+        return "sign-in";
+    }
+
+    @RequestMapping({"/sign-up"})
+    public String signUp() {
+        return "sign-up";
+    }
+
 
 }
