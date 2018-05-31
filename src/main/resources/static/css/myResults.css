@@ -1,0 +1,27 @@
+.container_index {
+    margin: auto!important;
+    padding: 5vh 0;
+}
+
+.container_result {
+    list-style: none;
+    padding: 0;
+}
+
+.container_result li {
+    display: block;
+    width: 40%;
+    border: 1px solid #3e697a;
+    border-radius: 10px;
+    margin-bottom: 3vh;
+}
+
+.container_result li a{
+    padding: 3vh;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    color: #3e697a;
+    font-size: 20px;
+}

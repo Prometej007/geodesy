@@ -1,0 +1,74 @@
+.background_main {
+    width: 100%;
+    height: 325px;
+    background: url("../image/homeBG.png") no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3.5rem!important;
+    text-align: center;
+    color: #fff!important;
+    text-transform: uppercase;
+}
+.index_container {
+    position: relative;
+    height: 80vh;
+}
+
+iframe {
+    height: 100%;
+}
+
+.contact {
+    width: 36vw;
+    height: 80%;
+    position: absolute;
+    top: 11%;
+    right: 3%;
+    z-index: 2;
+    background: rgba(19,19,19,0.7);
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    padding: 70px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+h2 {
+    text-align: left;
+    font-size: 1.5rem;
+    color: #fff!important;
+    margin-bottom: 5vh;
+}
+
+table {
+    border-collapse: collapse;
+    border: 0;
+}
+
+td {
+    font-size: 20px;
+    color: #fff;
+    padding-bottom: 3vh;
+}
+
+.first_td {
+    color: #bbb;
+    padding-right: 1vw;
+    vertical-align: top;
+}
+
+.callBack {
+    border: 0;
+    display: inline-block;
+    padding: 10px 30px;
+    background: #f5d300;
+    color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    cursor: pointer;
+}

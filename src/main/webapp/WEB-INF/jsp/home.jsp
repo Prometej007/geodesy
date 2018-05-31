@@ -28,9 +28,9 @@
         <div class="up_container">
             <div class="nav_up">
                 <a href="/">Головна</a>
-                <a href="#">Мої результати</a>
-                <a href="#">Про нас</a>
-                <a href="#">Контакти</a>
+                <a href="/my-results">Мої результати</a>
+                <a href="/about-us">Про нас</a>
+                <a href="/contacts">Контакти</a>
                 <a href="#">Вхід<img src="#" class="sign_in_img"></a>
             </div>
         </div>

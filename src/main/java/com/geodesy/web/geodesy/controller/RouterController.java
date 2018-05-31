@@ -38,5 +38,15 @@ public class RouterController {
         return "my-results";
     }
 
+    @RequestMapping({"/about-us"})
+    public String aboutUs() {
+        return "about-us";
+    }
+
+    @RequestMapping({"/contacts"})
+    public String contacts() {
+        return "contacts";
+    }
+
 
 }
