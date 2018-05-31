@@ -69,10 +69,10 @@ public class ExcelReader {
                     for (int c = 0; c < cols; c++) {
                         cell = row.getCell((short) c);
                         if (cell != null) {
-                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
+                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
                                     tempApproximationReper.setName((cell.getStringCellValue()));
-                                    LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
+                                    LOGGER.info("Reper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
                                 }
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
                                     tempApproximationReper.setHeight((cell.getNumericCellValue()));

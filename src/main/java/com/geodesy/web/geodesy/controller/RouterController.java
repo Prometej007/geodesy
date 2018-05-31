@@ -33,5 +33,10 @@ public class RouterController {
         return "result";
     }
 
+    @RequestMapping({"/my-results"})
+    public String myResults() {
+        return "my-results";
+    }
+
 
 }

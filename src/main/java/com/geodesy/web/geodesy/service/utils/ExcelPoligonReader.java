@@ -3,6 +3,10 @@ package com.geodesy.web.geodesy.service.utils;
 import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
 import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
+import com.geodesy.web.geodesy.model.poligon.Poligon;
+import com.geodesy.web.geodesy.model.poligon.PoligonData;
+import com.geodesy.web.geodesy.model.poligon.PoligonMove;
+import com.geodesy.web.geodesy.model.poligon.PoligonReper;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 public class ExcelPoligonReader {
@@ -24,19 +29,18 @@ public class ExcelPoligonReader {
 //        read();
     }
 
-    public CalculationData getCalculationData(MultipartFile multipartFile) {
+    public PoligonData getPoligonData(MultipartFile multipartFile) {
         if (multipartFile == null || multipartFile.isEmpty())
             return null;
-        CalculationData calculationData = new CalculationData();
-        read(multipartFile, calculationData);
-        return calculationData;
+        PoligonData poligonData = new PoligonData();
+        read(multipartFile, poligonData);
+        return poligonData;
     }
 
-    public void read(MultipartFile multipartFile, CalculationData calculationData) {
+    public void read(MultipartFile multipartFile, PoligonData poligonData) {
         try {
-            calculationData.setApproximationMoveList(new ArrayList<>());
-            calculationData.setReperList(new ArrayList<>());
 //            todo list
+            poligonData.setReperList(new ArrayList<>());
             POIFSFileSystem fs = new POIFSFileSystem(multipartFile.getInputStream());
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             HSSFSheet sheet = wb.getSheetAt(0);
@@ -57,42 +61,61 @@ public class ExcelPoligonReader {
                     if (tmp > cols) cols = tmp;
                 }
             }
-
+            Poligon poligon = null;
             for (int r = 1; r < rows; r++) {
                 row = sheet.getRow(r);
-//            todo list create element
+
+                //            todo list create element
                 ApproximationReper tempApproximationReper = new ApproximationReper();
                 ApproximationMove tempApproximationMove = new ApproximationMove();
                 if (row != null) {
+                    Double index = -1d;
                     for (int c = 0; c < cols; c++) {
                         cell = row.getCell((short) c);
                         if (cell != null) {
-                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("poligon name".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
-                                if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
-
-//todo
-                                    LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
-                                }
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("ApproximationReper".toLowerCase())) {
-//todo
-                                LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
+                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase())) {
+                                if (r > 1)
+                                    continue;
+                                poligonData.setReperList(Arrays.asList(new PoligonReper().setName(cell.getStringCellValue())));
+                                LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
-//todo
+                                if (r > 1)
+                                    continue;
+                                poligonData.getReperList().get(0).setHeight(cell.getNumericCellValue());
+                                LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+
+                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("#".toLowerCase())) {
+                                if (index == -1 || index != cell.getNumericCellValue()) {
+                                    if (index != cell.getNumericCellValue()&&index != -1)
+                                        poligonData.getPoligonList().add(poligon);
+
+                                    index = cell.getNumericCellValue();
+                                    poligon = new Poligon().setPoligonMoves(new ArrayList<>());
+                                }
+                                poligon.getPoligonMoves().add(new PoligonMove());
+                                //todo
                                 LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Steps".toLowerCase())) {
-//todo
+
+                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setName(cell.getStringCellValue());
                                 LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Exceeding,m".toLowerCase())) {
-//todo
+
+                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setDifference(cell.getNumericCellValue());
                                 LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
-//todo
+
+                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setStationCount(Integer.valueOf(cell.getNumericCellValue() + ""));
                                 LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Length,km".toLowerCase())) {
 //todo
+                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setDistance(cell.getNumericCellValue());
                                 LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+
                             }
 
 
@@ -103,9 +126,7 @@ public class ExcelPoligonReader {
 
                         }
                     }
-                    if (tempApproximationReper.getHeight() != null && tempApproximationReper.getName() != null)
-                        calculationData.getReperList().add(tempApproximationReper);
-                    calculationData.getApproximationMoveList().add(tempApproximationMove);
+
                 }
             }
         } catch (Exception ioe) {
