@@ -19,7 +19,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
-    <title>Title</title>
+    <title>Контакти</title>
 </head>
 <body>
 <div class="container-fluid p-0 m-0">
@@ -31,7 +31,7 @@
                 <a href="/my-results">Мої результати</a>
                 <a href="/about-us">Про нас</a>
                 <a href="/contacts">Контакти</a>
-                <a href="#">Вхід<img src="#" class="sign_in_img"></a>
+                <a href="/sign-in">Вхід<img src="#" class="sign_in_img"></a>
             </div>
         </div>
         <div class="down_container">

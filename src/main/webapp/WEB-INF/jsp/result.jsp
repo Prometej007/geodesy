@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/">
     <link rel="stylesheet" href="<c:url value="/css/header.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/result.css"/>">
+    <title>Обрахунок - TODO</title>
 </head>
 <body>
 <style>
@@ -34,7 +35,7 @@
                 <a href="/my-results">Мої результати</a>
                 <a href="/about-us">Про нас</a>
                 <a href="/contacts">Контакти</a>
-                <a href="#">Вхід<img src="#" class="sign_in_img"></a>
+                <a href="/sign-in">Вхід<img src="#" class="sign_in_img"></a>
             </div>
         </div>
         <div class="down_container">
