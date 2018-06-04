@@ -59,10 +59,10 @@
         <h1>Вхід</h1>
     </div>
     <div class="index_container">
-        <form>
+        <form method="post" action="/loginprocess">
             <h2>Вхід</h2>
-            <input type="text" placeholder="Your email*">
-            <input type="password" placeholder="Your password*">
+            <input type="text" name="name" placeholder="Your email*">
+            <input type="password" name="password" placeholder="Your password*">
             <button class="btn btn-primary">Відправити</button>
             <a href="/sign-up">Створити акаунт</a>
         </form>
