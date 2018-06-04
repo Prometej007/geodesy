@@ -63,7 +63,8 @@
                     <div class="tab">
                         <p class="title">Назва класу обрахунків: ${calcs.calculationTypeName}</p>
                         <p class="title">Назва типу: 1</p>
-                        <p class="title">Назва файлу: exls</p>
+                        <p class="title">Назва файлу: <a download
+                                                         href="/calculation/download/file/${calcs.idData}">exls</a></p>
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
@@ -163,6 +164,9 @@
                             </table>
                         </div>
                     </div>
+                    <br>
+                    <hr>
+                    <br>
                 </c:forEach>
 
             </li>

@@ -49,7 +49,7 @@ public class RouterController {
         if (ofNullable(principal).isPresent()) {
             if (ofNullable(principal.getName()).isPresent()) {
                 model.addAttribute("calcss", calculationDataRepository.findAllByUserName(principal.getName()).stream()
-                        .map(calculationData -> new OneData().setPointDtos(pointDtoParser.parse(calculationData)).setCalculationTypeName(calculationData.getCalculationTypeName())).collect(toList()));
+                        .map(calculationData -> new OneData().setPointDtos(pointDtoParser.parse(calculationData)).setCalculationTypeName(calculationData.getCalculationTypeName()).setIdData(calculationData.getId())).collect(toList()));
                 return "my-results";
             }
         }

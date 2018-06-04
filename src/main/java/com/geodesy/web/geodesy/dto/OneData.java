@@ -5,9 +5,18 @@ import com.geodesy.web.geodesy.model.utils.enums.CalculationTypeName;
 import java.util.List;
 
 public class OneData {
-
+    private Long idData;
     private List<PointDto> pointDtos;
     private CalculationTypeName calculationTypeName;
+
+    public Long getIdData() {
+        return idData;
+    }
+
+    public OneData setIdData(Long idData) {
+        this.idData = idData;
+        return this;
+    }
 
     public List<PointDto> getPointDtos() {
         return pointDtos;
