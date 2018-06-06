@@ -31,7 +31,7 @@
                 <a href="/my-results">Мої результати</a>
                 <a href="/about-us">Про нас</a>
                 <a href="/contacts">Контакти</a>
-                <a href="/sign-in">Вхід<img src="#" class="sign_in_img"></a>
+                <a href="/sign-in">Вхід</a>
             </div>
         </div>
         <div class="down_container">
@@ -84,9 +84,9 @@
                     <img class="icon_xls" src="/image/excel-xls-icon.png" alt="">
                     <input type="text" name="classSystem" hidden value="FIRST">
                     <label style="display:none;">
-                        <input style="display: none" id="file" name="file" type="file" accept="application/vnd.ms-excel" placeholder="Виберіть файл">
+                        <input style="display: none" onchange="changeTitleFile(1)" id="file1" name="file" type="file" accept="application/vnd.ms-excel" placeholder="Виберіть файл">
                     </label>
-                    <label for="file" class="file_form">
+                    <label for="file1" class="file_form" id="label1">
                         Виберіть файл *.xls</label>
                     <%--<label>--%>
                     <%--<select>--%>
@@ -108,24 +108,24 @@
                         <button type="submit">Обрахувати</button>
                     </label>
                 </form:form>
-                <div class="file_dop_container">
-                    <div class="file_dop_container_item">
-                        <img src="/image/file.png" alt="">
-                        <p>Переглянути</p>
-                    </div>
-                    <div class="file_dop_container_item">
-                        <img src="/image/download.png" alt="">
-                        <p>Завантажити</p>
-                    </div>
-                </div>
+                <%--<div class="file_dop_container">--%>
+                    <%--<div class="file_dop_container_item">--%>
+                        <%--<img src="/image/file.png" alt="">--%>
+                        <%--<p>Переглянути</p>--%>
+                    <%--</div>--%>
+                    <%--<div class="file_dop_container_item">--%>
+                        <%--<img src="/image/download.png" alt="">--%>
+                        <%--<p>Завантажити</p>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <form class="file_container">
                     <img class="icon_xls" src="/image/excel-xls-icon.png" alt="">
                     <label style="display:none;">
-                        <input style="display: none" id="file1" type="file" placeholder="Виберіть файл">
+                        <input style="display: none" onchange="changeTitleFile(2)" id="file2" type="file" placeholder="Виберіть файл">
                     </label>
-                    <label for="file1" class="file_form">Виберіть файл *.xls</label>
+                    <label for="file2" class="file_form" id="label2">Виберіть файл *.xls</label>
                     <%--<label>--%>
                     <%--<select>--%>
                     <%--<option>test</option>--%>
@@ -146,16 +146,16 @@
                         <button>Обрахувати</button>
                     </label>
                 </form>
-                <div class="file_dop_container">
-                    <div class="file_dop_container_item">
-                        <img src="/image/file.png" alt="">
-                        <p>Переглянути</p>
-                    </div>
-                    <div class="file_dop_container_item">
-                        <img src="/image/download.png" alt="">
-                        <p>Завантажити</p>
-                    </div>
-                </div>
+                <%--<div class="file_dop_container">--%>
+                    <%--<div class="file_dop_container_item">--%>
+                        <%--<img src="/image/file.png" alt="">--%>
+                        <%--<p>Переглянути</p>--%>
+                    <%--</div>--%>
+                    <%--<div class="file_dop_container_item">--%>
+                        <%--<img src="/image/download.png" alt="">--%>
+                        <%--<p>Завантажити</p>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
             <%--<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">--%>
             <%--<form class="file_container">--%>
@@ -240,6 +240,8 @@
     </div>
 </div>
 
+
+<script src="<c:url value="/js/home.js"/>"></script>
 </body>
 
 </html>
