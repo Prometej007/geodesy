@@ -21,6 +21,17 @@ public class CalculationData extends Data {
     @OneToMany(mappedBy = "data", cascade = CascadeType.REFRESH)
     private List<ApproximationReper> reperList;
 
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public CalculationData setUserName(String userName) {
+        this.userName = userName;
+        return this;
+    }
+
     public List<ApproximationMove> getApproximationMoveList() {
         return approximationMoveList;
     }

@@ -28,7 +28,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("name")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/login")
+                .failureUrl("/sign-in")
                 .and()
                 .logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/loginpage").permitAll()
@@ -38,7 +38,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
+        auth.inMemoryAuthentication()
+                .withUser("admin").password("admin").roles("USER").and()
+                .withUser("admin1").password("admin").roles("USER").and()
+                .withUser("admin2").password("admin").roles("USER").and()
+                .withUser("admin3").password("admin").roles("USER");
     }
 
 }

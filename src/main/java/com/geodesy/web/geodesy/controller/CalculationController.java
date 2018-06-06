@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Optional.ofNullable;
 
 @Controller
 @RequestMapping("/calculation")
@@ -35,14 +38,17 @@ public class CalculationController {
     private ConsistentApproximationMethod consistentApproximationMethod;
 
     @PostMapping("/result-1")
-    private String calculation1(Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
+    private String calculation1(Principal principal, Model model, @RequestParam ClassSystem classSystem, @RequestParam CalculationTypeName type, @RequestParam MultipartFile file) {
         CalculationData res = consistentApproximationMethod.calculate(excelReader.getCalculationData(file).setCalculationTypeName(type).setDate(Timestamp.valueOf(LocalDateTime.now())));
         model.addAttribute("classSystem", classSystem.name());
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
         model.addAttribute("calcs", pointDtoParser.parse(res));
         model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
-        calculationDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")));
+        if (ofNullable(principal).isPresent())
+            if (ofNullable(principal.getName()).isPresent()) {
+                calculationDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")).setUserName(principal.getName()));
+            }
         return "result";
     }
 
