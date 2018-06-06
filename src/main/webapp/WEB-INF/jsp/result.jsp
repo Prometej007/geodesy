@@ -63,7 +63,7 @@
         <p class="title">Назва класу обрахунків: ${classSystem}</p>
         <p class="title">Назва типу: ${type}</p>
         <p class="title">Назва файлу: ${file}</p>
-        <div class="table-responsive">
+        <div class="table-responsive" style="widows: 100%; overflow: auto">
             <table class="table">
                 <tr>
                     <td rowspan="2">ходи які сходяться у вузловій точці</td>
@@ -156,6 +156,16 @@
                 </c:forEach>
 
             </table>
+        </div>
+    </div>
+    <div class="file_dop_container">
+        <div class="file_dop_container_item">
+            <img src="/image/file.png" alt="">
+            <p>Переглянути</p>
+        </div>
+        <div class="file_dop_container_item">
+            <img src="/image/download.png" alt="">
+            <p>Завантажити</p>
         </div>
     </div>
 </div>

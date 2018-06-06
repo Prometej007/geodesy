@@ -64,7 +64,7 @@
                 width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
         <div class="contact">
             <div>
-                <h2>ТзОВ «Житлово-будівельна компанія «Ваш дім»</h2>
+                <h2>Geodesy</h2>
                 <table>
                     <tr>
                         <td class="first_td">Адреса:</td>
