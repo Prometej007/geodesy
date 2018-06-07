@@ -20,7 +20,7 @@ public class ReperServiceImpl implements ReperService {
     @Override
     public ApproximationReper save(ApproximationReper approximationReper) {
         approximationReper.setId(null);
-        LOGGER.info("ApproximationReper name to save :"+ approximationReper.getName());
+//        LOGGER.info("ApproximationReper name to save :"+ approximationReper.getName());
         return reperRepository.save(approximationReper);
     }
 

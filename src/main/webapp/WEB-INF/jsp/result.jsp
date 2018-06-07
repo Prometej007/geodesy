@@ -2,6 +2,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+           prefix="sec"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <html lang="en">
@@ -158,6 +160,7 @@
             </table>
         </div>
     </div>
+    <sec:authorize access="authentication.authenticated">
     <div class="file_dop_container">
         <div class="file_dop_container_item">
             <img src="/image/file.png" alt="">
@@ -165,9 +168,10 @@
         </div>
         <div class="file_dop_container_item">
             <img src="/image/download.png" alt="">
-            <p>Завантажити</p>
+            <a href="/calculation/download/file/${idRes}" download>Завантажити</a>
         </div>
     </div>
+    </sec:authorize>
 </div>
 </body>
 </html>

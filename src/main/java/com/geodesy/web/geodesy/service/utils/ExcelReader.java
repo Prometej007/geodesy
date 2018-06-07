@@ -72,27 +72,27 @@ public class ExcelReader {
                             if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase()) || sheet.getRow(0).getCell((short) c).getStringCellValue().contains("номер студентського квитка")) {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
                                     tempApproximationReper.setName((cell.getStringCellValue()));
-                                    LOGGER.info("Reper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
+//                                    LOGGER.info("Reper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
                                 }
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
                                     tempApproximationReper.setHeight((cell.getNumericCellValue()));
-                                    LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+//                                    LOGGER.info("Height,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Steps".toLowerCase())) {
                                 if (cell.getStringCellValue() != null && !cell.getStringCellValue().isEmpty()) {
                                     tempApproximationMove.setName(cell.getStringCellValue());
-                                    LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
+//                                    LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
                                 }
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Exceeding,m".toLowerCase())) {
                                 tempApproximationMove.setDifference(Double.valueOf(cell.getNumericCellValue()));
-                                LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+//                                LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
 
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
                                 tempApproximationMove.setStationCount(intValue(cell.getNumericCellValue()));
-                                LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+//                                LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Length,km".toLowerCase())) {
                                 tempApproximationMove.setDistance(Double.valueOf(cell.getNumericCellValue()));
-                                LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
+//                                LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
                             }
 
 

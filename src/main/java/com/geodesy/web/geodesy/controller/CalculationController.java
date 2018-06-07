@@ -43,12 +43,13 @@ public class CalculationController {
         model.addAttribute("classSystem", classSystem.name());
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
-        model.addAttribute("calcs", pointDtoParser.parse(res));
-        model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
         if (ofNullable(principal).isPresent())
             if (ofNullable(principal.getName()).isPresent()) {
-                calculationDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")).setUserName(principal.getName()));
+                res = calculationDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")).setUserName(principal.getName()));
+                model.addAttribute("idRes", res.getId());
             }
+        model.addAttribute("calcs", pointDtoParser.parse(res));
+        model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
         return "result";
     }
 
@@ -57,7 +58,7 @@ public class CalculationController {
         CalculationData calculationData = calculationDataService.findOne(id);
         List<PointDto> dtoList = pointDtoParser.parse(calculationData);
         Map<String, Object> map = new HashMap<>();
-        map.put("name", "calculation_data_" + calculationData.getDate().toString());
+        map.put("name", calculationData.getName());
         map.put("pointDto", dtoList);
         map.put("approximationDtoLength", (long) calculationData.getApproximationMoveList().get(0).getApproximations().size());
         return new ModelAndView(new ExcelViewReport(), map);

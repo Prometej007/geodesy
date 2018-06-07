@@ -20,13 +20,13 @@ public class ExcelViewReport extends AbstractXlsView {
                                       HttpServletResponse response) throws Exception {
 
 //        System.out.println(model.get("tickets"));
-        System.out.println("--------------------");
-        System.out.println("--------------------");
-        model.keySet().stream().forEach(s -> {
-            System.out.println(s);
-        });
-        System.out.println("--------------------");
-        System.out.println("--------------------");
+//        System.out.println("--------------------");
+//        System.out.println("--------------------");
+//        model.keySet().stream().forEach(s -> {
+//            System.out.println(s);
+//        });
+//        System.out.println("--------------------");
+//        System.out.println("--------------------");
 //        System.out.println();
 
         @SuppressWarnings("unchecked")
