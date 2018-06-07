@@ -120,12 +120,15 @@
                 <%--</div>--%>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <form class="file_container">
+                <form:form method="post" action="/calculation/result-2" class="file_container"
+                           enctype="multipart/form-data">
                     <img class="icon_xls" src="/image/excel-xls-icon.png" alt="">
+                    <input type="text" name="classSystem" hidden value="FIRST">
                     <label style="display:none;">
-                        <input style="display: none" onchange="changeTitleFile(2)" id="file2" type="file" placeholder="Виберіть файл">
+                        <input style="display: none" onchange="changeTitleFile(1)" id="file2" name="file" type="file" accept="application/vnd.ms-excel" placeholder="Виберіть файл">
                     </label>
-                    <label for="file2" class="file_form" id="label2">Виберіть файл *.xls</label>
+                    <label for="file2" class="file_form" id="label2">
+                        Виберіть файл *.xls</label>
                     <%--<label>--%>
                     <%--<select>--%>
                     <%--<option>test</option>--%>
@@ -135,17 +138,17 @@
                     <%--</select>--%>
                     <%--</label>--%>
                     <label>
-                        <select>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
+                        <select name="type">
+                            <option value="FIRST">FIRST</option>
+                            <option value="SECOND">SECOND</option>
+                            <option value="THIRD">THIRD</option>
+                            <option value="FOURTH">FOURTH</option>
                         </select>
                     </label>
                     <label>
-                        <button>Обрахувати</button>
+                        <button type="submit">Обрахувати</button>
                     </label>
-                </form>
+                </form:form>
                 <%--<div class="file_dop_container">--%>
                     <%--<div class="file_dop_container_item">--%>
                         <%--<img src="/image/file.png" alt="">--%>

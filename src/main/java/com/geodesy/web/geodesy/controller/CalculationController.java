@@ -92,6 +92,7 @@ public class CalculationController {
         model.addAttribute("type", type.name());
         model.addAttribute("file", file.getOriginalFilename());
         model.addAttribute("pointDto", res.getReperList());
+//        System.err.println(res);
         if (ofNullable(principal).isPresent())
             if (ofNullable(principal.getName()).isPresent()) {
                 res = poligonDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")).setUserName(principal.getName()));

@@ -10,14 +10,17 @@ import com.geodesy.web.geodesy.model.utils.PoligonMischiefComparator;
 import com.geodesy.web.geodesy.model.utils.PoligonNameComparator;
 import com.geodesy.web.geodesy.model.utils.constants.CalculationType;
 import com.geodesy.web.geodesy.service.PoligonMethod;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class PoligonMethodImpl implements PoligonMethod {
     @Override
     public PoligonData calculate(PoligonData poligonData) {
+//        System.err.println(poligonData);
         getWeight(poligonData);
         mainCalculation(poligonData);
         getHeights(poligonData);
@@ -26,6 +29,8 @@ public class PoligonMethodImpl implements PoligonMethod {
 
     @Override
     public PoligonData getWeight(PoligonData poligonData) {
+        if(poligonData.getPoligonList()==null)
+            poligonData.setPoligonList(new ArrayList<>());
         getMischief(getPerimeter(poligonData));
         if (!checkMischiefValidity(poligonData))
             throw new RuntimeException();
@@ -77,16 +82,16 @@ public class PoligonMethodImpl implements PoligonMethod {
     @Override
     public PoligonData getHeights(PoligonData poligonData) {
         for (Poligon poligon : poligonData.getPoligonList()) {
-            System.err.println("------------------POLIGON---------------------");
-            System.err.println(poligon.getName());
+//            System.err.println("------------------POLIGON---------------------");
+//            System.err.println(poligon.getName());
             for (PoligonMove move : poligon.getPoligonMoves()) {
-                System.err.println("---------------MOVE----------------");
-                System.err.println(move.getName());
+//                System.err.println("---------------MOVE----------------");
+//                System.err.println(move.getName());
                 Reper reper = poligonData.getReperList().stream().filter(poligonReper -> move.getName().contains(poligonReper.getName() + "-")).findFirst().orElse(new PoligonReper());
-                if (reper.getId() == null)
+                if (reper.getName() == null)
                     continue;
-                System.err.println("-----------------REPER--------------------");
-                System.err.println(reper.getName());
+//                System.err.println("-----------------REPER--------------------");
+//                System.err.println(reper.getName());
                 createNewReper(poligonData, move, reper);
             }
         }
@@ -95,13 +100,13 @@ public class PoligonMethodImpl implements PoligonMethod {
 
     private void createNewReper(PoligonData poligonData, PoligonMove move, Reper reper) {
         if (poligonData.getReperList().stream().noneMatch(poligonReper -> poligonReper.getName().equals(move.getName().split("-")[1]))) {
-            System.err.println("---------------NONE-MATCH--------------");
+//            System.err.println("---------------NONE-MATCH--------------");
             PoligonReper poligonReper = new PoligonReper().setHeight(reper.getHeight() + move.getDifference()).setName(move.getName().split("-")[1]);
             List<PoligonReper> temp = new ArrayList<>(poligonData.getReperList());
             temp.add(poligonReper);
             poligonData.setReperList(temp);
         } else {
-            System.err.println("---------------FOUND-MATCH------------------");
+//            System.err.println("---------------FOUND-MATCH------------------");
         }
     }
 

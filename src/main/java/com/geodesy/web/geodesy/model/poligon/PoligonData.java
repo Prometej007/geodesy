@@ -70,8 +70,8 @@ public class PoligonData extends Data {
     @Override
     public String toString() {
         return "PoligonData{" +
-                "\n\tpoligonList=" + poligonList +
-                ",\n\t reperList=" + reperList +
+                "\n\tpoligonList=" + (poligonList==null?"null":poligonList) +
+                ",\n\t reperList=" + (reperList==null?"null":reperList) +
                 ",\n\t date=" + date +
                 ",\n\t calculationTypeName=" + calculationTypeName +
                 ",\n\t id=" + id +
