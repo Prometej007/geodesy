@@ -26,6 +26,11 @@ public class PoligonData extends Data {
         return this;
     }
 
+    @Override
+    public PoligonData setUserName(String userName) {
+        return (PoligonData) super.setUserName(userName);
+    }
+
     public PoligonData addPoligon(Poligon poligon) {
         if (poligonList == null)
             poligonList = new ArrayList<>();

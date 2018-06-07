@@ -21,17 +21,6 @@ public class CalculationData extends Data {
     @OneToMany(mappedBy = "data", cascade = CascadeType.REFRESH)
     private List<ApproximationReper> reperList;
 
-    private String userName;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public CalculationData setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
     public List<ApproximationMove> getApproximationMoveList() {
         return approximationMoveList;
     }
@@ -46,6 +35,11 @@ public class CalculationData extends Data {
             approximationMoveList = new ArrayList<>();
         this.approximationMoveList.add(approximationMove);
         return this;
+    }
+
+    @Override
+    public CalculationData setUserName(String userName) {
+        return (CalculationData) super.setUserName(userName);
     }
 
     public Double getNiu() {

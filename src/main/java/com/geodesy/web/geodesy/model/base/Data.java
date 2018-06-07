@@ -17,6 +17,7 @@ public abstract class Data extends GObject {
     protected Timestamp date;
     @Enumerated
     protected CalculationTypeName calculationTypeName;
+    private String userName;
 
     @JsonSerialize(using = DateSerializer.class)
     public Timestamp getDate() {
@@ -46,5 +47,14 @@ public abstract class Data extends GObject {
     @Override
     public Data setName(String name) {
         return (Data) super.setName(name);
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public Data setUserName(String userName) {
+        this.userName = userName;
+        return this;
     }
 }
