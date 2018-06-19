@@ -14,14 +14,14 @@
          pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Hui</title>
+    <title>Результат</title>
 </head>
 <body>
 <table>
-    <c:forEach var="huj" items="${pointDto}">
+    <c:forEach var="point" items="${pointDto}">
         <tr>
-            <td>${huj.height}</td>
-            <td>${huj.name}</td>
+            <td>${point.height}</td>
+            <td>${point.name}</td>
         </tr>
     </c:forEach>
 </table>
