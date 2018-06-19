@@ -59,14 +59,14 @@
         <h1>Реєстрація</h1>
     </div>
     <div class="index_container">
-        <form>
+        <form method="post" action="/sign-up-processing">
             <h2>Реєстрація</h2>
-            <input type="text" placeholder="Your email*">
-            <input type="text" placeholder="Your firstname*">
-            <input type="text" placeholder="Your lastname*">
-            <input type="text" placeholder="Your phone*">
-            <input type="password" placeholder="Your password*">
-            <input type="password" placeholder="Repeat your password*">
+            <input type="text" name="email" placeholder="Your email*">
+            <%--<input type="text" placeholder="Your firstname*">--%>
+            <%--<input type="text" placeholder="Your lastname*">--%>
+            <%--<input type="text" placeholder="Your phone*">--%>
+            <input type="password" name="password" placeholder="Your password*">
+            <%--<input type="password" placeholder="Repeat your password*">--%>
             <button class="btn btn-primary">Відправити</button>
         </form>
     </div>
