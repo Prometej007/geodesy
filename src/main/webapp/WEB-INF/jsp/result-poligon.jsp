@@ -149,7 +149,7 @@
         </tr>
         <tr>
             <td class="head">назва репера</td>
-            <td class="head">вистора тепера</td>
+            <td class="head">вистора репера</td>
         </tr>
         <c:forEach var="point" items="${pointDto}">
             <tr>
