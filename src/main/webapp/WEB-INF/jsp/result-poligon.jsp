@@ -17,11 +17,18 @@
     <title>Hui</title>
 </head>
 <body>
-<table>
+<p class="title">Назва класу обрахунків: ${classSystem}</p>
+<p class="title">Назва типу: ${type}</p>
+<p class="title">Назва файлу: ${file}</p>
+<table border="1">
+    <tr>
+        <td>Reper</td>
+        <td>Height</td>
+    </tr>
     <c:forEach var="huj" items="${pointDto}">
         <tr>
-            <td>${huj.height}</td>
             <td>${huj.name}</td>
+            <td>${huj.height}</td>
         </tr>
     </c:forEach>
 </table>
