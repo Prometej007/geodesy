@@ -60,36 +60,13 @@
     </div>
     <div class="index_container">
         <p class="description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor dolores, enim est ex ipsum nemo
-            nostrum obcaecati veritatis! Atque ipsam itaque labore minus neque nulla quasi recusandae tenetur ut!
+            Даний сайт призначений для спрощення проведення врівноваження геодезичних мереж.<br>
+            На сайті представлено 2 найпопулярніших методи для врівноваження геодезичних мереж, а саме метод вузлових
+            точок(послідовних наближень) та метод полігонів В.В.Попова. Також у вас є можливість переглянути та скачати
+            результати проведених обрахунків<br><a
+                href="http://kaf-geod.ucoz.ua/Metodychky/Geodezia/Poslidovni_nabluzhennja.ZAOCHNEdoc.pdf"
+                target="_blank">Дізнатися
+            більше про дані методи можна тут</a>
         </p>
     </div>
 </div>

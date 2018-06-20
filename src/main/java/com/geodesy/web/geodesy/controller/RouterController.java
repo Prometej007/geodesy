@@ -4,10 +4,13 @@ import com.geodesy.web.geodesy.dto.OneData;
 import com.geodesy.web.geodesy.dto.utils.PointDtoParser;
 import com.geodesy.web.geodesy.repository.CalculationDataRepository;
 import com.geodesy.web.geodesy.service.TestService;
+import com.geodesy.web.geodesy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -24,6 +27,8 @@ public class RouterController {
     private TestService testService;
     @Autowired
     private CalculationDataRepository calculationDataRepository;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping({"/", "/home", "/home/"})
     public String index(Model model) {
@@ -75,6 +80,14 @@ public class RouterController {
     @RequestMapping({"/sign-up"})
     public String signUp() {
         return "sign-up";
+    }
+
+    @RequestMapping(value = {"/sign-up-processing"}, method = RequestMethod.POST)
+    public String signUpProcessing(@RequestParam String email, @RequestParam String password) {
+
+        userService.save(email, password);
+
+        return "redirect:/sign-in";
     }
 
 
