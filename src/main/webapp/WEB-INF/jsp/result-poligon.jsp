@@ -75,7 +75,7 @@
     }
 
     td {
-        border: blue 1px solid;
+        border: #000 1px solid;
         padding: 10px;
         font-size: 17px;
         text-align: center;
@@ -93,6 +93,7 @@
         margin: 10vh 10vw;
         margin-top: 5vh;
         background: white;
+        border-collapse: collapse;
     }
 
     .head {
@@ -148,8 +149,8 @@
             <td class="main_head" colspan="2">РЕЗУЛЬТАТ</td>
         </tr>
         <tr>
-            <td class="head">назва репера</td>
-            <td class="head">вистора репера</td>
+            <td class="head">Назва репера</td>
+            <td class="head">Висота репера</td>
         </tr>
         <c:forEach var="point" items="${pointDto}">
             <tr>
