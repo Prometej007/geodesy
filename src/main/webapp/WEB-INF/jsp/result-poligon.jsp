@@ -124,6 +124,7 @@
             </nav>
         </div>
     </div>
+</div>
     <table>
         <tr>
             <td class="main_head" colspan="2">РЕЗУЛЬТАТ</td>
@@ -139,5 +140,18 @@
             </tr>
         </c:forEach>
     </table>
+<sec:authorize access="authentication.authenticated">
+    <div class="file_dop_container">
+        <div class="file_dop_container_item">
+            <img src="/image/file.png" alt="">
+            <p>Переглянути</p>
+        </div>
+        <div class="file_dop_container_item">
+            <img src="/image/download.png" alt="">
+            <a href="/calculation/download/poligon/${idRes}" download>Завантажити</a>
+        </div>
+    </div>
+</sec:authorize>
+
 </body>
 </html>

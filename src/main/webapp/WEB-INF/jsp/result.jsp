@@ -168,7 +168,7 @@
         </div>
         <div class="file_dop_container_item">
             <img src="/image/download.png" alt="">
-            <a href="/calculation/download/file/${idRes}" download>Завантажити</a>
+            <a href="/calculation/download/approximation/${idRes}" download>Завантажити</a>
         </div>
     </div>
     </sec:authorize>
