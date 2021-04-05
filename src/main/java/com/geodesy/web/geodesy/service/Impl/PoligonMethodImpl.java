@@ -171,9 +171,10 @@ public class PoligonMethodImpl implements PoligonMethod {
     }
 
     private Boolean checkMischiefValidity(PoligonData poligonData) {
+        System.err.println(poligonData);
         for (Poligon poligon : poligonData.getPoligonList()) {
-//            System.err.println(DoubleFormatter.format(poligon.getMischief()));
-//            System.err.println((CalculationType.TYPES_P.get(poligonData.getCalculationTypeName()) * 100) * Math.sqrt(poligon.getPerimeter()));
+            System.err.println(DoubleFormatter.format(poligon.getMischief()));
+            System.err.println((CalculationType.TYPES_P.get(poligonData.getCalculationTypeName()) * 100) * Math.sqrt(poligon.getPerimeter()));
             if (Math.abs(poligon.getMischief()) > (CalculationType.TYPES_P.get(poligonData.getCalculationTypeName()) * 100) * Math.sqrt(poligon.getPerimeter())) {
                 System.err.println(DoubleFormatter.format(poligon.getMischief()) + ">" + DoubleFormatter.format((CalculationType.TYPES_P.get(poligonData.getCalculationTypeName()) * 100) * Math.sqrt(poligon.getPerimeter())));
                 return false;

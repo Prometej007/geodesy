@@ -5,135 +5,145 @@ import com.geodesy.web.geodesy.model.poligon.PoligonData;
 import com.geodesy.web.geodesy.model.poligon.PoligonMove;
 import com.geodesy.web.geodesy.model.poligon.PoligonReper;
 import org.apache.log4j.Logger;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 @Service
 public class ExcelPoligonReader {
 
+    public static final int MIN_NUMBER_OF_CELLS = 5;
+    public static final String REPER = "Reper";
+    public static final String HEIGHT_M = "Height,m";
+    public static final String POLIGON_NUMBER = "#";
+    public static final String STEPS = "Steps";
+    public static final String EXCEEDING_M = "Exceeding,m";
+    public static final String NUMBER_OF_STATION = "Number of station";
+    public static final String LENGTH_KM = "Length,km";
     private static final Logger LOGGER = Logger.getLogger(ExcelPoligonReader.class);
+    private static final Map<String, BiConsumer<Cell, PoligonData>> poligonDataCreators = new HashMap<>();
 
+    static {
+        poligonDataCreators.put(REPER, ExcelPoligonReader::setReperName);
+        poligonDataCreators.put(HEIGHT_M, ExcelPoligonReader::setReperHeight);
+        poligonDataCreators.put(POLIGON_NUMBER, ExcelPoligonReader::addPoligon);
+        poligonDataCreators.put(STEPS, ExcelPoligonReader::setMoveName);
+        poligonDataCreators.put(EXCEEDING_M, ExcelPoligonReader::setMoveDifference);
+        poligonDataCreators.put(NUMBER_OF_STATION, ExcelPoligonReader::setStationCount);
+        poligonDataCreators.put(LENGTH_KM, ExcelPoligonReader::setMoveDistance);
 
-    public static void main(String[] args) {
-//        read();
+    }
+
+    private static <T> T getLast(List<T> collection, Supplier<T> orElseGet) {
+        if (isEmpty(collection)) {
+            collection.add(orElseGet.get());
+        }
+        return collection.get(collection.size() - 1);
+    }
+
+    private static <T> T getLast(List<T> collection) {
+        return getLast(collection, () -> null);
+    }
+
+    private static void setReperName(Cell cell, PoligonData poligonData) {
+        PoligonReper last = getLast(poligonData.getReperList(), PoligonReper::new);
+        last.setName(cell.getStringCellValue());
+    }
+
+    private static void setReperHeight(Cell cell, PoligonData poligonData) {
+        PoligonReper last = getLast(poligonData.getReperList(), PoligonReper::new);
+        if (last.getHeight() == null) {
+            last.setHeight(cell.getNumericCellValue());
+        }
+    }
+
+    private static void addPoligon(Cell cell, PoligonData poligonData) {
+        Poligon last = getLast(poligonData.getPoligonList());
+        String name = String.valueOf(cell.getNumericCellValue());
+        if (last == null || !name.equals(last.getName())) {
+            poligonData.addPoligon(new Poligon().setName(name));
+        }
+    }
+
+    private static void setMoveName(Cell cell, PoligonData poligonData) {
+        getLast(poligonData.getPoligonList(), Poligon::new).addPoligonMove(new PoligonMove().setName(cell.getStringCellValue()));
+    }
+
+    private static void setMoveDifference(Cell cell, PoligonData poligonData) {
+        PoligonMove poligonMove = getLast(getLast(poligonData.getPoligonList(), Poligon::new).getPoligonMoves(), PoligonMove::new);
+        poligonMove.setDifference(cell.getNumericCellValue());
+    }
+
+    private static void setMoveDistance(Cell cell, PoligonData poligonData) {
+        PoligonMove poligonMove = getLast(getLast(poligonData.getPoligonList(), Poligon::new).getPoligonMoves(), PoligonMove::new);
+        poligonMove.setDistance(cell.getNumericCellValue());
+    }
+
+    private static void setStationCount(Cell cell, PoligonData poligonData) {
+        PoligonMove poligonMove = getLast(getLast(poligonData.getPoligonList(), Poligon::new).getPoligonMoves(), PoligonMove::new);
+        poligonMove.setStationCount((int) cell.getNumericCellValue());
     }
 
     public PoligonData getPoligonData(MultipartFile multipartFile) {
         if (multipartFile == null || multipartFile.isEmpty())
             return null;
-        PoligonData poligonData = new PoligonData();
-        read(multipartFile, poligonData);
-        return poligonData;
+        return read(multipartFile);
     }
 
-    public void read(MultipartFile multipartFile, PoligonData poligonData) {
-        try {
-//            todo list
-            poligonData.setReperList(new ArrayList<>());
-            poligonData.setPoligonList(new ArrayList<>());
-            POIFSFileSystem fs = new POIFSFileSystem(multipartFile.getInputStream());
-            HSSFWorkbook wb = new HSSFWorkbook(fs);
-            HSSFSheet sheet = wb.getSheetAt(0);
-            HSSFRow row;
-            HSSFCell cell;
-
-            int rows; // No of rows
-            rows = sheet.getPhysicalNumberOfRows();
-
-            int cols = 0; // No of columns
-            int tmp = 0;
-
-            // This trick ensures that we get the data properly even if it doesn't start from first few rows
-            for (int i = 0; i < 10 || i < rows; i++) {
-                row = sheet.getRow(i);
-                if (row != null) {
-                    tmp = sheet.getRow(i).getPhysicalNumberOfCells();
-                    if (tmp > cols) cols = tmp;
-                }
+    public PoligonData read(MultipartFile multipartFile) {
+        PoligonData poligonData = new PoligonData();
+        try (
+                OPCPackage fs = OPCPackage.open(multipartFile.getInputStream());
+                XSSFWorkbook wb = new XSSFWorkbook(fs)
+        ) {
+            XSSFSheet sheet = wb.getSheetAt(0);
+            Iterator<Row> rowIterator = sheet.rowIterator();
+            XSSFRow firstRow = sheet.getRow(sheet.getFirstRowNum());
+            Iterator<Cell> firstCellsIterator = firstRow.cellIterator();
+            Map<Integer, String> columnIndexToColumnName = new HashMap<>();
+            while (firstCellsIterator.hasNext()) {
+                Cell next = firstCellsIterator.next();
+                poligonDataCreators.keySet().stream().filter(s -> s.equalsIgnoreCase(next.getStringCellValue())).findAny().ifPresent(s -> {
+                    columnIndexToColumnName.put(next.getColumnIndex(), s);
+                });
             }
-            Poligon poligon = new Poligon().setPoligonMoves(new ArrayList<>());
-            Double index = -1d;
-            for (int r = 1; r < rows; r++) {
-                row = sheet.getRow(r);
-
-                //            todo list create element
-                if (row != null) {
-                    for (int c = 0; c < cols; c++) {
-                        cell = row.getCell((short) c);
-                        if (cell != null) {
-                            if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Reper".toLowerCase())) {
-                                if (r > 1)
-                                    continue;
-                                poligonData.setReperList(Arrays.asList(new PoligonReper().setName(cell.getStringCellValue())));
-//                                LOGGER.info("ApproximationReper :row:[" + r + "]cell:[" + (cell.getStringCellValue()) + "]");
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Height,m".toLowerCase())) {
-                                if (r > 1)
-                                    continue;
-                                poligonData.getReperList().get(0).setHeight(cell.getNumericCellValue());
-//                                LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("#".toLowerCase())) {
-                                if (index == -1 || index != cell.getNumericCellValue()) {
-//                                    LOGGER.info(index);
-//                                    LOGGER.info(cell.getNumericCellValue());
-//                                    LOGGER.info("index != cell.getNumericCellValue()&&index != -1"+(index != cell.getNumericCellValue()&&index != -1));
-                                    if (index != cell.getNumericCellValue() && index != -1) {
-                                        LOGGER.info("add poligon");
-                                        poligonData.getPoligonList().add(poligon);
-                                    }
-
-                                    index = cell.getNumericCellValue();
-                                    poligon = new Poligon().setPoligonMoves(new ArrayList<>()).setName(String.valueOf(index.intValue()));
-                                }
-                                poligon.getPoligonMoves().add(new PoligonMove());
-                                //todo
-                                LOGGER.info("Steps :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Steps".toLowerCase())) {
-
-                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setName(cell.getStringCellValue());
-//                                LOGGER.info("Exceeding,m :row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
-
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Exceeding,m".toLowerCase())) {
-
-                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setDifference(cell.getNumericCellValue());
-//                                LOGGER.info("Number of station :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Number of station".toLowerCase())) {
-
-                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setStationCount(Double.valueOf(cell.getNumericCellValue()).intValue());
-//                                LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                            } else if (sheet.getRow(0).getCell((short) c).getStringCellValue().toLowerCase().contains("Length,km".toLowerCase())) {
-//todo
-                                poligon.getPoligonMoves().get(poligon.getPoligonMoves().size() - 1).setDistance(cell.getNumericCellValue());
-//                                LOGGER.info("Length,km :row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                            }
-
-
-//                            if (cell.getCellTypeEnum().equals(CellType.STRING))
-//                                LOGGER.info("row:[" + r + "]cell:[" + cell.getStringCellValue() + "]");
-//                            else if (cell.getCellTypeEnum().equals(CellType.NUMERIC))
-//                                LOGGER.info("row:[" + r + "]cell:[" + cell.getNumericCellValue() + "]");
-
-                        }
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                if (row.getPhysicalNumberOfCells() < MIN_NUMBER_OF_CELLS) {
+                    break;
+                }
+                if (firstRow.equals(row)) {
+                    continue;
+                }
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    if (columnIndexToColumnName.containsKey(cell.getColumnIndex())) {
+                        poligonDataCreators.get(columnIndexToColumnName.get(cell.getColumnIndex())).accept(cell, poligonData);
                     }
-
                 }
             }
-            poligonData.getPoligonList().add(poligon);
-        } catch (Exception ioe) {
-            ioe.printStackTrace();
+        } catch (Exception e) {
+            System.err.println(e);
         }
+        poligonData.setPoligonList(poligonData.getPoligonList().stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        return poligonData;
     }
 
 }

@@ -18,6 +18,8 @@ public class PoligonData extends Data {
     private List<PoligonReper> reperList;
 
     public List<Poligon> getPoligonList() {
+        if (poligonList == null)
+            poligonList = new ArrayList<>();
         return poligonList;
     }
 
@@ -39,6 +41,8 @@ public class PoligonData extends Data {
     }
 
     public List<PoligonReper> getReperList() {
+        if (reperList == null)
+            reperList = new ArrayList<>();
         return reperList;
     }
 

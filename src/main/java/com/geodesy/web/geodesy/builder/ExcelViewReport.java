@@ -2,7 +2,12 @@ package com.geodesy.web.geodesy.builder;
 
 import com.geodesy.web.geodesy.dto.PointDto;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,10 +52,10 @@ public class ExcelViewReport extends AbstractXlsView {
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
         font.setFontName("Arial");
-        style.setFillForegroundColor(HSSFColor.BLUE.index);
+        style.setFillForegroundColor(HSSFColor.HSSFColorPredefined.BLUE.getIndex());
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         font.setBold(true);
-        font.setColor(HSSFColor.WHITE.index);
+        font.setColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
         style.setFont(font);
 
 
@@ -111,7 +116,7 @@ public class ExcelViewReport extends AbstractXlsView {
             userRow.createCell(3).setCellValue("Eh=");
             userRow.createCell(4).setCellValue(ticket.getCheckParams().get(0));
             for (int i = 1; i < ticket.getCheckParams().size(); i++) {
-                userRow.createCell((int) (4 + i)).setCellValue(ticket.getCheckParams().get(i));
+                userRow.createCell(4 + i).setCellValue(ticket.getCheckParams().get(i));
             }
         }
 

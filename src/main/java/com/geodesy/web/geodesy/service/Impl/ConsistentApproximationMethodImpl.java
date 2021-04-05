@@ -4,10 +4,10 @@ import com.geodesy.web.geodesy.model.approximation.Approximation;
 import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
+import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
 import com.geodesy.web.geodesy.model.utils.constants.CalculationType;
 import com.geodesy.web.geodesy.model.utils.enums.MoveType;
 import com.geodesy.web.geodesy.model.utils.enums.ReperType;
-import com.geodesy.web.geodesy.model.utils.MoveNameComparator;
 import com.geodesy.web.geodesy.service.ConsistentApproximationMethod;
 import com.geodesy.web.geodesy.service.DefaultConfiguration;
 import org.apache.log4j.Logger;
@@ -78,6 +78,7 @@ public class ConsistentApproximationMethodImpl implements ConsistentApproximatio
      */
     @Override
     public CalculationData fulfillMoves(CalculationData calculationData) {
+        System.err.println(calculationData);
         List<ApproximationMove> approximationMoves = calculationData.getApproximationMoveList().stream().filter(move -> !move.getName().contains("Rp")).collect(toList());
         System.err.println(approximationMoves.stream().map(ApproximationMove::getName).collect(toList()));
         for (ApproximationMove approximationMove :

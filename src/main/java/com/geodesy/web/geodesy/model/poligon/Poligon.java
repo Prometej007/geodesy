@@ -39,6 +39,8 @@ public class Poligon extends GObject {
     }
 
     public List<PoligonMove> getPoligonMoves() {
+        if (poligonMoves == null)
+            poligonMoves = new ArrayList<>();
         return poligonMoves;
     }
 
