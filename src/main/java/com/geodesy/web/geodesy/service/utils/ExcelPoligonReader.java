@@ -1,5 +1,7 @@
 package com.geodesy.web.geodesy.service.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geodesy.web.geodesy.model.poligon.Poligon;
 import com.geodesy.web.geodesy.model.poligon.PoligonData;
 import com.geodesy.web.geodesy.model.poligon.PoligonMove;
@@ -143,6 +145,11 @@ public class ExcelPoligonReader {
             System.err.println(e);
         }
         poligonData.setPoligonList(poligonData.getPoligonList().stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        try {
+            System.err.println(new ObjectMapper().writeValueAsString(poligonData));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return poligonData;
     }
 

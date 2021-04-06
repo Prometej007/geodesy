@@ -63,6 +63,22 @@ public class CalculationController {
         return "result";
     }
 
+    @PostMapping("/v2/result-1")
+    private String calculation1(Principal principal, Model model, @RequestBody CalculationData calculationData) {
+        CalculationData res = consistentApproximationMethod.calculate(calculationData.setDate(Timestamp.valueOf(LocalDateTime.now())));
+        model.addAttribute("classSystem", calculationData.getCalculationTypeName().name());
+        model.addAttribute("type",  calculationData.getCalculationTypeName().name());
+        model.addAttribute("file", "file.getOriginalFilename()");
+        if (ofNullable(principal).isPresent())
+            if (ofNullable(principal.getName()).isPresent()) {
+                res = calculationDataService.save(res.setUserName(principal.getName()));
+                model.addAttribute("idRes", res.getId());
+            }
+        model.addAttribute("calcs", pointDtoParser.parse(res));
+        model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
+        return "result";
+    }
+
     @GetMapping("/download/approximation/{id}")
     private ModelAndView download1(@PathVariable Long id) {
         CalculationData calculationData = calculationDataService.findOne(id);
@@ -96,6 +112,24 @@ public class CalculationController {
         if (ofNullable(principal).isPresent())
             if (ofNullable(principal.getName()).isPresent()) {
                 res = poligonDataService.save(res.setName(file.getOriginalFilename().replace(".xls", "")).setUserName(principal.getName()));
+                model.addAttribute("idRes", res.getId());
+            }
+//        model.addAttribute("calcs", pointDtoParser.parse(res));
+//        model.addAttribute("length", res.getApproximationMoveList().get(0).getApproximations().size());
+        return "result-poligon";
+    }
+
+    @PostMapping("/v2/result-2")
+    private String calculation2(Model model, @RequestBody PoligonData poligonData,Principal principal) {
+        PoligonData res = poligonMethod.calculate(poligonData.setDate(Timestamp.valueOf(LocalDateTime.now())));
+        model.addAttribute("classSystem", poligonData.getCalculationTypeName().name());
+        model.addAttribute("type", poligonData.getCalculationTypeName().name());
+        model.addAttribute("file", "file.getOriginalFilename()");
+        model.addAttribute("pointDto", res.getReperList());
+//        System.err.println(res);
+        if (ofNullable(principal).isPresent())
+            if (ofNullable(principal.getName()).isPresent()) {
+                res = poligonDataService.save(res.setUserName(principal.getName()));
                 model.addAttribute("idRes", res.getId());
             }
 //        model.addAttribute("calcs", pointDtoParser.parse(res));

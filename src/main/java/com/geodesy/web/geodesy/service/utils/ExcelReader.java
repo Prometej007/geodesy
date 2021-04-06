@@ -1,5 +1,6 @@
 package com.geodesy.web.geodesy.service.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geodesy.web.geodesy.model.approximation.ApproximationMove;
 import com.geodesy.web.geodesy.model.approximation.ApproximationReper;
 import com.geodesy.web.geodesy.model.approximation.CalculationData;
@@ -108,6 +109,7 @@ public class ExcelReader {
                     calculationData.getApproximationMoveList().add(tempApproximationMove);
                 }
             }
+            System.err.println(new ObjectMapper().writeValueAsString(calculationData));
         } catch (Exception ioe) {
             ioe.printStackTrace();
         }

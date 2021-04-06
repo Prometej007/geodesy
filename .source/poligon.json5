@@ -1,0 +1,70 @@
+{
+  "name": "some",
+  "calculationTypeName": "FIRST",
+  "poligonList": [
+    {
+      "name": "1.0",
+      "poligonMoves": [
+        {
+          "name": "Rp5-Rp3",
+          "stationCount": 11,
+          "distance": 0.66,
+          "difference": 0.72374
+        },
+        {
+          "name": "Rp3-Rp6",
+          "stationCount": 6,
+          "distance": 0.36,
+          "difference": 0.16389
+        },
+        {
+          "name": "Rp6-Rp2",
+          "stationCount": 10,
+          "distance": 0.6,
+          "difference": -0.84286
+        },
+        {
+          "name": "Rp2-Rp5",
+          "stationCount": 12,
+          "distance": 0.72,
+          "difference": -0.04454
+        }
+      ]
+    },
+    {
+      "name": "2.0",
+      "poligonMoves": [
+        {
+          "name": "Rp5-Rp7",
+          "stationCount": 13,
+          "distance": 0.78,
+          "difference": 0.81016
+        },
+        {
+          "name": "Rp7-Rp4",
+          "stationCount": 10,
+          "distance": 0.6,
+          "difference": 2.62626
+        },
+        {
+          "name": "Rp4-Rp3",
+          "stationCount": 12,
+          "distance": 0.72,
+          "difference": -2.71273
+        },
+        {
+          "name": "Rp3-Rp5",
+          "stationCount": 11,
+          "distance": 0.66,
+          "difference": -0.72374
+        }
+      ]
+    }
+  ],
+  "reperList": [
+    {
+      "name": "Rp5",
+      "height": 261.837
+    }
+  ]
+}
