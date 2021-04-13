@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="<c:url value="/css/home.css"/>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
@@ -79,7 +77,7 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <form:form method="post" action="/calculation/result-1" class="file_container"
+                <form:form method="post" action="/calculation/result-1" class="file_container main-mb"
                            enctype="multipart/form-data">
                     <img class="icon_xls" src="/image/excel-xls-icon.png" alt="">
                     <input type="text" name="classSystem" hidden value="FIRST">
@@ -108,6 +106,77 @@
                         <button type="submit">Обрахувати</button>
                     </label>
                 </form:form>
+
+                <div style="background: #3e959dab; margin: 0 25%">
+                    <form class="file_container main-w-100" id="first-metod-main-form">
+                        <div style="display: flex; align-items: center; justify-content: flex-start" class="main-mb">
+                            <label style="display:block; width:25%;" class="main-mb">
+                                Назва:
+                                <input required name="name" type="text">
+                            </label>
+                             <label style="display:block; width:25%;">
+                                Тип:
+                                <select required name="type" style="margin: auto">
+                                    <option value="FIRST">FIRST</option>
+                                    <option value="SECOND">SECOND</option>
+                                    <option value="THIRD">THIRD</option>
+                                    <option value="FOURTH">FOURTH</option>
+                                </select>
+                             </label>
+                        </div>
+                    </form>
+                    
+                    <form onsubmit="addNewReper()" class="file_container main-w-100" id="first-metod-reper-form">
+                        <h5 style="color: white; margin: 0 1vw; width: 100%">Репери:</h2>
+                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; margin-bottom: 10px; width: 100%;">
+                            <label style="display:block; width:25%;">
+                                Назва:
+                                <input required name="name" type="text">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Висота:
+                                <input required name="height" type="number" step="0.001">
+                            </label>
+                            <label>
+                                <button type="submit">+</button>
+                            </label>
+                        </div>
+                        <div id="first-method-repers" style="width:100%; margin: 0 1vw"></div>
+                    </form>
+                    
+                    <form onsubmit="addNewStep()" class="file_container main-w-100" id="first-metod-step-form">
+                        <h5 style="color: white; margin: 0 1vw; width: 100%">Кроки:</h2>
+                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; margin-bottom: 10px">
+                            <label style="display:block; width:25%;">
+                                Назва:
+                                <input required name="name">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Різниця:
+                                <input required name="difference" type="number" step="0.001">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Кількість станцій:
+                                <input required name="stationCount" type="number" step="0.001">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Дистанція:
+                                <input required name="distance" type="number" step="0.001">
+                            </label>
+                            <label>
+                                <button type="submit">+</button>
+                            </label>
+                        </div>
+                        <div id="first-method-steps" style="width:100%; margin: 0 1vw"></div>
+                    </form>
+                    
+                    <div class="file_container main-w-100" style="justify-content: flex-end">
+                        <label>
+                            <button onclick="submitFirstMethod()" type="button">Обрахувати</button>
+                        </label>   
+                    </div>
+                </div>
+
                 <%--<div class="file_dop_container">--%>
                     <%--<div class="file_dop_container_item">--%>
                         <%--<img src="/image/file.png" alt="">--%>
@@ -182,34 +251,34 @@
             <%--</div>--%>
             <%--</div>--%>
         </div>
-        <div class="file_step_container">
-            <div class="file_step_container_item">
-                <h2>Step 1</h2>
-                <p>
-                    Виберіть файл з розширенням .xls
-                    <a href="#" data-toggle="modal" data-target="#exampleModal">Приклад завантажуваного файлу для
-                        "Методу послідовних наближень"</a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal1">Приклад завантажуваного файлу для
-                        "Методу полігонів"</a>
-                </p>
-            </div>
-            <hr class="step_hr">
-            <div class="file_step_container_item">
-                <h2>Step 2</h2>
-                <p>
-                    Виберіть клас з яким проводилось вимірювання.
-                    та натисніть кнопку обрахувати
-                </p>
-            </div>
-            <hr class="step_hr">
-            <div class="file_step_container_item">
-                <h2>Step 3</h2>
-                <p>
-                    Натисніть кнопку обрахувати
+<%--        <div class="file_step_container">--%>
+<%--            <div class="file_step_container_item">--%>
+<%--                <h2>Step 1</h2>--%>
+<%--                <p>--%>
+<%--                    Виберіть файл з розширенням .xls--%>
+<%--                    <a href="#" data-toggle="modal" data-target="#exampleModal">Приклад завантажуваного файлу для--%>
+<%--                        "Методу послідовних наближень"</a>--%>
+<%--                    <a href="#" data-toggle="modal" data-target="#exampleModal1">Приклад завантажуваного файлу для--%>
+<%--                        "Методу полігонів"</a>--%>
+<%--                </p>--%>
+<%--            </div>--%>
+<%--            <hr class="step_hr">--%>
+<%--            <div class="file_step_container_item">--%>
+<%--                <h2>Step 2</h2>--%>
+<%--                <p>--%>
+<%--                    Виберіть клас з яким проводилось вимірювання.--%>
+<%--                    та натисніть кнопку обрахувати--%>
+<%--                </p>--%>
+<%--            </div>--%>
+<%--            <hr class="step_hr">--%>
+<%--            <div class="file_step_container_item">--%>
+<%--                <h2>Step 3</h2>--%>
+<%--                <p>--%>
+<%--                    Натисніть кнопку обрахувати--%>
 
-                </p>
-            </div>
-        </div>
+<%--                </p>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

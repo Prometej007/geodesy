@@ -61,7 +61,6 @@ h1 {
 
 .file_container {
     width: 50%;
-    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -70,6 +69,7 @@ h1 {
     box-sizing: border-box;
     margin: auto;
     margin-bottom: 3vh!important;
+    flex-wrap: wrap;
 }
 
 /** {*/
@@ -83,12 +83,13 @@ h1 {
 
 .file_container input, .file_container select {
     display: block;
+    width: 100%;
     font-size: 16px;
     padding: 5px;
     color: #999;
     border: 1px solid #999;
     cursor: pointer;
-    margin: 0 10px!important;
+    /*margin: 0 10px!important;*/
 }
 
 .file_form {
@@ -188,4 +189,24 @@ h1 {
 .modal-dialog {
     width: 60%!important;
     max-width: none!important;
+}
+
+.main-mb {
+    margin-bottom: 20px;
+}
+
+.main-w-100 {
+    width: 100% !important;
+}
+
+.main-table {
+    width: 100%;
+    border: 1px solid #fff;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.main-table td, .main-table th {
+    color: #fff;
+    border: 1px solid #fff;
 }
