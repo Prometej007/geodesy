@@ -218,6 +218,85 @@
                         <button type="submit">Обрахувати</button>
                     </label>
                 </form:form>
+                
+                <div style="background: #3e959dab; margin: 0 25%">
+                    <form class="file_container main-w-100" id="second-metod-main-form">
+                        <div style="display: flex; align-items: center; justify-content: flex-start" class="main-mb">
+                            <label style="display:block; width:25%;" class="main-mb">
+                                Назва:
+                                <input required name="name" type="text">
+                            </label>
+                             <label style="display:block; width:25%;">
+                                Тип:
+                                <select required name="type" style="margin: auto">
+                                    <option value="FIRST">FIRST</option>
+                                    <option value="SECOND">SECOND</option>
+                                    <option value="THIRD">THIRD</option>
+                                    <option value="FOURTH">FOURTH</option>
+                                </select>
+                             </label>
+                        </div>
+                    </form>
+                    
+                    <form onsubmit="addNewReperPoligon()" class="file_container main-w-100" id="second-metod-reper-form">
+                        <h5 style="color: white; margin: 0 1vw; width: 100%">Репери:</h2>
+                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; margin-bottom: 10px; width: 100%;">
+                            <label style="display:block; width:25%;">
+                                Назва:
+                                <input required name="name" type="text">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Висота:
+                                <input required name="height" type="number" step="0.001">
+                            </label>
+                            <label>
+                                <button type="submit">+</button>
+                            </label>
+                        </div>
+                        <div id="second-method-repers" style="width:100%; margin: 0 1vw"></div>
+                    </form>
+                    
+                    <form class="file_container main-w-100" id="second-metod-poligon-form">
+                        <h5 style="color: white; margin: 0 1vw; width: 100%">Полігони:</h2>
+                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; margin-bottom: 10px">
+                            <label style="display:block; width:25%;">
+                                Полігон:
+                                <input required name="name">
+                            </label>
+                        </div>
+                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; margin-bottom: 10px">
+                            <label style="display:block; width:25%;">
+                                Назва:
+                                <input required name="moveName">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Різниця:
+                                <input required name="difference" type="number" step="0.001">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Кількість станцій:
+                                <input required name="stationCount" type="number" step="0.001">
+                            </label>
+                            <label style="display:block; width:25%;">
+                                Дистанція:
+                                <input required name="distance" type="number" step="0.001">
+                            </label>
+                            <label>
+                                <button onclick="addNewPoligonMove()" type="button">+</button>
+                            </label>
+                        </div>
+                        <div id="second-method-poligon-moves" style="width:100%; margin: 0 1vw"></div>
+                        <div id="second-method-poligons" style="width:100%; margin: 0 1vw"></div>
+                    </form>
+                    
+                    <div class="file_container main-w-100" style="justify-content: flex-end">
+                        <label>
+                            <button onclick="submitSecondMethod()" type="button">Обрахувати</button>
+                        </label>   
+                    </div>
+                </div>
+                
+                
                 <%--<div class="file_dop_container">--%>
                     <%--<div class="file_dop_container_item">--%>
                         <%--<img src="/image/file.png" alt="">--%>
